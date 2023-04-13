@@ -1,0 +1,17 @@
+bricks:
+  arctikq_project_starter_basic:
+    git:
+      url: "https://github.com/Afoudo-Richard/bricks"
+      path: flutter/arctikq_project_starter_basic
+  arctikq_project_starter:
+    git:
+      url: "https://github.com/Afoudo-Richard/bricks"
+      path: flutter/arctikq_project_starter
+  arctikq_app_page:
+    git:
+      url: "https://github.com/Afoudo-Richard/bricks"
+      path: flutter/arctikq_app_page
+  arctikq_full_parse_server_starter_project:
+    git:
+      url: "https://github.com/Afoudo-Richard/bricks"
+      path: flutter/arctikq_full_parse_server_starter_project

@@ -1,0 +1,9 @@
+export './src/confirm_password.dart';
+export './src/email.dart';
+export './src/firstname.dart';
+export './src/lastname.dart';
+export './src/login_password.dart';
+export './src/password.dart';
+export './src/phone.dart';
+export './src/username.dart';
+export './src/gender.dart';

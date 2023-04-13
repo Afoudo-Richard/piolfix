@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "113094693277",
+    "project_id": "piolfix",
+    "storage_bucket": "piolfix.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:113094693277:android:b37d9adaf78c3163369f74",
+        "android_client_info": {
+          "package_name": "com.example.piolfix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "113094693277-sqp895qbn0gan9mvb4vuc6ofo0jsn5pd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo6gobP0NzpdalXOfqWAIM0yW8qBI0o5g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "113094693277-sqp895qbn0gan9mvb4vuc6ofo0jsn5pd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "113094693277-tnkdu415pljj0f16cu1cpbvfki88avj4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.piolfix"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
