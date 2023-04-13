@@ -1,2 +1,12 @@
 export './src/splash/splash.dart';
 export './src/home/home.dart';
+export './src/login/login.dart';
+export './src/walk_through/walk_through.dart';
+export './src/registration/registration.dart';
+export './src/search/search.dart';
+export './src/task/task.dart';
+export './src/select_tasker/select_tasker.dart';
+export './src/tasker_profile/tasker_profile.dart';
+export './src/my_taskers/my_taskers.dart';
+export './src/profile/profile.dart';
+export './src/user_map/user_map.dart';

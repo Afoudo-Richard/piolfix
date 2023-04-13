@@ -1,10 +1,11 @@
 import 'package:poilfix/poilfix.dart';
 import 'package:flutter/material.dart';
 
-const Color primaryColor = Color(0xFF225DE8);
-const Color secondaryColor = Color(0xFFFFA500);
+const Color primaryColor = Color(0xFFCA3130);
+const Color secondaryColor = Color(0xFF003048);
 const Color contentBackgroundColor = Color(0XFFE5E5E5);
-const Color allGameCardColor = Color.fromRGBO(230, 230, 230, 1);
+const Color darkColor = Color(0XFF171717);
+const Color darkSecondaryColor = Color(0XFF444444);
 
 const double paddingSize = 13;
 

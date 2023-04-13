@@ -41,8 +41,8 @@ void main() async {
 }
 
 registerParseServer() async {
-  const keyApplicationId = '';
-  const keyClientKey = '';
+  const keyApplicationId = 'Uqc9HYgHwTrE6nyBJl9zMPZi5pZE5lyQalWaDcr1';
+  const keyClientKey = 'dRCisEpybrKkwzoEnJmzayHlbLoGtbKnKVJL3kA8';
   const keyParseServerUrl = 'https://parseapi.back4app.com';
 
   await Parse().initialize(

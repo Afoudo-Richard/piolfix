@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "piolfix" "\0"
+            VALUE "FileDescription", "PiolFix" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "piolfix" "\0"
+            VALUE "InternalName", "PiolFix" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
             VALUE "OriginalFilename", "piolfix.exe" "\0"
-            VALUE "ProductName", "piolfix" "\0"
+            VALUE "ProductName", "PiolFix" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

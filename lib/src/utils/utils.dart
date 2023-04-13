@@ -9,3 +9,5 @@ export './src/validator.dart';
 export './src/errors/errors.dart';
 export 'package:flutter_gen/gen_l10n/app_localizations.dart';
 export './src/app_configs.dart';
+export 'package:line_icons/line_icons.dart';
+export 'package:parse_server_sdk_flutter/parse_server_sdk.dart';

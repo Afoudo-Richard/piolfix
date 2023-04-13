@@ -240,7 +240,6 @@ class IntroScreenState extends State<IntroScreen> {
               child: PageView(
                 controller: controller,
                 onPageChanged: _onPageChanged,
-                scrollDirection: Axis.vertical,
                 children: widget.onbordingDataList,
               ),
             ),

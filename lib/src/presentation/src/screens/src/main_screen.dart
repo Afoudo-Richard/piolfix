@@ -18,7 +18,7 @@ class MainScreen extends StatelessWidget {
           return state.activePage;
         },
       ),
-      // bottomNavigationBar: const AppBottomNavigationBar(),
+      bottomNavigationBar: const AppBottomNavigationBar(),
     );
   }
 }
