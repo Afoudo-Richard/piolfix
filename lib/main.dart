@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:poilfix/app.dart';
-// adf
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:poilfix/poilfix.dart';
 import 'firebase_options.dart';
+import 'package:poilfix/src/data/src/models/src/category.dart' as modelCategory;
 
 void main() async {
   await runZonedGuarded(() async {
@@ -63,7 +63,10 @@ registerParseServer() async {
     ),
   );
 
-  // ParseCoreData().registerSubClass(Vehicle.keyTableName, () => Vehicle());
+  ParseCoreData().registerSubClass(
+    modelCategory.Category.keyTableName,
+    () => modelCategory.Category(),
+  );
 }
 
 void initializeAwesomeNotification() {

@@ -15,3 +15,7 @@ bricks:
     git:
       url: "https://github.com/Afoudo-Richard/bricks"
       path: flutter/arctikq_full_parse_server_starter_project
+  arctikq_app_bloc:
+    git:
+      url: "https://github.com/Afoudo-Richard/bricks"
+      path: flutter/arctikq_app_bloc

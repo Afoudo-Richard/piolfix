@@ -15,3 +15,4 @@ export './src/category_item.dart';
 export './src/tasker_item.dart';
 export './src/individual_review.dart';
 export './src/item_tile.dart';
+export './src/global_scaffold.dart';

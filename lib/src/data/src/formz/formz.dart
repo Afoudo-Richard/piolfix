@@ -7,3 +7,4 @@ export './src/password.dart';
 export './src/phone.dart';
 export './src/username.dart';
 export './src/gender.dart';
+export './src/category_name.dart';

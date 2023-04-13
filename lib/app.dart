@@ -18,6 +18,7 @@ class App extends StatelessWidget {
           BlocProvider(create: (context) => AuthenticationBloc()),
           BlocProvider(create: (context) => UserBloc()),
           BlocProvider(create: (context) => AppBottomNavigationBarBloc()),
+          BlocProvider(create: (context) => CategoryAddBloc()),
         ],
         child: const AppView(),
       ),
@@ -63,32 +64,17 @@ class _AppViewState extends State<AppView> {
             navigatorKey: _navigatorKey,
             theme: appTheme(context),
             builder: (context, child) {
-              return InternetConnectivityWidgetWrapper(
-                child: BlocListener<AuthenticationBloc, AuthenticationState>(
-                  listener: (context, state) {
-                    Future.delayed(
-                      const Duration(seconds: 1),
-                      () {
-                        if (state.authenticated || state.isSignedInAnonymous) {
-                          _navigator.pushAndRemoveUntil<void>(
-                            MainScreen.route(),
-                            (route) => false,
-                          );
-                          BlocProvider.of<AppBottomNavigationBarBloc>(context)
-                              .add(
-                            AppBottomNavigationBarChanged(
-                              activePage: const HomePage(),
-                            ),
-                          );
-                        } else {
-                          if (state.hasWalkedThrough) {
+              return GlobalScaffold(
+                child: InternetConnectivityWidgetWrapper(
+                  child: BlocListener<AuthenticationBloc, AuthenticationState>(
+                    listener: (context, state) {
+                      Future.delayed(
+                        const Duration(seconds: 1),
+                        () {
+                          if (state.authenticated ||
+                              state.isSignedInAnonymous) {
                             _navigator.pushAndRemoveUntil<void>(
-                              LoginPage.route(),
-                              (route) => false,
-                            );
-                          } else {
-                            _navigator.pushAndRemoveUntil<void>(
-                              WalkThroughPage.route(),
+                              MainScreen.route(),
                               (route) => false,
                             );
                             BlocProvider.of<AppBottomNavigationBarBloc>(context)
@@ -97,12 +83,31 @@ class _AppViewState extends State<AppView> {
                                 activePage: const HomePage(),
                               ),
                             );
+                          } else {
+                            if (state.hasWalkedThrough) {
+                              _navigator.pushAndRemoveUntil<void>(
+                                LoginPage.route(),
+                                (route) => false,
+                              );
+                            } else {
+                              _navigator.pushAndRemoveUntil<void>(
+                                WalkThroughPage.route(),
+                                (route) => false,
+                              );
+                              BlocProvider.of<AppBottomNavigationBarBloc>(
+                                      context)
+                                  .add(
+                                AppBottomNavigationBarChanged(
+                                  activePage: const HomePage(),
+                                ),
+                              );
+                            }
                           }
-                        }
-                      },
-                    );
-                  },
-                  child: child,
+                        },
+                      );
+                    },
+                    child: child,
+                  ),
                 ),
               );
             },

@@ -118,6 +118,7 @@ class TaskerItem extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: 10.sp,
+                color: Colors.grey,
               ),
             ),
             1.h.ph,

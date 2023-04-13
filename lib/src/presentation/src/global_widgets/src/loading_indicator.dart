@@ -27,7 +27,7 @@ class LoadingIndicator extends StatelessWidget {
         //   color: color,
         // ),
         child: LoadingAnimationWidget.hexagonDots(
-          color: primaryColor,
+          color: secondaryColor,
           size: size,
         ),
       ),

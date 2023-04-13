@@ -62,6 +62,14 @@ class ProfilePage extends StatelessWidget {
             5.h.ph,
             ItemTile(
               icon: LineIcons.bell,
+              title: "Add Category",
+              onTap: () => Navigator.push(
+                context,
+                CategoryAddPage.route(),
+              ),
+            ),
+            ItemTile(
+              icon: LineIcons.bell,
               title: "Notification",
             ),
             ItemTile(
@@ -70,11 +78,11 @@ class ProfilePage extends StatelessWidget {
             ),
             ItemTile(
               icon: LineIcons.scroll,
-              title: "terms&condition",
+              title: "Terms & condition",
             ),
             ItemTile(
               icon: LineIcons.userShield,
-              title: "Privacy_policy",
+              title: "Privacy policy",
             ),
             ItemTile(
               icon: LineIcons.users,

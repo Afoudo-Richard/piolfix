@@ -49,3 +49,12 @@ class ErrorUpdatingUser extends PoilfixApiError {
         );
 }
 
+class ErrorAddingCategory extends PoilfixApiError {
+  ErrorAddingCategory({
+    String? message,
+    Map<String, dynamic>? errors,
+  }) : super(
+          message: message,
+          errors: errors,
+        );
+}
