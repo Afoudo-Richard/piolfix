@@ -21,10 +21,7 @@ class Category extends ParseObject implements ParseCloneable {
   // set imageThumbnailUrl(String? value) =>
   //     set<String?>('image_thumbnail_url', value);
 
-  ParseFile? get imageThumbnail {
-    this.imageThumbnailUrl = get<ParseFile?>('image_thumbnail')!.url;
-    return get('image_thumbnail');
-  }
+  ParseFile? get imageThumbnail => get('image_thumbnail');
 
   set imageThumbnail(value) => set('image_thumbnail', value);
 

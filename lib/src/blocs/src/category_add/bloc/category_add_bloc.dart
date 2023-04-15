@@ -95,15 +95,17 @@ class CategoryAddBloc extends Bloc<CategoryAddEvent, CategoryAddState> {
     CategoryAddSubmitted event,
     Emitter<CategoryAddState> emit,
   ) async {
-    if (state.formStatus.isValidated) {
+    if (state.formStatus.isValidated && state.pickedPhoto != null) {
       emit(state.copyWith(
         formStatus: FormzStatus.submissionInProgress,
       ));
       try {
+        ParseFileBase? parseFile = ParseFile(File(state.pickedPhoto!.path));
+        await parseFile.save();
         var category = Category()
           ..name = state.categoryName.value
           ..description = 'A dummy description'
-          ..imageThumbnail = ParseFile(File(state.pickedPhoto!.path));
+          ..imageThumbnail = parseFile;
 
         var response = await category.create();
 
@@ -126,6 +128,11 @@ class CategoryAddBloc extends Bloc<CategoryAddEvent, CategoryAddState> {
           formStatus: FormzStatus.submissionFailure,
         ));
       }
+    } else {
+      emit(state.copyWith(
+        errorMessage: 'Please Fill out the form (add image and name)',
+        formStatus: FormzStatus.submissionFailure,
+      ));
     }
   }
 

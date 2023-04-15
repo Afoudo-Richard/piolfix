@@ -17,23 +17,31 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      body: SingleChildScrollView(
-        padding: pagePadding,
-        child: Column(
-          children: [
-            4.h.ph,
-            const UserLocation(),
-            const Divider(),
-            3.h.ph,
-            const HomeSearchInput(),
-            2.h.ph,
-            const TrendingProjects(),
-            5.h.ph,
-            const InfoCard(),
-            2.h.ph,
-            const PopularTaskers(),
-            3.h.ph,
-          ],
+      body: RefreshIndicator(
+        color: primaryColor,
+        onRefresh: () => Future.sync(
+          () => BlocProvider.of<CategoryListBloc>(context).add(
+            CategoryListFetched(refresh: true),
+          ),
+        ),
+        child: SingleChildScrollView(
+          padding: pagePadding,
+          child: Column(
+            children: [
+              4.h.ph,
+              const UserLocation(),
+              const Divider(),
+              3.h.ph,
+              const HomeSearchInput(),
+              2.h.ph,
+              const TrendingProjects(),
+              5.h.ph,
+              const InfoCard(),
+              2.h.ph,
+              const PopularTaskers(),
+              3.h.ph,
+            ],
+          ),
         ),
       ),
     );

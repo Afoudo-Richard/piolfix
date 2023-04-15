@@ -22,16 +22,9 @@ class ProfilePage extends StatelessWidget {
             4.h.ph,
             Row(
               children: [
-                CustomContainer(
-                  padding: EdgeInsets.zero,
-                  height: 50.sp,
-                  width: 50.sp,
-                  child: Image.asset(
-                    'assets/images/user1.jpeg',
-                    width: 100.w,
-                    height: 100.h,
-                    fit: BoxFit.cover,
-                  ),
+                GestureDetector(
+                  onTap: () {},
+                  child: UserImage(),
                 ),
                 2.w.pw,
                 Expanded(
@@ -62,10 +55,10 @@ class ProfilePage extends StatelessWidget {
             5.h.ph,
             ItemTile(
               icon: LineIcons.bell,
-              title: "Add Category",
+              title: "List Category",
               onTap: () => Navigator.push(
                 context,
-                CategoryAddPage.route(),
+                CategoryListPage.route(),
               ),
             ),
             ItemTile(

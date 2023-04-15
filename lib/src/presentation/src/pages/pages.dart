@@ -11,3 +11,4 @@ export './src/my_taskers/my_taskers.dart';
 export './src/profile/profile.dart';
 export './src/user_map/user_map.dart';
 export './src/category_add/category_add.dart';
+export './src/category_list/category_list.dart';

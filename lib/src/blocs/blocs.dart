@@ -5,3 +5,5 @@ export './src/registration/bloc/registration_bloc.dart';
 export './src/user/bloc/user_bloc.dart';
 export './src/settings/bloc/settings_bloc.dart';
 export './src/category_add/bloc/category_add_bloc.dart';
+export './src/category_list/bloc/category_list_bloc.dart';
+export './src/user_image/bloc/user_image_bloc.dart';

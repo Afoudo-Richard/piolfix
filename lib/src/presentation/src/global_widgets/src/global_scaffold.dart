@@ -38,6 +38,7 @@ class GlobalScaffold extends StatelessWidget {
                 singleScaffoldMessenger(
                   context,
                   message: state.errorMessage ?? 'Failed to Add Category',
+                  backgroundColor: Colors.red,
                 );
               }
             },

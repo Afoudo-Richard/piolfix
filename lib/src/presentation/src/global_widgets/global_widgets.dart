@@ -16,3 +16,5 @@ export './src/tasker_item.dart';
 export './src/individual_review.dart';
 export './src/item_tile.dart';
 export './src/global_scaffold.dart';
+export './src/select_image_source_dialog.dart';
+export './src/user_image.dart';

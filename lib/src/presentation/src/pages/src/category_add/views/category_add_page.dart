@@ -14,24 +14,9 @@ class CategoryAddPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<CategoryAddBloc, CategoryAddState>(
       listener: (context, state) {
-        // if (state.formStatus.isSubmissionSuccess) {
-        //   ScaffoldMessenger.of(context)
-        //     ..hideCurrentSnackBar()
-        //     ..showSnackBar(
-        //       const SnackBar(
-        //         backgroundColor: Colors.green,
-        //         content: Text("Category Added Successfully"),
-        //       ),
-        //     );
-        // } else if (state.formStatus.isSubmissionFailure) {
-        //   ScaffoldMessenger.of(context)
-        //     ..hideCurrentSnackBar()
-        //     ..showSnackBar(
-        //       SnackBar(
-        //         content: Text(state.errorMessage ?? 'Failed to '),
-        //       ),
-        //     );
-        // }
+        if (state.formStatus.isSubmissionSuccess) {
+          Navigator.pushReplacement(context, CategoryListPage.route());
+        }
       },
       child: Scaffold(
         appBar: const CustomAppBar(
@@ -131,7 +116,7 @@ class CategoryAddPage extends StatelessWidget {
                       1.h.ph,
                       CustomInput(
                         label: 'Category Name',
-                        inputHintText: trans(context)!.enter_vehicle_price,
+                        inputHintText: 'Enter Category name',
                         backgroundColor: Colors.white.withOpacity(0.7),
                         labelTextStyle: const TextStyle(
                           color: primaryColor,
@@ -154,11 +139,16 @@ class CategoryAddPage extends StatelessWidget {
                 child: BlocBuilder<CategoryAddBloc, CategoryAddState>(
                   builder: (context, state) {
                     return CustomButton(
+                      backgroundColor: state.formStatus.isSubmissionInProgress
+                          ? Colors.grey
+                          : null,
                       onPressed: () {
                         state.formStatus.isValidated
-                            ? context
-                                .read<CategoryAddBloc>()
-                                .add(CategoryAddSubmitted())
+                            ? state.formStatus.isSubmissionInProgress
+                                ? null
+                                : context
+                                    .read<CategoryAddBloc>()
+                                    .add(CategoryAddSubmitted())
                             : BlocProvider.of<CategoryAddBloc>(context)
                                 .add(SubmitCategoryAddInputsChecked());
                       },

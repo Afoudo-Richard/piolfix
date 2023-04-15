@@ -19,6 +19,11 @@ class App extends StatelessWidget {
           BlocProvider(create: (context) => UserBloc()),
           BlocProvider(create: (context) => AppBottomNavigationBarBloc()),
           BlocProvider(create: (context) => CategoryAddBloc()),
+          BlocProvider(create: (context) => UserImageBloc()),
+          BlocProvider(
+            create: (context) => CategoryListBloc()..add(CategoryListFetched()),
+            lazy: false,
+          ),
         ],
         child: const AppView(),
       ),

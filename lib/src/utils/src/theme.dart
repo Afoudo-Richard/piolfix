@@ -5,7 +5,7 @@ import 'package:poilfix/poilfix.dart';
 ThemeData? appTheme(BuildContext context) {
   return ThemeData(
     platform: TargetPlatform.iOS,
-    fontFamily: 'Rubik',
+    textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
     popupMenuTheme: PopupMenuThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(4),
@@ -15,7 +15,7 @@ ThemeData? appTheme(BuildContext context) {
     colorScheme: ColorScheme.fromSwatch(
       accentColor: primaryColor, // but now it should be declared like this
     ),
-    textSelectionTheme: TextSelectionThemeData(
+    textSelectionTheme: const TextSelectionThemeData(
       cursorColor: primaryColor,
     ),
     appBarTheme: AppBarTheme(
