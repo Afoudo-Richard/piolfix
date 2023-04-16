@@ -20,6 +20,13 @@ class TaskReviewPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             2.h.ph,
+            Text(
+              'Task Review here.....',
+              style: TextStyle(
+                fontSize: 14.sp,
+                letterSpacing: 1.5,
+              ),
+            ),
           ],
         ),
       ),

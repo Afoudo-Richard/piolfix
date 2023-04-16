@@ -88,3 +88,13 @@ class ErrorRequestingCamPayPayment extends PoilfixApiError {
           errors: errors,
         );
 }
+
+class ErrorRequestingCamPayToken extends PoilfixApiError {
+  ErrorRequestingCamPayToken({
+    String? message,
+    Map<String, dynamic>? errors,
+  }) : super(
+          message: message,
+          errors: errors,
+        );
+}

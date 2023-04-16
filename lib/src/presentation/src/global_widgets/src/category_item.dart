@@ -32,8 +32,9 @@ class CategoryItem extends StatelessWidget {
                 placeholder: (context, url) => Center(
                   child: LoadingIndicator(),
                 ),
-                imageUrl: category.imageThumbnail?.url ??
-                    "https://ui-avatars.com/api/?name=P+F",
+                imageUrl: category.imageThumbnailUrl != null
+                    ? category.imageThumbnailUrl!
+                    : "https://ui-avatars.com/api/?name=P+F",
               ),
             ),
           ),

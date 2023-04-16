@@ -64,14 +64,14 @@ class ProfilePage extends StatelessWidget {
                   ],
                 ),
                 5.h.ph,
-                ItemTile(
-                  icon: LineIcons.bell,
-                  title: "List Category",
-                  onTap: () => Navigator.push(
-                    context,
-                    CategoryListPage.route(),
-                  ),
-                ),
+                // ItemTile(
+                //   icon: LineIcons.bell,
+                //   title: "List Category",
+                //   onTap: () => Navigator.push(
+                //     context,
+                //     CategoryListPage.route(),
+                //   ),
+                // ),
                 ItemTile(
                   icon: LineIcons.book,
                   title: "My Tasker Profile",
@@ -112,10 +112,10 @@ class ProfilePage extends StatelessWidget {
                   icon: LineIcons.alternateSignOut,
                   title: "LogOut",
                   onTap: () {
-                    BlocProvider.of<AuthenticationBloc>(context).add(
-                      const AuthenticationHasWalkedThroughChanged(
-                          hasWalkedThrough: false),
-                    );
+                    // BlocProvider.of<AuthenticationBloc>(context).add(
+                    //   const AuthenticationHasWalkedThroughChanged(
+                    //       hasWalkedThrough: false),
+                    // );
                     BlocProvider.of<AuthenticationBloc>(context).add(
                       AuthenticationLogoutRequested(),
                     );

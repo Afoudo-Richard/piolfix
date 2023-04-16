@@ -49,20 +49,26 @@ class OrangeMtnMomoPaymentPage extends StatelessWidget {
               },
             ),
             4.h.ph,
-            Text(
-              'Request sent. Dial *126 or #150# and confirm.',
-              style: TextStyle(
-                color: secondaryColor,
-                fontSize: 12.sp,
-                letterSpacing: 1.5,
-              ),
+            BlocBuilder<MobileMoneyBloc, MobileMoneyState>(
+              builder: (context, state) {
+                return state.formStatus.isSubmissionSuccess
+                    ? Text(
+                        'Request sent. Dial *126 or #150# and confirm.',
+                        style: TextStyle(
+                          color: secondaryColor,
+                          fontSize: 12.sp,
+                          letterSpacing: 1.5,
+                        ),
+                      )
+                    : const SizedBox.shrink();
+              },
             ),
           ],
         ),
       ),
       bottomNavigationBar: BlocBuilder<MobileMoneyBloc, MobileMoneyState>(
         builder: (context, state) {
-          return state.formStatus.isSubmissionSuccess
+          return !state.formStatus.isSubmissionSuccess
               ? Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: IntrinsicHeight(

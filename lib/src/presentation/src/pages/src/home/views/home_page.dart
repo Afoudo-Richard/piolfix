@@ -41,16 +41,16 @@ class _HomePageState extends State<HomePage> {
               const InfoCard(),
               2.h.ph,
               const PopularTaskers(),
-              2.h.ph,
-              ItemTile(
-                icon: LineIcons.alternateSignOut,
-                title: "LogOut",
-                onTap: () {
-                  BlocProvider.of<AuthenticationBloc>(context).add(
-                    AuthenticationLogoutRequested(),
-                  );
-                },
-              ),
+              // 2.h.ph,
+              // ItemTile(
+              //   icon: LineIcons.alternateSignOut,
+              //   title: "LogOut",
+              //   onTap: () {
+              //     BlocProvider.of<AuthenticationBloc>(context).add(
+              //       AuthenticationLogoutRequested(),
+              //     );
+              //   },
+              // ),
               5.h.ph,
             ],
           ),
@@ -83,7 +83,7 @@ class InfoCard extends StatelessWidget {
           height: 30.h,
           width: 100.w,
           child: Image.asset(
-            'assets/images/packaging.jpeg',
+            'assets/images/user_bg_1.jpg',
             width: 100.w,
             height: 100.h,
             fit: BoxFit.cover,
@@ -151,12 +151,21 @@ class HomeSearchInput extends StatelessWidget {
           ),
         ),
         2.h.ph,
-        CustomInput(
-          leading: Icon(
-            LineIcons.search,
-            color: primaryColor,
+        GestureDetector(
+          child: CustomInput(
+            inputEnabled: false,
+            leading: Icon(
+              LineIcons.search,
+              color: primaryColor,
+            ),
+            inputHintText: 'Try "mount Tv or leacky faucet',
           ),
-          inputHintText: 'Try "mount Tv or leacky faucet',
+          onTap: () {
+            BlocProvider.of<AppBottomNavigationBarBloc>(context)
+                .add(AppBottomNavigationBarChanged(
+              activePage: const TaskPage(),
+            ));
+          },
         ),
         // What are you looking for? 🤔
       ],

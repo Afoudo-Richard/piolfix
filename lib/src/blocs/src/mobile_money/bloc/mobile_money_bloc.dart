@@ -53,7 +53,7 @@ class MobileMoneyBloc extends Bloc<MobileMoneyEvent, MobileMoneyState> {
       try {
         final response = await camPayApi.requestPayment(
           amount: '100',
-          phone: state.phone.value,
+          phone: '+237${state.phone.value}',
         );
 
         emit(
@@ -61,8 +61,18 @@ class MobileMoneyBloc extends Bloc<MobileMoneyEvent, MobileMoneyState> {
             formStatus: FormzStatus.submissionSuccess,
           ),
         );
+      } on ErrorRequestingCamPayPayment catch (e) {
+        emit(
+          state.copyWith(
+            formStatus: FormzStatus.submissionFailure,
+            errorMessage: e.message,
+          ),
+        );
       } catch (e) {
-        print(e);
+        emit(state.copyWith(
+          formStatus: FormzStatus.submissionFailure,
+          errorMessage: e.toString(),
+        ));
       }
     }
   }

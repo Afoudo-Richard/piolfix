@@ -1,6 +1,9 @@
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:equatable/equatable.dart';
 
-class Category extends ParseObject implements ParseCloneable {
+class Category extends ParseObject
+    with EquatableMixin
+    implements ParseCloneable {
   Category() : super(keyTableName);
   Category.clone() : this();
 
@@ -21,11 +24,25 @@ class Category extends ParseObject implements ParseCloneable {
   // set imageThumbnailUrl(String? value) =>
   //     set<String?>('image_thumbnail_url', value);
 
-  ParseFile? get imageThumbnail => get('image_thumbnail');
+  ParseFile? get imageThumbnail {
+    imageThumbnailUrl = get<ParseFile>('image_thumbnail')?.url;
+    return get('image_thumbnail');
+  }
 
-  set imageThumbnail(value) => set('image_thumbnail', value);
+  set imageThumbnail(ParseFileBase? value) {
+    imageThumbnailUrl = value?.url;
+    return set<ParseFileBase?>('image_thumbnail', value);
+  }
 
   String? imageThumbnailUrl;
+
+  @override
+  List<Object?> get props => [
+        objectId,
+        name,
+        description,
+        imageThumbnail,
+      ];
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{

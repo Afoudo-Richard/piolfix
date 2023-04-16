@@ -21,6 +21,59 @@ class SelectPaymentMethodPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             2.h.ph,
+            Row(
+              children: [
+                CustomCircle(
+                  radius: 15.sp,
+                ),
+                3.w.pw,
+                Expanded(
+                  child: Text(
+                    'ORANGE/MTN Mobile Money',
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            3.h.ph,
+            Row(
+              children: [
+                CustomCircle(
+                  radius: 15.sp,
+                ),
+                3.w.pw,
+                Expanded(
+                  child: Text(
+                    'VISA/MASTER CARD',
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            3.h.ph,
+            Row(
+              children: [
+                CustomCircle(
+                  radius: 15.sp,
+                ),
+                3.w.pw,
+                Expanded(
+                  child: Text(
+                    'PayPal',
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

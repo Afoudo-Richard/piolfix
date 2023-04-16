@@ -90,41 +90,54 @@ class TaskerProfileInfoPage extends StatelessWidget {
           );
         },
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: IntrinsicHeight(
-          child: SizedBox(
-            width: 100.w,
-            child: BlocBuilder<TaskerProfileInfoBloc, TaskerProfileInfoState>(
-              builder: (context, state) {
-                return CustomButton(
-                  backgroundColor: state.formStatus.isSubmissionInProgress
-                      ? Colors.grey
-                      : null,
-                  onPressed: () {
-                    state.formStatus.isValidated
-                        ? state.formStatus.isSubmissionInProgress
-                            ? null
-                            : context
-                                .read<TaskerProfileInfoBloc>()
-                                .add(TaskerProfileInfoSubmitted())
-                        : BlocProvider.of<TaskerProfileInfoBloc>(context)
-                            .add(TaskerProfileInfoInputsChecked());
-                  },
-                  child: state.formStatus.isSubmissionInProgress
-                      ? LoadingIndicator(
-                          color: secondaryColor,
-                        )
-                      : Text(
-                          'Save',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14.sp,
-                            letterSpacing: 1.5,
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            const BoxShadow(
+              color: Colors.black12,
+              blurRadius: 16,
+              spreadRadius: 0,
+              offset: Offset(0, -8),
+            ),
+          ],
+          color: Colors.white,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: IntrinsicHeight(
+            child: SizedBox(
+              width: 100.w,
+              child: BlocBuilder<TaskerProfileInfoBloc, TaskerProfileInfoState>(
+                builder: (context, state) {
+                  return CustomButton(
+                    backgroundColor: state.formStatus.isSubmissionInProgress
+                        ? Colors.grey
+                        : null,
+                    onPressed: () {
+                      state.formStatus.isValidated
+                          ? state.formStatus.isSubmissionInProgress
+                              ? null
+                              : context
+                                  .read<TaskerProfileInfoBloc>()
+                                  .add(TaskerProfileInfoSubmitted())
+                          : BlocProvider.of<TaskerProfileInfoBloc>(context)
+                              .add(TaskerProfileInfoInputsChecked());
+                    },
+                    child: state.formStatus.isSubmissionInProgress
+                        ? LoadingIndicator(
+                            color: secondaryColor,
+                          )
+                        : Text(
+                            'Save',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14.sp,
+                              letterSpacing: 1.5,
+                            ),
                           ),
-                        ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
         ),
