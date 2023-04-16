@@ -62,10 +62,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   Colors.white,
                 ],
               ),
-              // image: DecorationImage(
-              //   image: AssetImage("assets/images/others/car_bg.jpg"),
-              //   fit: BoxFit.cover,
-              // ),
+              image: DecorationImage(
+                image: AssetImage("assets/images/user_bg_1.jpg"),
+                fit: BoxFit.cover,
+              ),
             ),
             child: SingleChildScrollView(
               padding: pagePadding,
@@ -77,7 +77,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   CustomContainer(
                     backgroundColor: Colors.transparent,
                     child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                      filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -332,11 +332,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 RegistrationState>(
                               builder: (context, state) {
                                 return CustomButton(
+                                  backgroundColor:
+                                      state.status.isSubmissionInProgress
+                                          ? Colors.grey
+                                          : null,
                                   onPressed: () {
                                     state.status.isValidated
-                                        ? context
-                                            .read<RegistrationBloc>()
-                                            .add(RegistrationSubmitted())
+                                        ? state.status.isSubmissionInProgress
+                                            ? null
+                                            : context
+                                                .read<RegistrationBloc>()
+                                                .add(RegistrationSubmitted())
                                         : BlocProvider.of<RegistrationBloc>(
                                                 context)
                                             .add(SubmitInputsChecked());

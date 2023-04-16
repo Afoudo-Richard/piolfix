@@ -88,9 +88,9 @@ class CategoryListPage extends StatelessWidget {
                                           placeholder: (context, url) => Center(
                                             child: LoadingIndicator(),
                                           ),
-                                          imageUrl:
-                                              service.imageThumbnail!.url ??
-                                                  "some image default image",
+                                          imageUrl: service
+                                                  .imageThumbnail?.url ??
+                                              "https://ui-avatars.com/api/?name=P+F",
                                         ),
                                       ),
                                       1.w.pw,

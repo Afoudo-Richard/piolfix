@@ -11,22 +11,24 @@ class TaskPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> tasks = categories
-        .map((task) => GestureDetector(
-              onTap: () {
-                Navigator.push(context, SelectTaskerPage.route());
-              },
-              child: CustomContainer(
-                boxShadow: [],
-                border: Border.all(color: primaryColor),
-                child: Text(
-                  task,
-                  style: TextStyle(
-                    color: primaryColor,
-                    fontSize: 12.sp,
-                  ),
+        .map(
+          (task) => GestureDetector(
+            onTap: () {
+              Navigator.push(context, SelectTaskerPage.route());
+            },
+            child: CustomContainer(
+              boxShadow: [],
+              border: Border.all(color: primaryColor),
+              child: Text(
+                task,
+                style: TextStyle(
+                  color: primaryColor,
+                  fontSize: 12.sp,
                 ),
               ),
-            ))
+            ),
+          ),
+        )
         .toList();
     return Scaffold(
       appBar: const CustomAppBar(
@@ -53,10 +55,36 @@ class TaskPage extends StatelessWidget {
               ),
             ),
             3.h.ph,
-            Wrap(
-              children: tasks,
-              spacing: 10.sp,
-              runSpacing: 10.sp,
+            BlocBuilder<CategoryListBloc, CategoryListState>(
+              builder: (context, state) {
+                return Wrap(
+                  spacing: 10.sp,
+                  runSpacing: 10.sp,
+                  children: state.categories
+                      .map(
+                        (task) => GestureDetector(
+                          onTap: () {
+                            BlocProvider.of<SelectTaskBloc>(context)
+                                .add(SelectTaskServiceChanged(task));
+
+                            Navigator.push(context, SelectTaskerPage.route());
+                          },
+                          child: CustomContainer(
+                            boxShadow: [],
+                            border: Border.all(color: primaryColor),
+                            child: Text(
+                              '${task.name}',
+                              style: TextStyle(
+                                color: primaryColor,
+                                fontSize: 12.sp,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                );
+              },
             ),
             5.h.ph,
           ],

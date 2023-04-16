@@ -1,15 +1,21 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:poilfix/poilfix.dart';
 
 class TaskerItem extends StatelessWidget {
-  const TaskerItem({super.key});
+  final User user;
+
+  const TaskerItem({
+    super.key,
+    required this.user,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, TaskerProfilePage.route());
+        Navigator.push(context, TaskerProfilePage.route(user));
       },
       child: CustomContainer(
         child: Column(
@@ -22,12 +28,18 @@ class TaskerItem extends StatelessWidget {
                   padding: EdgeInsets.zero,
                   boxShadow: [],
                   height: 15.h,
-                  width: 30.w,
-                  child: Image.asset(
-                    'assets/images/user1.jpeg',
-                    width: 100.w,
-                    height: 100.h,
+                  width: 25.w,
+                  child: CachedNetworkImage(
                     fit: BoxFit.cover,
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor: primaryColor,
+                        color: secondaryColor,
+                      ),
+                    ),
+                    imageUrl: user.profileImageUrl != null
+                        ? user.profileImageUrl!
+                        : "https://ui-avatars.com/api/?name=${user.firstname}+${user.lastname}",
                   ),
                 ),
                 2.w.pw,
@@ -38,7 +50,7 @@ class TaskerItem extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              'Mubifor Marcellus',
+                              '${user.firstname} ${user.lastname}',
                               style: TextStyle(
                                 fontSize: 10.sp,
                                 fontWeight: FontWeight.bold,
@@ -47,7 +59,7 @@ class TaskerItem extends StatelessWidget {
                           ),
                           2.w.pw,
                           Text(
-                            'FCFA 1000/hr',
+                            'FCFA ${user.pricePerHr}/hr',
                             style: TextStyle(
                               fontSize: 8.sp,
                               fontWeight: FontWeight.bold,
@@ -113,7 +125,7 @@ class TaskerItem extends StatelessWidget {
             ),
             1.5.h.ph,
             Text(
-              'Happy to wait as long as neccesary, can give updates if asked on where I am so far while waiting the task to be completed',
+              '${user.skills}',
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(

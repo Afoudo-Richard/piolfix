@@ -19,11 +19,13 @@ class _HomePageState extends State<HomePage> {
     return CustomScaffold(
       body: RefreshIndicator(
         color: primaryColor,
-        onRefresh: () => Future.sync(
-          () => BlocProvider.of<CategoryListBloc>(context).add(
-            CategoryListFetched(refresh: true),
-          ),
-        ),
+        onRefresh: () => Future.sync(() {
+          BlocProvider.of<CategoryListBloc>(context)
+              .add(CategoryListFetched(refresh: true));
+
+          BlocProvider.of<TaskerListBloc>(context)
+              .add(TaskerListFetched(refresh: true));
+        }),
         child: SingleChildScrollView(
           padding: pagePadding,
           child: Column(
@@ -31,7 +33,7 @@ class _HomePageState extends State<HomePage> {
               4.h.ph,
               const UserLocation(),
               const Divider(),
-              3.h.ph,
+              const UpdateUserProfile(),
               const HomeSearchInput(),
               2.h.ph,
               const TrendingProjects(),
@@ -39,7 +41,17 @@ class _HomePageState extends State<HomePage> {
               const InfoCard(),
               2.h.ph,
               const PopularTaskers(),
-              3.h.ph,
+              2.h.ph,
+              ItemTile(
+                icon: LineIcons.alternateSignOut,
+                title: "LogOut",
+                onTap: () {
+                  BlocProvider.of<AuthenticationBloc>(context).add(
+                    AuthenticationLogoutRequested(),
+                  );
+                },
+              ),
+              5.h.ph,
             ],
           ),
         ),
@@ -174,18 +186,37 @@ class TrendingProjects extends StatelessWidget {
           ),
         ),
         2.h.ph,
-        AlignedGridView.count(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          crossAxisCount: 3,
-          mainAxisSpacing: 15.sp,
-          crossAxisSpacing: 10.sp,
-          itemCount: 6,
-          itemBuilder: (BuildContext context, int index) {
-            final String categoryTitle = categories[index];
-            return CategoryItem(
-              title: categoryTitle,
-            );
+        BlocBuilder<CategoryListBloc, CategoryListState>(
+          builder: (context, state) {
+            switch (state.categoryListStatus) {
+              case CategoryListStatus.initial:
+              case CategoryListStatus.refresh:
+                return const ServicesLoading();
+              case CategoryListStatus.failure:
+                return FetchError(
+                  onPressedTryAgain: () {
+                    BlocProvider.of<CategoryListBloc>(context).add(
+                      CategoryListFetched(refresh: true),
+                    );
+                  },
+                );
+              case CategoryListStatus.success:
+                return AlignedGridView.count(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 15.sp,
+                  crossAxisSpacing: 10.sp,
+                  itemCount:
+                      state.categories.length < 6 ? state.categories.length : 6,
+                  itemBuilder: (BuildContext context, int index) {
+                    final categoryTitle = state.categories[index];
+                    return CategoryItem(
+                      category: categoryTitle,
+                    );
+                  },
+                );
+            }
           },
         ),
       ],
@@ -215,18 +246,45 @@ class PopularTaskers extends StatelessWidget {
           ),
         ),
         2.h.ph,
-        ListView.separated(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            // final category = categories[index];
-            return const TaskerItem();
+        BlocBuilder<TaskerListBloc, TaskerListState>(
+          builder: (context, state) {
+            switch (state.taskerListStatus) {
+              case TaskerListStatus.initial:
+              case TaskerListStatus.refresh:
+                return const TaskersLoading();
+
+              case TaskerListStatus.failure:
+                return FetchError(
+                  onPressedTryAgain: () {
+                    BlocProvider.of<TaskerListBloc>(context).add(
+                      TaskerListFetched(refresh: true),
+                    );
+                  },
+                );
+              case TaskerListStatus.success:
+                return TaskersListing(
+                  taskers: state.taskers,
+                  onScroll: () {
+                    BlocProvider.of<TaskerListBloc>(context)
+                        .add(TaskerListFetched());
+                  },
+                  hasReachedMax: state.hasReachedMax,
+                );
+            }
           },
-          separatorBuilder: (context, index) {
-            return 2.h.ph;
-          },
-          itemCount: 7,
         ),
+        // ListView.separated(
+        //   shrinkWrap: true,
+        //   physics: const NeverScrollableScrollPhysics(),
+        //   itemBuilder: (context, index) {
+        //     // final category = categories[index];
+        //     return const TaskerItem();
+        //   },
+        //   separatorBuilder: (context, index) {
+        //     return 2.h.ph;
+        //   },
+        //   itemCount: 7,
+        // ),
       ],
     );
   }

@@ -31,14 +31,38 @@ class User extends ParseUser with EquatableMixin implements ParseCloneable {
   String? get gender => get<String?>('gender');
   set gender(String? value) => set<String?>('gender', value);
 
-  String? get profileImage => get<String?>('profileImage');
-  set profileImage(String? value) => set<String?>('profileImage', value);
+  // String? get profileImage => get<String?>('profileImage');
+  // set profileImage(String? value) => set<String?>('profileImage', value);
 
   bool get isAdmin => get<bool?>('is_admin') ?? false;
   set isAdmin(bool value) => set<bool?>('is_admin', value);
 
   List<dynamic>? get devices => get('devices');
   set devices(List<dynamic>? value) => set('devices', value);
+
+  ParseFile? get profileImage {
+    profileImageUrl = get<ParseFile>('profile_image')?.url;
+    return get('profile_image');
+  }
+
+  set profileImage(ParseFileBase? value) {
+    profileImageUrl = value?.url;
+    return set<ParseFileBase?>('profile_image', value);
+  }
+
+  String? get tools => get<String?>('tools');
+  set tools(String? value) => set<String?>('tools', value);
+
+  String? get skills => get<String?>('skills');
+  set skills(String? value) => set<String?>('skills', value);
+
+  String? get pricePerHr => get<String?>('price_per_hr');
+  set pricePerHr(String? value) => set<String?>('price_per_hr', value);
+
+  String? get status => get<String?>('status');
+  set status(String? value) => set<String?>('status', value);
+
+  String? profileImageUrl;
 
   @override
   List<Object?> get props => [
@@ -47,9 +71,14 @@ class User extends ParseUser with EquatableMixin implements ParseCloneable {
         email,
         phone,
         gender,
-        profileImage,
         isAdmin,
         devices,
+        profileImage,
+        profileImageUrl,
+        tools,
+        skills,
+        pricePerHr,
+        status,
       ];
 
   Map<String, dynamic> toMap() {
@@ -60,10 +89,15 @@ class User extends ParseUser with EquatableMixin implements ParseCloneable {
       'email': email,
       'phone': phone,
       'gender': gender,
-      'profileImage': profileImage,
       'sessionToken': sessionToken,
       'isAdmin': isAdmin,
       'devices': devices,
+      // 'profileImage': profileImage,
+      'profileImageUrl': profileImageUrl,
+      'tools': tools,
+      'skills': skills,
+      'pricePerHr': pricePerHr,
+      'status': status,
     };
   }
 
@@ -75,13 +109,22 @@ class User extends ParseUser with EquatableMixin implements ParseCloneable {
       ..email = map['email'] != null ? map['email'] as String : null
       ..phone = map['phone'] != null ? map['phone'] as String : null
       ..gender = map['gender'] != null ? map['gender'] as String : null
-      ..profileImage =
-          map['profileImage'] != null ? map['profileImage'] as String : null
       ..sessionToken =
           map['sessionToken'] != null ? map['sessionToken'] as String : null
       ..isAdmin = map['isAdmin'] as bool
       ..devices =
-          map['devices'] != null ? map['devices'] as List<dynamic> : null;
+          map['devices'] != null ? map['devices'] as List<dynamic> : null
+      // ..profileImageUrl =
+      //     map['profileImage'] != null ? map['profileImage'] as String : null
+
+      ..profileImageUrl = map['profileImageUrl'] != null
+          ? map['profileImageUrl'] as String
+          : null
+      ..tools = map['tools'] != null ? map['tools'] as String : null
+      ..skills = map['skills'] != null ? map['skills'] as String : null
+      ..pricePerHr =
+          map['pricePerHr'] != null ? map['pricePerHr'] as String : null
+      ..status = map['status'] != null ? map['status'] as String : null;
 
     return user;
   }

@@ -5,8 +5,10 @@ part 'registration_event.dart';
 part 'registration_state.dart';
 
 class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
-  RegistrationBloc({required this.poilfixApi, required this.authenticationBloc,})
-      : super(const RegistrationState(gender: Gender.dirty("male"))) {
+  RegistrationBloc({
+    required this.poilfixApi,
+    required this.authenticationBloc,
+  }) : super(const RegistrationState(gender: Gender.dirty("male"))) {
     on<RegistrationFirstNameChanged>(_onFirstNameChanged);
     on<RegistrationLastNameChanged>(_onLastNameChanged);
     on<RegistrationPhoneChanged>(_onPhoneChanged);
@@ -207,8 +209,28 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
     required String gender,
     required String password,
   }) async {
+    final user = User(username: email, password: password, email: email);
+    user
+      ..phone = phone
+      ..gender = gender
+      ..firstname = firstname
+      ..lastname = lastname;
 
+    user.setAdd("devices", []);
+
+    var response = await user.signUp();
+
+    if (response.success) {
+      var result = response.result;
+      return true;
+    } else {
+      print(response.error?.message);
+      throw ErrorRegistering(
+        message: response.error?.message ==
+                'Account already exists for this username.'
+            ? 'Account already exists for this email.'
+            : response.error?.message,
+      );
+    }
   }
-
-
 }

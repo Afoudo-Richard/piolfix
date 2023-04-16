@@ -13,8 +13,8 @@ class SplashPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Text(
-          'Poilfix',
+        child: LoadingIndicator(
+          radius: 30.sp,
         ),
       ),
     );

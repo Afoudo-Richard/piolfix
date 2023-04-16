@@ -37,7 +37,7 @@ class ListRowText extends StatelessWidget {
                     fontSize: SizerUtil.deviceType == DeviceType.mobile
                         ? 12.sp
                         : 6.sp,
-                    color: secondaryColor,
+                    color: primaryColor,
                   ),
                 ),
               )

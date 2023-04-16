@@ -29,51 +29,65 @@ class UserImage extends StatelessWidget {
               )
             : null;
       },
-      child: Stack(
-        children: [
-          BlocBuilder<UserImageBloc, UserImageState>(
-            builder: (context, state) {
-              return CustomContainer(
-                padding: EdgeInsets.zero,
-                height: squareSize ?? 50.sp,
-                width: squareSize ?? 50.sp,
-                child: state.pickedFile != null
-                    ? Image(
-                        image: FileImage(
-                          File(state.pickedFile!.path),
-                        ),
-                        fit: BoxFit.cover,
-                      )
-                    : CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => const Center(
-                          child: CircularProgressIndicator(
-                            backgroundColor: primaryColor,
-                            color: secondaryColor,
+      child: BlocBuilder<UserImageBloc, UserImageState>(
+        builder: (context, state) {
+          return Stack(
+            children: [
+              BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                builder: (context, authState) {
+                  return BlocBuilder<UserBloc, UserState>(
+                    builder: (context, userState) {
+                      return CustomContainer(
+                        padding: EdgeInsets.zero,
+                        height: squareSize ?? 50.sp,
+                        width: squareSize ?? 50.sp,
+                        child: CachedNetworkImage(
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => const Center(
+                            child: CircularProgressIndicator(
+                              backgroundColor: primaryColor,
+                              color: secondaryColor,
+                            ),
                           ),
+                          imageUrl: authState.authenticated
+                              ? userState.user?.profileImageUrl != null
+                                  ? userState.user!.profileImageUrl!
+                                  : "https://ui-avatars.com/api/?name=${userState.user!.firstname}+${userState.user!.lastname}"
+                              : "https://ui-avatars.com/api/?name=Anonymous+A",
                         ),
-                        imageUrl: "https://ui-avatars.com/api/?name=U+Shop",
+                      );
+                    },
+                  );
+                },
+              ),
+              showEditIcon
+                  ? Positioned(
+                      bottom: 0,
+                      right: 5,
+                      child: CustomCircle(
+                        radius: 20.sp,
+                        padding: EdgeInsets.all(1.sp),
+                        color: primaryColor,
+                        child: Icon(
+                          LineIcons.pen,
+                          color: Colors.white,
+                          size: 15.sp,
+                        ),
                       ),
-              );
-            },
-          ),
-          showEditIcon
-              ? Positioned(
-                  bottom: 0,
-                  right: 5,
-                  child: CustomCircle(
-                    radius: 20.sp,
-                    padding: EdgeInsets.all(1.sp),
-                    color: primaryColor,
-                    child: Icon(
-                      LineIcons.pen,
-                      color: Colors.white,
-                      size: 15.sp,
-                    ),
-                  ),
-                )
-              : const SizedBox.shrink(),
-        ],
+                    )
+                  : const SizedBox.shrink(),
+              state.userImageStatus == UserImageStatus.uploading
+                  ? Positioned(
+                      bottom: 0,
+                      left: 5,
+                      child: LoadingIndicator(
+                        radius: 10,
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+            ],
+          );
+        },
       ),
     );
   }

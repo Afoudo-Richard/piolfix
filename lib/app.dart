@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poilfix/poilfix.dart';
+import 'package:poilfix/src/blocs/src/tasker_profile_info/bloc/tasker_profile_info_bloc.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -10,8 +11,15 @@ class App extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => PoilfixApi(),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(
+          create: (context) => PoilfixApi(),
+        ),
+        RepositoryProvider(
+          create: (context) => CamPayApi(),
+        ),
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => SettingsBloc()),
@@ -19,11 +27,23 @@ class App extends StatelessWidget {
           BlocProvider(create: (context) => UserBloc()),
           BlocProvider(create: (context) => AppBottomNavigationBarBloc()),
           BlocProvider(create: (context) => CategoryAddBloc()),
-          BlocProvider(create: (context) => UserImageBloc()),
+          BlocProvider(
+              create: (context) => UserImageBloc(
+                    userBloc: BlocProvider.of<UserBloc>(context),
+                  )),
+          BlocProvider(
+              create: (context) => TaskerListBloc()..add(TaskerListFetched())),
+          BlocProvider(
+              create: (context) => TaskerProfileInfoBloc(
+                  userBloc: BlocProvider.of<UserBloc>(context))),
           BlocProvider(
             create: (context) => CategoryListBloc()..add(CategoryListFetched()),
             lazy: false,
           ),
+          BlocProvider(create: (context) => SelectTaskBloc()),
+          BlocProvider(
+              create: (context) => MobileMoneyBloc(
+                  camPayApi: RepositoryProvider.of<CamPayApi>(context))),
         ],
         child: const AppView(),
       ),
@@ -74,7 +94,7 @@ class _AppViewState extends State<AppView> {
                   child: BlocListener<AuthenticationBloc, AuthenticationState>(
                     listener: (context, state) {
                       Future.delayed(
-                        const Duration(seconds: 1),
+                        const Duration(microseconds: 500),
                         () {
                           if (state.authenticated ||
                               state.isSignedInAnonymous) {

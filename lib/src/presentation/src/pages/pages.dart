@@ -12,3 +12,8 @@ export './src/profile/profile.dart';
 export './src/user_map/user_map.dart';
 export './src/category_add/category_add.dart';
 export './src/category_list/category_list.dart';
+export './src/tasker_profile_info/tasker_profile_info.dart';
+export './src/task_detail/task_detail.dart';
+export './src/task_review/task_review.dart';
+export './src/select_payment_method/select_payment_method.dart';
+export './src/orange_mtn_momo_payment/orange_mtn_momo_payment.dart';

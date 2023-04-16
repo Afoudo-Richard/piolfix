@@ -8,3 +8,6 @@ export './src/phone.dart';
 export './src/username.dart';
 export './src/gender.dart';
 export './src/category_name.dart';
+export './src/tasker_price_per_hr.dart';
+export './src/tasker_skill.dart';
+export './src/tasker_tools.dart';

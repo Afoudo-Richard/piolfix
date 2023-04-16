@@ -62,10 +62,10 @@ class _LoginPageState extends State<LoginPage> {
                       Colors.white,
                     ],
                   ),
-                  // image: DecorationImage(
-                  //   image: AssetImage("assets/images/others/car_bg.jpg"),
-                  //   fit: BoxFit.cover,
-                  // ),
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/user_bg_1.jpg"),
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 child: SingleChildScrollView(
                   padding: pagePadding,
@@ -73,15 +73,15 @@ class _LoginPageState extends State<LoginPage> {
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      3.h.ph,
+                      1.h.ph,
                       CustomContainer(
                         backgroundColor: Colors.transparent,
                         child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                          filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
                           child: Column(
                             // crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              3.h.ph,
+                              1.h.ph,
                               Text(
                                 'Welcome Back To',
                                 style: TextStyle(
@@ -99,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 ],
                               ),
-                              4.h.ph,
+                              2.h.ph,
                               Text(
                                 'Sign in to your PiolFix account',
                                 style: TextStyle(
@@ -143,7 +143,6 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                     trailing: GestureDetector(
                                       onTap: () {
-                                        print(hidePassword);
                                         setState(() {
                                           hidePassword = !hidePassword;
                                         });
@@ -170,11 +169,18 @@ class _LoginPageState extends State<LoginPage> {
                                 child: BlocBuilder<LoginBloc, LoginState>(
                                   builder: (context, state) {
                                     return CustomButton(
+                                      backgroundColor:
+                                          state.status.isSubmissionInProgress
+                                              ? Colors.grey
+                                              : null,
                                       onPressed: () {
                                         state.status.isValidated
-                                            ? context
-                                                .read<LoginBloc>()
-                                                .add(LoginSubmitted())
+                                            ? state.status
+                                                    .isSubmissionInProgress
+                                                ? null
+                                                : context
+                                                    .read<LoginBloc>()
+                                                    .add(LoginSubmitted())
                                             : BlocProvider.of<LoginBloc>(
                                                     context)
                                                 .add(

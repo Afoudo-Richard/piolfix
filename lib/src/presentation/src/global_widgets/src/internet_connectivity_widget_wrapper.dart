@@ -58,22 +58,28 @@ class InternetConnectivityWidgetWrapper extends StatelessWidget {
     final bool _isOffline = Provider.of<ConnectivityStatus>(context) !=
         ConnectivityStatus.CONNECTED;
     return Scaffold(
-      body: child,
-      bottomNavigationBar: AnimatedContainer(
-        decoration: decoration,
-        height: _isOffline ? height ?? 15.sp : 0,
-        color: _isOffline
-            ? disconnectedColor ?? Colors.red
-            : connectedColor ?? Colors.green,
-        duration: const Duration(milliseconds: 500),
-        child: Center(
-          child: Text(
-            _isOffline ? "No connection" : "Back online",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 9.sp,
-            ).merge(messageStyle),
-          ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            AnimatedContainer(
+              decoration: decoration,
+              height: _isOffline ? height ?? 15.sp : 0,
+              color: _isOffline
+                  ? disconnectedColor ?? Colors.red
+                  : connectedColor ?? Colors.green,
+              duration: const Duration(milliseconds: 500),
+              child: Center(
+                child: Text(
+                  _isOffline ? "No connection" : "Back online",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 9.sp,
+                  ).merge(messageStyle),
+                ),
+              ),
+            ),
+            Expanded(child: child),
+          ],
         ),
       ),
     );

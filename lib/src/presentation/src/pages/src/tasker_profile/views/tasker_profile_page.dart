@@ -1,111 +1,178 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:poilfix/poilfix.dart';
 
 class TaskerProfilePage extends StatelessWidget {
-  const TaskerProfilePage({super.key});
+  final User user;
+  const TaskerProfilePage({super.key, required this.user});
 
-  static Route route() {
-    return MaterialPageRoute<void>(builder: (_) => const TaskerProfilePage());
+  static Route route(User user) {
+    return MaterialPageRoute<void>(
+        builder: (_) => TaskerProfilePage(
+              user: user,
+            ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CustomAppBar(
-          title: 'Tasker Profile',
-        ),
-        body: SingleChildScrollView(
-          padding: pagePadding,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              4.h.ph,
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomContainer(
-                    padding: EdgeInsets.zero,
-                    boxShadow: [],
-                    height: 15.h,
-                    width: 30.w,
-                    child: Image.asset(
-                      'assets/images/user1.jpeg',
-                      width: 100.w,
-                      height: 100.h,
-                      fit: BoxFit.cover,
+      appBar: const CustomAppBar(
+        title: 'Tasker Profile',
+      ),
+      body: SingleChildScrollView(
+        padding: pagePadding,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            4.h.ph,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomContainer(
+                  padding: EdgeInsets.zero,
+                  boxShadow: [],
+                  height: 15.h,
+                  width: 30.w,
+                  child: CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor: primaryColor,
+                        color: secondaryColor,
+                      ),
                     ),
+                    imageUrl: user.profileImage != null
+                        ? user.profileImageUrl!
+                        : "https://ui-avatars.com/api/?name=${user.firstname}+${user.lastname}",
                   ),
-                  2.w.pw,
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                'Mubifor Marcellus',
-                                style: TextStyle(
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        1.h.ph,
-                        Row(
-                          children: [
-                            Icon(
-                              LineIcons.star,
-                              color: Colors.orange,
-                              size: 10.sp,
-                            ),
-                            2.w.pw,
-                            Text(
-                              '5.0 (11 Reviews)',
+                ),
+                2.w.pw,
+                Expanded(
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              '${user.firstname} ${user.lastname}',
                               style: TextStyle(
-                                fontSize: 10.sp,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ],
+                          ),
+                        ],
+                      ),
+                      1.h.ph,
+                      Row(
+                        children: [
+                          Icon(
+                            LineIcons.star,
+                            color: Colors.orange,
+                            size: 10.sp,
+                          ),
+                          2.w.pw,
+                          Text(
+                            '5.0 (11 Reviews)',
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+            2.h.ph,
+            const TaskerInfoTextItem(
+              icon: LineIcons.checkCircle,
+              text: '9 waiting inline jobs',
+            ),
+            2.h.ph,
+            const TaskerInfoTextItem(
+              icon: LineIcons.clock,
+              text: '2 hours minimum required',
+            ),
+            2.h.ph,
+            TaskerInfoTextItem(
+              icon: LineIcons.tools,
+              text: "Tools: ${user.tools}",
+            ),
+            2.h.ph,
+            const TaskerInfoTextItem(
+              icon: LineIcons.comment,
+              text: "Speeks: English, French , Spanish",
+            ),
+            4.h.ph,
+            SkillsAndExperience(
+              user: user,
+            ),
+            3.h.ph,
+            UserReviews(),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BlocBuilder<SelectTaskBloc, SelectTaskState>(
+        builder: (context, state) {
+          return state.service != null
+              ? Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      const BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 16,
+                        spreadRadius: 0,
+                        offset: Offset(0, -8),
+                      ),
+                    ],
+                    color: Colors.white,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'FCFA ${user.pricePerHr}/hr',
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        10.w.pw,
+                        Expanded(
+                          child: CustomButton(
+                            onPressed: () {
+                              BlocProvider.of<SelectTaskBloc>(context)
+                                  .add(SelectTaskTaskerChanged(user));
+                              Navigator.push(context, TaskDetailPage.route());
+                            },
+                            child: Text(
+                              'Select',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14.sp,
+                                letterSpacing: 1.5,
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
-                  )
-                ],
-              ),
-              2.h.ph,
-              const TaskerInfoTextItem(
-                icon: LineIcons.checkCircle,
-                text: '9 waiting inline jobs',
-              ),
-              2.h.ph,
-              const TaskerInfoTextItem(
-                icon: LineIcons.clock,
-                text: '2 hours minimum required',
-              ),
-              2.h.ph,
-              const TaskerInfoTextItem(
-                icon: LineIcons.tools,
-                text: "Tools: I don't use tools",
-              ),
-              2.h.ph,
-              const TaskerInfoTextItem(
-                icon: LineIcons.comment,
-                text: "Speeks: English, French , Spanish",
-              ),
-              4.h.ph,
-              const SkillsAndExperience(),
-              3.h.ph,
-              UserReviews(),
-            ],
-          ),
-        ));
+                  ),
+                )
+              : const SizedBox.shrink();
+        },
+      ),
+    );
   }
 }
 
 class SkillsAndExperience extends StatelessWidget {
+  final User user;
   const SkillsAndExperience({
+    required this.user,
     super.key,
   });
 
@@ -117,7 +184,7 @@ class SkillsAndExperience extends StatelessWidget {
         const SectionHeader(title: "Skills and Experience"),
         2.h.ph,
         Text(
-          'Happy to wait as long as neccesary, can give updates if asked on where I am so far while waiting the task to be completed.',
+          '${user.skills}',
           style: TextStyle(
             fontSize: 12.sp,
           ),
@@ -288,10 +355,12 @@ class TaskerInfoTextItem extends StatelessWidget {
           size: 14.sp,
         ),
         2.w.pw,
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: 12.sp,
+        Expanded(
+          child: Text(
+            text,
+            style: TextStyle(
+              fontSize: 12.sp,
+            ),
           ),
         ),
       ],

@@ -15,7 +15,16 @@ class SelectTaskerPage extends StatelessWidget {
           title: 'Select Tasker',
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                  barrierColor: primaryColor.withOpacity(0.7),
+                  isScrollControlled: true,
+                  context: context,
+                  builder: (ctx) {
+                    return const SearchFilterBottomSheet();
+                  },
+                );
+              },
               icon: Icon(
                 LineIcons.horizontalSliders,
                 color: primaryColor,
@@ -23,48 +32,107 @@ class SelectTaskerPage extends StatelessWidget {
             )
           ],
         ),
-        body: SingleChildScrollView(
+        body: Padding(
           padding: pagePadding,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              3.h.ph,
-              CustomContainer(
-                border: Border.all(color: secondaryColor),
-                child: Row(
-                  children: [
-                    Icon(
-                      LineIcons.userShield,
+              1.h.ph,
+              BlocBuilder<SelectTaskBloc, SelectTaskState>(
+                builder: (context, state) {
+                  return Text(
+                    'Task : ${state.service!.name}',
+                    style: TextStyle(
+                      fontSize: 15.sp,
                       color: primaryColor,
                     ),
-                    2.w.pw,
-                    Expanded(
-                      child: Text(
-                        'Always have peace of mind. All taskers undergo ID and criminal background checks',
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                  ],
+                  );
+                },
+              ),
+              2.h.ph,
+              Expanded(
+                child: BlocBuilder<TaskerListBloc, TaskerListState>(
+                  builder: (context, state) {
+                    switch (state.taskerListStatus) {
+                      case TaskerListStatus.initial:
+                      case TaskerListStatus.refresh:
+                        return const TaskersLoading();
+
+                      case TaskerListStatus.failure:
+                        return FetchError(
+                          onPressedTryAgain: () {
+                            BlocProvider.of<TaskerListBloc>(context).add(
+                              TaskerListFetched(refresh: true),
+                            );
+                          },
+                        );
+                      case TaskerListStatus.success:
+                        return TaskersListing(
+                          taskers: state.taskers,
+                          onScroll: () {
+                            BlocProvider.of<TaskerListBloc>(context)
+                                .add(TaskerListFetched());
+                          },
+                          hasReachedMax: state.hasReachedMax,
+                        );
+                    }
+                  },
                 ),
               ),
-              4.h.ph,
-              ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  // final category = categories[index];
-                  return const TaskerItem();
-                },
-                separatorBuilder: (context, index) {
-                  return 2.h.ph;
-                },
-                itemCount: 10,
-              ),
+              // Expanded(
+              //   child: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       UserSecurityInfo(),
+              //       4.h.ph,
+              //       // ListView.separated(
+              //       //   shrinkWrap: true,
+              //       //   physics: const NeverScrollableScrollPhysics(),
+              //       //   itemBuilder: (context, index) {
+              //       //     // final category = categories[index];
+              //       //     return const TaskerItem();
+              //       //   },
+              //       //   separatorBuilder: (context, index) {
+              //       //     return 2.h.ph;
+              //       //   },
+              //       //   itemCount: 10,
+              //       // ),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ));
+  }
+}
+
+class UserSecurityInfo extends StatelessWidget {
+  const UserSecurityInfo({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomContainer(
+      border: Border.all(color: secondaryColor),
+      child: Row(
+        children: [
+          Icon(
+            LineIcons.userShield,
+            color: primaryColor,
+          ),
+          2.w.pw,
+          Expanded(
+            child: Text(
+              'Always have peace of mind. All taskers undergo ID and criminal background checks',
+              style: TextStyle(
+                fontSize: 12.sp,
+                color: Colors.grey,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

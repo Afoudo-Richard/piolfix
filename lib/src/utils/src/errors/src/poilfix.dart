@@ -58,3 +58,33 @@ class ErrorAddingCategory extends PoilfixApiError {
           errors: errors,
         );
 }
+
+class ErrorUpdatingUserProfile extends PoilfixApiError {
+  ErrorUpdatingUserProfile({
+    String? message,
+    Map<String, dynamic>? errors,
+  }) : super(
+          message: message,
+          errors: errors,
+        );
+}
+
+class ErrorUpdatingUserProfileImage extends PoilfixApiError {
+  ErrorUpdatingUserProfileImage({
+    String? message,
+    Map<String, dynamic>? errors,
+  }) : super(
+          message: message,
+          errors: errors,
+        );
+}
+
+class ErrorRequestingCamPayPayment extends PoilfixApiError {
+  ErrorRequestingCamPayPayment({
+    String? message,
+    Map<String, dynamic>? errors,
+  }) : super(
+          message: message,
+          errors: errors,
+        );
+}
