@@ -47,6 +47,8 @@ class GlobalScaffold extends StatelessWidget {
           BlocListener<TaskerProfileInfoBloc, TaskerProfileInfoState>(
             listener: (context, state) {
               if (state.formStatus.isSubmissionSuccess) {
+                BlocProvider.of<TaskerListBloc>(context)
+                    .add(TaskerListFetched());
                 singleScaffoldMessenger(
                   context,
                   message: 'User profile info updated successfully',

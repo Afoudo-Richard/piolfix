@@ -11,3 +11,5 @@ export './src/category_name.dart';
 export './src/tasker_price_per_hr.dart';
 export './src/tasker_skill.dart';
 export './src/tasker_tools.dart';
+export './src/review.dart';
+export './src/rating.dart';

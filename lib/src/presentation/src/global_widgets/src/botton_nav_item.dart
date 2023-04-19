@@ -46,13 +46,19 @@ class BottomNavItem extends StatelessWidget {
                       ),
                     ],
                   )
-                : Text(
-                    text,
-                    style: TextStyle(
-                      fontSize: SizerUtil.deviceType == DeviceType.mobile
-                          ? 7.sp
-                          : 3.sp,
-                    ),
+                : BlocBuilder<SettingsBloc, SettingsState>(
+                    builder: (context, settingState) {
+                      return Text(
+                        text,
+                        style: TextStyle(
+                            fontSize: SizerUtil.deviceType == DeviceType.mobile
+                                ? 7.sp
+                                : 3.sp,
+                            color: settingState.isDarkMode
+                                ? Colors.white
+                                : Colors.black),
+                      );
+                    },
                   )
           ],
         ),

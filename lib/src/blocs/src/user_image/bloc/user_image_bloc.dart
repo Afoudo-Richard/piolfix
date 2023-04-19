@@ -81,7 +81,9 @@ class UserImageBloc extends Bloc<UserImageEvent, UserImageState> {
     ParseFileBase? parseFile = ParseFile(File(state.pickedFile!.path));
     await parseFile.save();
 
-    var user = updateUser..profileImage = parseFile;
+    var user = updateUser
+      ..profileImageUrl = parseFile.url
+      ..profileImage = parseFile;
 
     var response = await user.save();
 

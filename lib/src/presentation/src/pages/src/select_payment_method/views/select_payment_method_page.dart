@@ -11,7 +11,7 @@ class SelectPaymentMethodPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
       appBar: const CustomAppBar(
         title: "Select Payment Method",
       ),

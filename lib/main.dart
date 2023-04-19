@@ -34,7 +34,7 @@ void main() async {
     );
 
     HydratedBlocOverrides.runZoned(
-      () => runApp(App()),
+      () => runApp(const App()),
       storage: storage,
     );
   }, (error, stackTrace) {});
@@ -66,6 +66,11 @@ registerParseServer() async {
   ParseCoreData().registerSubClass(
     modelCategory.Category.keyTableName,
     () => modelCategory.Category(),
+  );
+
+  ParseCoreData().registerSubClass(
+    ReviewModel.keyTableName,
+    () => ReviewModel(),
   );
 }
 

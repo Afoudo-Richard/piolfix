@@ -24,24 +24,20 @@ class Category extends ParseObject
   // set imageThumbnailUrl(String? value) =>
   //     set<String?>('image_thumbnail_url', value);
 
-  ParseFile? get imageThumbnail {
-    imageThumbnailUrl = get<ParseFile>('image_thumbnail')?.url;
-    return get('image_thumbnail');
-  }
+  ParseFile? get imageThumbnail => get('image_thumbnail');
+  set imageThumbnail(ParseFileBase? value) =>
+      set<ParseFileBase?>('image_thumbnail', value);
 
-  set imageThumbnail(ParseFileBase? value) {
-    imageThumbnailUrl = value?.url;
-    return set<ParseFileBase?>('image_thumbnail', value);
-  }
-
-  String? imageThumbnailUrl;
+  String? get imageThumbnailUrl => get<String?>('image_thumb_url');
+  set imageThumbnailUrl(String? value) =>
+      set<String?>('image_thumb_url', value);
 
   @override
   List<Object?> get props => [
         objectId,
         name,
         description,
-        imageThumbnail,
+        imageThumbnailUrl,
       ];
 
   Map<String, dynamic> toMap() {

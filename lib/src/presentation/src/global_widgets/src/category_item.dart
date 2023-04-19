@@ -13,6 +13,8 @@ class CategoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        BlocProvider.of<SelectTaskBloc>(context)
+            .add(SelectTaskServiceChanged(category));
         Navigator.push(
           context,
           SelectTaskerPage.route(),
@@ -39,12 +41,17 @@ class CategoryItem extends StatelessWidget {
             ),
           ),
           1.h.ph,
-          Text(
-            category.name ?? 'N/A',
-            style: TextStyle(
-              fontSize: 9.sp,
-              fontWeight: FontWeight.bold,
-            ),
+          BlocBuilder<SettingsBloc, SettingsState>(
+            builder: (context, settingState) {
+              return Text(
+                category.name ?? 'N/A',
+                style: TextStyle(
+                  fontSize: 9.sp,
+                  fontWeight: FontWeight.bold,
+                  color: settingState.isDarkMode ? Colors.white : Colors.black,
+                ),
+              );
+            },
           ),
         ],
       ),

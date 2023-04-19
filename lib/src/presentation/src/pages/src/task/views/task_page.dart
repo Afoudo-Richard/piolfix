@@ -30,7 +30,7 @@ class TaskPage extends StatelessWidget {
           ),
         )
         .toList();
-    return Scaffold(
+    return CustomScaffold(
       appBar: const CustomAppBar(
         title: 'Task',
       ),

@@ -10,7 +10,7 @@ class TaskReviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
       appBar: const CustomAppBar(
         title: "Task review",
       ),

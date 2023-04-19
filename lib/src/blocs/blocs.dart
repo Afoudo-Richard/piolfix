@@ -10,3 +10,4 @@ export './src/user_image/bloc/user_image_bloc.dart';
 export './src/tasker_list/bloc/tasker_list_bloc.dart';
 export './src/select_task/bloc/select_task_bloc.dart';
 export './src/mobile_money/bloc/mobile_money_bloc.dart';
+export './src/review/bloc/review_bloc.dart';

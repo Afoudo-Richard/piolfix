@@ -13,7 +13,7 @@ class TaskersListing extends StatefulWidget {
     this.onScroll,
     required this.hasReachedMax,
     this.loadMoreScrollExtend = 0.8,
-    this.paddinng,
+    this.padding,
     this.showVehicleItemActivationStatusBar = false,
   });
 
@@ -23,7 +23,7 @@ class TaskersListing extends StatefulWidget {
   final void Function()? onScroll;
   final bool hasReachedMax;
   final double loadMoreScrollExtend;
-  final EdgeInsets? paddinng;
+  final EdgeInsets? padding;
   final bool showVehicleItemActivationStatusBar;
 
   @override
@@ -48,7 +48,7 @@ class _TaskersListingState extends State<TaskersListing> {
             ),
           )
         : ListView.separated(
-            padding: widget.paddinng,
+            padding: widget.padding,
             itemBuilder: (context, index) {
               final user = widget.taskers[index];
               final taskerItem = TaskerItem(

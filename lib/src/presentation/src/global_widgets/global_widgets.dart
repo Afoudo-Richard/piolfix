@@ -25,3 +25,5 @@ export './src/fetch_empty.dart';
 export './src/fetch_error.dart';
 export './src/taskers_listing.dart';
 export './src/search_filter_botton_sheet.dart';
+export './src/app_logo.dart';
+export './src/add_tasker_review_bottom_sheet.dart';

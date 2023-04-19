@@ -15,7 +15,7 @@ class TaskerProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
       appBar: const CustomAppBar(
         title: 'Tasker Profile',
       ),
@@ -103,14 +103,16 @@ class TaskerProfilePage extends StatelessWidget {
             2.h.ph,
             const TaskerInfoTextItem(
               icon: LineIcons.comment,
-              text: "Speeks: English, French , Spanish",
+              text: "Speaks: English, French , Spanish",
             ),
             4.h.ph,
             SkillsAndExperience(
               user: user,
             ),
             3.h.ph,
-            UserReviews(),
+            UserReviews(
+              tasker: user,
+            ),
           ],
         ),
       ),
@@ -195,8 +197,10 @@ class SkillsAndExperience extends StatelessWidget {
 }
 
 class UserReviews extends StatelessWidget {
+  final User tasker;
   const UserReviews({
     super.key,
+    required this.tasker,
   });
 
   @override
@@ -204,7 +208,37 @@ class UserReviews extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SectionHeader(title: "User Reviews"),
+        SectionHeader(
+          title: "User Reviews",
+          trailing: InkWell(
+            onTap: () {
+              showModalBottomSheet(
+                barrierColor: primaryColor.withOpacity(0.7),
+                isScrollControlled: true,
+                context: context,
+                builder: (ctx) {
+                  return AddTaskerReviewBottomSheet(
+                    tasker: tasker,
+                  );
+                },
+              );
+            },
+            child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+              builder: (context, state) {
+                return state.authenticated
+                    ? Text(
+                        "Add",
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w400,
+                          color: secondaryColor,
+                        ),
+                      )
+                    : const SizedBox.shrink();
+              },
+            ),
+          ),
+        ),
         2.h.ph,
         Row(
           children: [
@@ -222,31 +256,31 @@ class UserReviews extends StatelessWidget {
             ),
           ],
         ),
-        2.h.ph,
-        Column(
-          children: const [
-            ReviewTile(
-              ratingValue: '5',
-              level: 70,
-            ),
-            ReviewTile(
-              ratingValue: '4',
-              level: 20,
-            ),
-            ReviewTile(
-              ratingValue: '3',
-              level: 10,
-            ),
-            ReviewTile(
-              ratingValue: '2',
-              level: 0,
-            ),
-            ReviewTile(
-              ratingValue: '1',
-              level: 20,
-            ),
-          ],
-        ),
+        // 2.h.ph,
+        // Column(
+        //   children: const [
+        //     ReviewTile(
+        //       ratingValue: '5',
+        //       level: 70,
+        //     ),
+        //     ReviewTile(
+        //       ratingValue: '4',
+        //       level: 20,
+        //     ),
+        //     ReviewTile(
+        //       ratingValue: '3',
+        //       level: 10,
+        //     ),
+        //     ReviewTile(
+        //       ratingValue: '2',
+        //       level: 0,
+        //     ),
+        //     ReviewTile(
+        //       ratingValue: '1',
+        //       level: 20,
+        //     ),
+        //   ],
+        // ),
         2.h.ph,
         ListView.separated(
           shrinkWrap: true,
@@ -257,7 +291,29 @@ class UserReviews extends StatelessWidget {
           separatorBuilder: (context, index) {
             return 2.h.ph;
           },
-          itemCount: 7,
+          itemCount: 2,
+        ),
+        2.h.ph,
+        CustomButton(
+          backgroundColor: Colors.white,
+          border: const BorderSide(color: primaryColor),
+          child: Text(
+            'See all reviews',
+            style: TextStyle(
+              color: primaryColor,
+              fontSize: 12.sp,
+            ),
+          ),
+          onPressed: () {
+            showModalBottomSheet(
+              barrierColor: primaryColor.withOpacity(0.7),
+              isScrollControlled: true,
+              context: context,
+              builder: (ctx) {
+                return const AllReviews();
+              },
+            );
+          },
         ),
       ],
     );

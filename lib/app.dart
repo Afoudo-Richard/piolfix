@@ -74,6 +74,7 @@ class _AppViewState extends State<AppView> {
       builder: (context, orientation, deviceType) {
         return ConnectivityAppWrapper(
           app: MaterialApp(
+            title: 'PiolFix',
             // locale: context.locale,
             supportedLocales: const [
               Locale('en'), // English, no country code

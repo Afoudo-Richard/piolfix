@@ -17,134 +17,147 @@ class TaskerItem extends StatelessWidget {
       onTap: () {
         Navigator.push(context, TaskerProfilePage.route(user));
       },
-      child: CustomContainer(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+      child: BlocBuilder<SettingsBloc, SettingsState>(
+        builder: (context, settingState) {
+          final textColor =
+              settingState.isDarkMode ? Colors.white : Colors.black;
+          return CustomContainer(
+            backgroundColor:
+                settingState.isDarkMode ? secondaryColor : Colors.white,
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomContainer(
-                  padding: EdgeInsets.zero,
-                  boxShadow: [],
-                  height: 15.h,
-                  width: 25.w,
-                  child: CachedNetworkImage(
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => const Center(
-                      child: CircularProgressIndicator(
-                        backgroundColor: primaryColor,
-                        color: secondaryColor,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomContainer(
+                      padding: EdgeInsets.zero,
+                      boxShadow: [],
+                      height: 15.h,
+                      width: 25.w,
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(
+                            backgroundColor: primaryColor,
+                            color: secondaryColor,
+                          ),
+                        ),
+                        imageUrl: user.profileImageUrl != null
+                            ? user.profileImageUrl!
+                            : "https://ui-avatars.com/api/?name=${user.firstname}+${user.lastname}",
                       ),
                     ),
-                    imageUrl: user.profileImageUrl != null
-                        ? user.profileImageUrl!
-                        : "https://ui-avatars.com/api/?name=${user.firstname}+${user.lastname}",
+                    2.w.pw,
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  '${user.firstname} ${user.lastname}',
+                                  style: TextStyle(
+                                    fontSize: 10.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: textColor,
+                                  ),
+                                ),
+                              ),
+                              2.w.pw,
+                              Text(
+                                'FCFA ${user.pricePerHr}/hr',
+                                style: TextStyle(
+                                  fontSize: 8.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: textColor,
+                                ),
+                              )
+                            ],
+                          ),
+                          1.h.ph,
+                          Row(
+                            children: [
+                              Icon(
+                                LineIcons.star,
+                                color: Colors.orange,
+                                size: 10.sp,
+                              ),
+                              2.w.pw,
+                              Text(
+                                '5.0 (11 Reviews)',
+                                style: TextStyle(
+                                  fontSize: 10.sp,
+                                  color: textColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                          1.h.ph,
+                          Row(
+                            children: [
+                              Icon(
+                                LineIcons.checkCircle,
+                                color: Colors.orange,
+                                size: 10.sp,
+                              ),
+                              2.w.pw,
+                              Text(
+                                '9 waiting inline jobs',
+                                style: TextStyle(
+                                  fontSize: 10.sp,
+                                  color: textColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                          1.h.ph,
+                          Row(
+                            children: [
+                              Icon(
+                                LineIcons.clock,
+                                color: Colors.orange,
+                                size: 10.sp,
+                              ),
+                              2.w.pw,
+                              Text(
+                                '2 hours minimum required',
+                                style: TextStyle(
+                                  fontSize: 10.sp,
+                                  color: textColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                1.5.h.ph,
+                Text(
+                  '${user.skills}',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 10.sp,
+                    color: Colors.grey,
                   ),
                 ),
-                2.w.pw,
-                Expanded(
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              '${user.firstname} ${user.lastname}',
-                              style: TextStyle(
-                                fontSize: 10.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          2.w.pw,
-                          Text(
-                            'FCFA ${user.pricePerHr}/hr',
-                            style: TextStyle(
-                              fontSize: 8.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ],
-                      ),
-                      1.h.ph,
-                      Row(
-                        children: [
-                          Icon(
-                            LineIcons.star,
-                            color: Colors.orange,
-                            size: 10.sp,
-                          ),
-                          2.w.pw,
-                          Text(
-                            '5.0 (11 Reviews)',
-                            style: TextStyle(
-                              fontSize: 10.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                      1.h.ph,
-                      Row(
-                        children: [
-                          Icon(
-                            LineIcons.checkCircle,
-                            color: Colors.orange,
-                            size: 10.sp,
-                          ),
-                          2.w.pw,
-                          Text(
-                            '9 waiting inline jobs',
-                            style: TextStyle(
-                              fontSize: 10.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                      1.h.ph,
-                      Row(
-                        children: [
-                          Icon(
-                            LineIcons.clock,
-                            color: Colors.orange,
-                            size: 10.sp,
-                          ),
-                          2.w.pw,
-                          Text(
-                            '2 hours minimum required',
-                            style: TextStyle(
-                              fontSize: 10.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                1.h.ph,
+                GestureDetector(
+                  child: Text(
+                    'See Profile',
+                    style: TextStyle(
+                      fontSize: 10.sp,
+                      color: primaryColor,
+                    ),
                   ),
-                )
+                ),
               ],
             ),
-            1.5.h.ph,
-            Text(
-              '${user.skills}',
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: 10.sp,
-                color: Colors.grey,
-              ),
-            ),
-            1.h.ph,
-            GestureDetector(
-              child: Text(
-                'See Profile',
-                style: TextStyle(
-                  fontSize: 10.sp,
-                  color: primaryColor,
-                ),
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

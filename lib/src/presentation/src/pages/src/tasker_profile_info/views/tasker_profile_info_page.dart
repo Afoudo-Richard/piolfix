@@ -12,7 +12,7 @@ class TaskerProfileInfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
       appBar: const CustomAppBar(
         title: 'My Tasker Info',
       ),

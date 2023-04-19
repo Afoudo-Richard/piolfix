@@ -105,6 +105,7 @@ class CategoryAddBloc extends Bloc<CategoryAddEvent, CategoryAddState> {
         var category = Category()
           ..name = state.categoryName.value
           ..description = 'A dummy description'
+          ..imageThumbnailUrl = parseFile.url
           ..imageThumbnail = parseFile;
 
         var response = await category.create();

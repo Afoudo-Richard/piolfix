@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poilfix/poilfix.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
@@ -9,10 +10,11 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
       appBar: AppBar(
         title: Text("Search"),
       ),
-      body: Container(),);
+      body: Container(),
+    );
   }
 }

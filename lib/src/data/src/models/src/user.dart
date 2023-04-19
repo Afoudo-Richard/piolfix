@@ -40,15 +40,9 @@ class User extends ParseUser with EquatableMixin implements ParseCloneable {
   List<dynamic>? get devices => get('devices');
   set devices(List<dynamic>? value) => set('devices', value);
 
-  ParseFile? get profileImage {
-    profileImageUrl = get<ParseFile>('profile_image')?.url;
-    return get('profile_image');
-  }
-
-  set profileImage(ParseFileBase? value) {
-    profileImageUrl = value?.url;
-    return set<ParseFileBase?>('profile_image', value);
-  }
+  ParseFile? get profileImage => get('profile_image');
+  set profileImage(ParseFileBase? value) =>
+      set<ParseFileBase?>('profile_image', value);
 
   String? get tools => get<String?>('tools');
   set tools(String? value) => set<String?>('tools', value);
@@ -62,7 +56,9 @@ class User extends ParseUser with EquatableMixin implements ParseCloneable {
   String? get status => get<String?>('status');
   set status(String? value) => set<String?>('status', value);
 
-  String? profileImageUrl;
+  String? get profileImageUrl => get<String?>('profile_image_url');
+  set profileImageUrl(String? value) =>
+      set<String?>('profile_image_url', value);
 
   @override
   List<Object?> get props => [
@@ -73,7 +69,6 @@ class User extends ParseUser with EquatableMixin implements ParseCloneable {
         gender,
         isAdmin,
         devices,
-        profileImage,
         profileImageUrl,
         tools,
         skills,
@@ -92,7 +87,6 @@ class User extends ParseUser with EquatableMixin implements ParseCloneable {
       'sessionToken': sessionToken,
       'isAdmin': isAdmin,
       'devices': devices,
-      // 'profileImage': profileImage,
       'profileImageUrl': profileImageUrl,
       'tools': tools,
       'skills': skills,
@@ -114,9 +108,6 @@ class User extends ParseUser with EquatableMixin implements ParseCloneable {
       ..isAdmin = map['isAdmin'] as bool
       ..devices =
           map['devices'] != null ? map['devices'] as List<dynamic> : null
-      // ..profileImageUrl =
-      //     map['profileImage'] != null ? map['profileImage'] as String : null
-
       ..profileImageUrl = map['profileImageUrl'] != null
           ? map['profileImageUrl'] as String
           : null

@@ -18,7 +18,7 @@ class CategoryAddPage extends StatelessWidget {
           Navigator.pushReplacement(context, CategoryListPage.route());
         }
       },
-      child: Scaffold(
+      child: CustomScaffold(
         appBar: const CustomAppBar(
           title: 'Add Category',
         ),

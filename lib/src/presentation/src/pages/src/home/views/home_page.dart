@@ -37,9 +37,9 @@ class _HomePageState extends State<HomePage> {
               const HomeSearchInput(),
               2.h.ph,
               const TrendingProjects(),
-              5.h.ph,
-              const InfoCard(),
-              2.h.ph,
+              // 5.h.ph,
+              // const InfoCard(),
+              3.h.ph,
               const PopularTaskers(),
               // 2.h.ph,
               // ItemTile(

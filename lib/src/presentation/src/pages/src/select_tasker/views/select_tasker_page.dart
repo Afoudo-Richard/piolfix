@@ -32,13 +32,13 @@ class SelectTaskerPage extends StatelessWidget {
             )
           ],
         ),
-        body: Padding(
-          padding: pagePadding,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              1.h.ph,
-              BlocBuilder<SelectTaskBloc, SelectTaskState>(
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            1.h.ph,
+            Padding(
+              padding: pagePadding,
+              child: BlocBuilder<SelectTaskBloc, SelectTaskState>(
                 builder: (context, state) {
                   return Text(
                     'Task : ${state.service!.name}',
@@ -49,59 +49,63 @@ class SelectTaskerPage extends StatelessWidget {
                   );
                 },
               ),
-              2.h.ph,
-              Expanded(
-                child: BlocBuilder<TaskerListBloc, TaskerListState>(
-                  builder: (context, state) {
-                    switch (state.taskerListStatus) {
-                      case TaskerListStatus.initial:
-                      case TaskerListStatus.refresh:
-                        return const TaskersLoading();
+            ),
+            2.h.ph,
+            Expanded(
+              child: BlocBuilder<TaskerListBloc, TaskerListState>(
+                builder: (context, state) {
+                  switch (state.taskerListStatus) {
+                    case TaskerListStatus.initial:
+                    case TaskerListStatus.refresh:
+                      return const TaskersLoading();
 
-                      case TaskerListStatus.failure:
-                        return FetchError(
-                          onPressedTryAgain: () {
-                            BlocProvider.of<TaskerListBloc>(context).add(
-                              TaskerListFetched(refresh: true),
-                            );
-                          },
-                        );
-                      case TaskerListStatus.success:
-                        return TaskersListing(
-                          taskers: state.taskers,
-                          onScroll: () {
-                            BlocProvider.of<TaskerListBloc>(context)
-                                .add(TaskerListFetched());
-                          },
-                          hasReachedMax: state.hasReachedMax,
-                        );
-                    }
-                  },
-                ),
+                    case TaskerListStatus.failure:
+                      return FetchError(
+                        onPressedTryAgain: () {
+                          BlocProvider.of<TaskerListBloc>(context).add(
+                            TaskerListFetched(refresh: true),
+                          );
+                        },
+                      );
+                    case TaskerListStatus.success:
+                      return TaskersListing(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 5.sp, vertical: paddingSize),
+                        isScrollable: true,
+                        taskers: state.taskers,
+                        onScroll: () {
+                          BlocProvider.of<TaskerListBloc>(context)
+                              .add(TaskerListFetched());
+                        },
+                        hasReachedMax: state.hasReachedMax,
+                      );
+                  }
+                },
               ),
-              // Expanded(
-              //   child: Column(
-              //     crossAxisAlignment: CrossAxisAlignment.start,
-              //     children: [
-              //       UserSecurityInfo(),
-              //       4.h.ph,
-              //       // ListView.separated(
-              //       //   shrinkWrap: true,
-              //       //   physics: const NeverScrollableScrollPhysics(),
-              //       //   itemBuilder: (context, index) {
-              //       //     // final category = categories[index];
-              //       //     return const TaskerItem();
-              //       //   },
-              //       //   separatorBuilder: (context, index) {
-              //       //     return 2.h.ph;
-              //       //   },
-              //       //   itemCount: 10,
-              //       // ),
-              //     ],
-              //   ),
-              // ),
-            ],
-          ),
+            ),
+
+            // Expanded(
+            //   child: Column(
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: [
+            //       UserSecurityInfo(),
+            //       4.h.ph,
+            //       // ListView.separated(
+            //       //   shrinkWrap: true,
+            //       //   physics: const NeverScrollableScrollPhysics(),
+            //       //   itemBuilder: (context, index) {
+            //       //     // final category = categories[index];
+            //       //     return const TaskerItem();
+            //       //   },
+            //       //   separatorBuilder: (context, index) {
+            //       //     return 2.h.ph;
+            //       //   },
+            //       //   itemCount: 10,
+            //       // ),
+            //     ],
+            //   ),
+            // ),
+          ],
         ));
   }
 }

@@ -11,7 +11,7 @@ class CategoryListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
       appBar: CustomAppBar(
         title: 'List Category',
         actions: [

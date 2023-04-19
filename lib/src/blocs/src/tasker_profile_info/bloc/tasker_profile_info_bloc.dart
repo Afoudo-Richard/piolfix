@@ -127,6 +127,14 @@ class TaskerProfileInfoBloc
             formStatus: FormzStatus.pure,
           ),
         );
+
+        try {
+          User user = userBloc.state.user!;
+          await _sendUserNotification(
+              user.objectId!, "Your profile was updated you are now a tasker.");
+        } catch (e) {
+          print("Errrrooooooooooorr @@@@@@@@@@@@@@##########");
+        }
       } on ErrorUpdatingUserProfile catch (e) {
         emit(
           state.copyWith(
@@ -140,6 +148,23 @@ class TaskerProfileInfoBloc
           errorMessage: e.toString(),
         ));
       }
+    }
+  }
+
+  Future _sendUserNotification(String id, String message) async {
+    final ParseCloudFunction function =
+        ParseCloudFunction('sendPushToUserAboutProfileStatus');
+
+    final Map<String, dynamic> params = <String, dynamic>{
+      'id': id,
+      'message': message,
+    };
+    final ParseResponse parseResponse =
+        await function.executeObjectFunction<ParseObject>(parameters: params);
+
+    // ended here
+    if (parseResponse.success && parseResponse.result != null) {
+      print(parseResponse.result);
     }
   }
 
