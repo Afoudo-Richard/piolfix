@@ -35,9 +35,9 @@ class TaskerProfilePage extends StatelessWidget {
                     tag: user.objectId!,
                     child: CustomContainer(
                       padding: EdgeInsets.zero,
-                      boxShadow: [],
-                      height: 15.h,
-                      width: 30.w,
+                      boxShadow: const [],
+                      height: 90.sp,
+                      width: 100.sp,
                       child: CachedNetworkImage(
                         fit: BoxFit.cover,
                         placeholder: (context, url) => const Center(

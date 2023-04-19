@@ -101,9 +101,7 @@ class WalkThroughPage extends StatelessWidget {
                   letterSpacing: 1.5,
                 ),
               ),
-              SizedBox(
-                width: 100.w * 0.02,
-              ),
+              2.w.pw,
               Icon(
                 Icons.arrow_forward,
                 size: 12,

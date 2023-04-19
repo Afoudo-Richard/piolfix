@@ -35,8 +35,8 @@ class TaskerItem extends StatelessWidget {
                       child: CustomContainer(
                         padding: EdgeInsets.zero,
                         boxShadow: [],
-                        height: 15.h,
-                        width: 25.w,
+                        height: 80.sp,
+                        width: 90.sp,
                         child: CachedNetworkImage(
                           fit: BoxFit.cover,
                           placeholder: (context, url) => const Center(

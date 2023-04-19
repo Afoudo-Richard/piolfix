@@ -117,7 +117,7 @@ class _AppViewState extends State<AppView> {
                               );
                             } else {
                               _navigator.pushAndRemoveUntil<void>(
-                                WalkThroughPage.route(),
+                                SelectLanguagePage.route(),
                                 (route) => false,
                               );
                               BlocProvider.of<AppBottomNavigationBarBloc>(

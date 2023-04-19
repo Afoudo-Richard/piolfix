@@ -64,10 +64,12 @@ class ProfilePage extends StatelessWidget {
                         );
                       },
                     ),
-                    Icon(
-                      LineIcons.edit,
-                      color: primaryColor,
-                    ),
+                    authState.authenticated
+                        ? Icon(
+                            LineIcons.edit,
+                            color: primaryColor,
+                          )
+                        : const SizedBox.shrink(),
                   ],
                 ),
                 5.h.ph,
@@ -143,7 +145,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 ItemTile(
                   icon: LineIcons.alternateSignOut,
-                  title: "LogOut",
+                  title: authState.authenticated ? "LogOut" : 'Sign In',
                   onTap: () {
                     // BlocProvider.of<AuthenticationBloc>(context).add(
                     //   const AuthenticationHasWalkedThroughChanged(

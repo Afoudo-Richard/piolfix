@@ -78,14 +78,18 @@ class _AllReviewsState extends State<AllReviews> {
                         controller: _scrollController,
                         itemBuilder: (context, index) {
                           final review = state.reviews[index];
-                          return IndividualReview(
-                            review: review,
-                          );
+                          return index >= state.reviews.length
+                              ? LoadingIndicator()
+                              : IndividualReview(
+                                  review: state.reviews[index],
+                                );
                         },
                         separatorBuilder: (context, index) {
                           return 3.h.ph;
                         },
-                        itemCount: state.reviews.length,
+                        itemCount: state.reviewHasReachedMax
+                            ? state.reviews.length
+                            : state.reviews.length + 1,
                       ),
                     );
                   case ReviewStatus.failure:

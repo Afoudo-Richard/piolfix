@@ -102,7 +102,8 @@ class TaskerProfileBloc extends Bloc<TaskerProfileEvent, TaskerProfileState> {
 
   Future<List<ReviewModel>> _fetchReviews({
     int startIndex = 0,
-    int limit = AppConfigs.fetchLimit,
+    // int limit = AppConfigs.fetchLimit,
+    int limit = 4,
   }) async {
     QueryBuilder<ReviewModel> query = QueryBuilder(ReviewModel())
       ..setAmountToSkip(startIndex)

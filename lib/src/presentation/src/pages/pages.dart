@@ -19,3 +19,4 @@ export './src/select_payment_method/select_payment_method.dart';
 export './src/orange_mtn_momo_payment/orange_mtn_momo_payment.dart';
 export './src/settings/settings.dart';
 export './src/about_app/about_app.dart';
+export './src/select_language/select_language.dart';
