@@ -30,6 +30,7 @@ class AddTaskerReviewBottomSheet extends StatelessWidget {
                     content: Text('Review added successfully'),
                   ),
                 );
+              Navigator.pop(context);
             } else if (state.formStatus.isSubmissionFailure) {
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()

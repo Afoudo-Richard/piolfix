@@ -8,7 +8,7 @@ class CategoryListState extends Equatable {
   final CategoryListStatus categoryListStatus;
   final bool hasReachedMax;
 
-  CategoryListState({
+  const CategoryListState({
     this.categories = const <Category>[],
     this.categoriesCopy = const <Category>[],
     this.categoryListStatus = CategoryListStatus.initial,

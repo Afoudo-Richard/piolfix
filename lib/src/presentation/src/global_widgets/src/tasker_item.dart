@@ -30,27 +30,31 @@ class TaskerItem extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomContainer(
-                      padding: EdgeInsets.zero,
-                      boxShadow: [],
-                      height: 15.h,
-                      width: 25.w,
-                      child: CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => const Center(
-                          child: CircularProgressIndicator(
-                            backgroundColor: primaryColor,
-                            color: secondaryColor,
+                    Hero(
+                      tag: user.objectId!,
+                      child: CustomContainer(
+                        padding: EdgeInsets.zero,
+                        boxShadow: [],
+                        height: 15.h,
+                        width: 25.w,
+                        child: CachedNetworkImage(
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => const Center(
+                            child: CircularProgressIndicator(
+                              backgroundColor: primaryColor,
+                              color: secondaryColor,
+                            ),
                           ),
+                          imageUrl: user.profileImageUrl != null
+                              ? user.profileImageUrl!
+                              : "https://ui-avatars.com/api/?name=${user.firstname}+${user.lastname}",
                         ),
-                        imageUrl: user.profileImageUrl != null
-                            ? user.profileImageUrl!
-                            : "https://ui-avatars.com/api/?name=${user.firstname}+${user.lastname}",
                       ),
                     ),
                     2.w.pw,
                     Expanded(
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
@@ -93,24 +97,24 @@ class TaskerItem extends StatelessWidget {
                               ),
                             ],
                           ),
-                          1.h.ph,
-                          Row(
-                            children: [
-                              Icon(
-                                LineIcons.checkCircle,
-                                color: Colors.orange,
-                                size: 10.sp,
-                              ),
-                              2.w.pw,
-                              Text(
-                                '9 waiting inline jobs',
-                                style: TextStyle(
-                                  fontSize: 10.sp,
-                                  color: textColor,
-                                ),
-                              ),
-                            ],
-                          ),
+                          // 1.h.ph,
+                          // Row(
+                          //   children: [
+                          //     Icon(
+                          //       LineIcons.checkCircle,
+                          //       color: Colors.orange,
+                          //       size: 10.sp,
+                          //     ),
+                          //     2.w.pw,
+                          //     Text(
+                          //       '9 waiting inline jobs',
+                          //       style: TextStyle(
+                          //         fontSize: 10.sp,
+                          //         color: textColor,
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
                           1.h.ph,
                           Row(
                             children: [
@@ -129,6 +133,14 @@ class TaskerItem extends StatelessWidget {
                               ),
                             ],
                           ),
+                          1.h.ph,
+                          Text(
+                            'Available',
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                              color: Colors.green,
+                            ),
+                          ),
                         ],
                       ),
                     )
@@ -145,14 +157,26 @@ class TaskerItem extends StatelessWidget {
                   ),
                 ),
                 1.h.ph,
-                GestureDetector(
-                  child: Text(
-                    'See Profile',
-                    style: TextStyle(
-                      fontSize: 10.sp,
-                      color: primaryColor,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      child: Text(
+                        'See Profile',
+                        style: TextStyle(
+                          fontSize: 10.sp,
+                          color: primaryColor,
+                        ),
+                      ),
                     ),
-                  ),
+                    GestureDetector(
+                      child: Icon(
+                        LineIcons.heartAlt,
+                        size: 15.sp,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

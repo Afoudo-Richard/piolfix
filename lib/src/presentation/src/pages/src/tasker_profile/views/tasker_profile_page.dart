@@ -15,157 +15,164 @@ class TaskerProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      appBar: const CustomAppBar(
-        title: 'Tasker Profile',
-      ),
-      body: SingleChildScrollView(
-        padding: pagePadding,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            4.h.ph,
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomContainer(
-                  padding: EdgeInsets.zero,
-                  boxShadow: [],
-                  height: 15.h,
-                  width: 30.w,
-                  child: CachedNetworkImage(
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => const Center(
-                      child: CircularProgressIndicator(
-                        backgroundColor: primaryColor,
-                        color: secondaryColor,
-                      ),
-                    ),
-                    imageUrl: user.profileImage != null
-                        ? user.profileImageUrl!
-                        : "https://ui-avatars.com/api/?name=${user.firstname}+${user.lastname}",
-                  ),
-                ),
-                2.w.pw,
-                Expanded(
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              '${user.firstname} ${user.lastname}',
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      1.h.ph,
-                      Row(
-                        children: [
-                          Icon(
-                            LineIcons.star,
-                            color: Colors.orange,
-                            size: 10.sp,
-                          ),
-                          2.w.pw,
-                          Text(
-                            '5.0 (11 Reviews)',
-                            style: TextStyle(
-                              fontSize: 10.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-            2.h.ph,
-            const TaskerInfoTextItem(
-              icon: LineIcons.checkCircle,
-              text: '9 waiting inline jobs',
-            ),
-            2.h.ph,
-            const TaskerInfoTextItem(
-              icon: LineIcons.clock,
-              text: '2 hours minimum required',
-            ),
-            2.h.ph,
-            TaskerInfoTextItem(
-              icon: LineIcons.tools,
-              text: "Tools: ${user.tools}",
-            ),
-            2.h.ph,
-            const TaskerInfoTextItem(
-              icon: LineIcons.comment,
-              text: "Speaks: English, French , Spanish",
-            ),
-            4.h.ph,
-            SkillsAndExperience(
-              user: user,
-            ),
-            3.h.ph,
-            UserReviews(
-              tasker: user,
-            ),
-          ],
+    return BlocProvider(
+      create: (context) =>
+          TaskerProfileBloc(tasker: user)..add(TaskerProfileReviewsFetched()),
+      child: CustomScaffold(
+        appBar: const CustomAppBar(
+          title: 'Tasker Profile',
         ),
-      ),
-      bottomNavigationBar: BlocBuilder<SelectTaskBloc, SelectTaskState>(
-        builder: (context, state) {
-          return state.service != null
-              ? Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      const BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 16,
-                        spreadRadius: 0,
-                        offset: Offset(0, -8),
-                      ),
-                    ],
-                    color: Colors.white,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Text(
-                          'FCFA ${user.pricePerHr}/hr',
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.bold,
+        body: SingleChildScrollView(
+          padding: pagePadding,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              4.h.ph,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Hero(
+                    tag: user.objectId!,
+                    child: CustomContainer(
+                      padding: EdgeInsets.zero,
+                      boxShadow: [],
+                      height: 15.h,
+                      width: 30.w,
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(
+                            backgroundColor: primaryColor,
+                            color: secondaryColor,
                           ),
                         ),
-                        10.w.pw,
-                        Expanded(
-                          child: CustomButton(
-                            onPressed: () {
-                              BlocProvider.of<SelectTaskBloc>(context)
-                                  .add(SelectTaskTaskerChanged(user));
-                              Navigator.push(context, TaskDetailPage.route());
-                            },
-                            child: Text(
-                              'Select',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14.sp,
-                                letterSpacing: 1.5,
+                        imageUrl: user.profileImage != null
+                            ? user.profileImageUrl!
+                            : "https://ui-avatars.com/api/?name=${user.firstname}+${user.lastname}",
+                      ),
+                    ),
+                  ),
+                  2.w.pw,
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                '${user.firstname} ${user.lastname}',
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                          ),
+                          ],
+                        ),
+                        1.h.ph,
+                        Row(
+                          children: [
+                            Icon(
+                              LineIcons.star,
+                              color: Colors.orange,
+                              size: 10.sp,
+                            ),
+                            2.w.pw,
+                            Text(
+                              '5.0 (11 Reviews)',
+                              style: TextStyle(
+                                fontSize: 10.sp,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ),
-                )
-              : const SizedBox.shrink();
-        },
+                  )
+                ],
+              ),
+              2.h.ph,
+              // const TaskerInfoTextItem(
+              //   icon: LineIcons.checkCircle,
+              //   text: '9 waiting inline jobs',
+              // ),
+              // 2.h.ph,
+              // const TaskerInfoTextItem(
+              //   icon: LineIcons.clock,
+              //   text: '2 hours minimum required',
+              // ),
+              2.h.ph,
+              TaskerInfoTextItem(
+                icon: LineIcons.tools,
+                text: "Tools: ${user.tools}",
+              ),
+              2.h.ph,
+              const TaskerInfoTextItem(
+                icon: LineIcons.comment,
+                text: "Speaks: English, French , Spanish",
+              ),
+              4.h.ph,
+              SkillsAndExperience(
+                user: user,
+              ),
+              3.h.ph,
+              UserReviews(
+                tasker: user,
+              ),
+            ],
+          ),
+        ),
+        bottomNavigationBar: BlocBuilder<SelectTaskBloc, SelectTaskState>(
+          builder: (context, state) {
+            return state.service != null
+                ? Container(
+                    decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 16,
+                          spreadRadius: 0,
+                          offset: Offset(0, -8),
+                        ),
+                      ],
+                      color: Colors.white,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            'FCFA ${user.pricePerHr}/hr',
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          10.w.pw,
+                          Expanded(
+                            child: CustomButton(
+                              onPressed: () {
+                                BlocProvider.of<SelectTaskBloc>(context)
+                                    .add(SelectTaskTaskerChanged(user));
+                                Navigator.push(context, TaskDetailPage.route());
+                              },
+                              child: Text(
+                                'Select',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14.sp,
+                                  letterSpacing: 1.5,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : const SizedBox.shrink();
+          },
+        ),
       ),
     );
   }
@@ -224,37 +231,48 @@ class UserReviews extends StatelessWidget {
               );
             },
             child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-              builder: (context, state) {
-                return state.authenticated
-                    ? Text(
-                        "Add",
-                        style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w400,
-                          color: secondaryColor,
-                        ),
-                      )
-                    : const SizedBox.shrink();
+              builder: (context, authState) {
+                return BlocBuilder<UserBloc, UserState>(
+                  builder: (context, state) {
+                    return authState.authenticated &&
+                            state.user!.objectId != tasker.objectId
+                        ? Text(
+                            "Add",
+                            style: TextStyle(
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w400,
+                              color: secondaryColor,
+                            ),
+                          )
+                        : const SizedBox.shrink();
+                  },
+                );
               },
             ),
           ),
         ),
         2.h.ph,
-        Row(
-          children: [
-            Icon(
-              LineIcons.star,
-              color: Colors.orange,
-              size: 10.sp,
-            ),
-            2.w.pw,
-            Text(
-              '5.0 (11 Reviews)',
-              style: TextStyle(
-                fontSize: 10.sp,
-              ),
-            ),
-          ],
+        BlocBuilder<TaskerProfileBloc, TaskerProfileState>(
+          builder: (context, state) {
+            return state.reviews.isNotEmpty
+                ? Row(
+                    children: [
+                      Icon(
+                        LineIcons.star,
+                        color: Colors.orange,
+                        size: 10.sp,
+                      ),
+                      2.w.pw,
+                      Text(
+                        '5.0 (11 Reviews)',
+                        style: TextStyle(
+                          fontSize: 10.sp,
+                        ),
+                      ),
+                    ],
+                  )
+                : const SizedBox.shrink();
+          },
         ),
         // 2.h.ph,
         // Column(
@@ -281,40 +299,95 @@ class UserReviews extends StatelessWidget {
         //     ),
         //   ],
         // ),
-        2.h.ph,
-        ListView.separated(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return const IndividualReview();
+        3.h.ph,
+        BlocBuilder<TaskerProfileBloc, TaskerProfileState>(
+          builder: (context, state) {
+            switch (state.reviewStatus) {
+              case ReviewStatus.initial:
+              case ReviewStatus.loading:
+              case ReviewStatus.refresh:
+                return LoadingIndicator();
+              case ReviewStatus.success:
+                return Column(
+                  children: [
+                    state.reviews.isEmpty
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "No reviews yet",
+                                style: TextStyle(fontSize: 11.sp),
+                              ),
+                            ],
+                          )
+                        : ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              final review = state.reviews[index];
+                              return IndividualReview(
+                                review: review,
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return 2.h.ph;
+                            },
+                            itemCount: state.reviews.length > 2
+                                ? 2
+                                : state.reviews.length,
+                          ),
+                    state.reviews.length > 2
+                        ? Column(
+                            children: [
+                              2.h.ph,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CustomButton(
+                                    backgroundColor: Colors.white,
+                                    border:
+                                        const BorderSide(color: primaryColor),
+                                    child: Text(
+                                      'See All Reviews',
+                                      style: TextStyle(
+                                        color: primaryColor,
+                                        fontSize: 12.sp,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      showModalBottomSheet(
+                                        barrierColor:
+                                            primaryColor.withOpacity(0.7),
+                                        isScrollControlled: true,
+                                        context: context,
+                                        builder: (ctx) {
+                                          return BlocProvider.value(
+                                            value: BlocProvider.of<
+                                                TaskerProfileBloc>(context),
+                                            child: const AllReviews(),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          )
+                        : const SizedBox.shrink(),
+                  ],
+                );
+              case ReviewStatus.failure:
+                return FetchError(
+                  onPressedTryAgain: () =>
+                      BlocProvider.of<TaskerProfileBloc>(context)
+                          .add(TaskerProfileReviewsFetched(refresh: true)),
+                );
+            }
           },
-          separatorBuilder: (context, index) {
-            return 2.h.ph;
-          },
-          itemCount: 2,
         ),
-        2.h.ph,
-        CustomButton(
-          backgroundColor: Colors.white,
-          border: const BorderSide(color: primaryColor),
-          child: Text(
-            'See all reviews',
-            style: TextStyle(
-              color: primaryColor,
-              fontSize: 12.sp,
-            ),
-          ),
-          onPressed: () {
-            showModalBottomSheet(
-              barrierColor: primaryColor.withOpacity(0.7),
-              isScrollControlled: true,
-              context: context,
-              builder: (ctx) {
-                return const AllReviews();
-              },
-            );
-          },
-        ),
+
+        3.h.ph,
       ],
     );
   }

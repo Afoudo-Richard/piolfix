@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
               ..showSnackBar(
                 const SnackBar(
                   backgroundColor: Colors.green,
-                  content: Text("User Logged in Successfully"),
+                  content: Text("Logged in Successfully"),
                 ),
               );
           } else if (state.status.isSubmissionFailure) {

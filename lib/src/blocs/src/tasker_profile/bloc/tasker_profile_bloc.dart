@@ -6,13 +6,20 @@ import 'package:poilfix/poilfix.dart';
 part 'tasker_profile_event.dart';
 part 'tasker_profile_state.dart';
 
+const _duration = Duration(milliseconds: 300);
+
 class TaskerProfileBloc extends Bloc<TaskerProfileEvent, TaskerProfileState> {
   final User tasker;
   TaskerProfileBloc({
     required this.tasker,
   }) : super(TaskerProfileState()) {
     on<TaskerProfileFetched>(_onTaskerProfileFetched);
-    on<TaskerProfileReviewsFetched>(_onTaskerProfileReviewsFetched);
+    on<TaskerProfileReviewsFetched>(
+      _onTaskerProfileReviewsFetched,
+      transformer: debounce(
+        _duration,
+      ),
+    );
   }
 
   Future<void> _onTaskerProfileFetched(
@@ -99,6 +106,10 @@ class TaskerProfileBloc extends Bloc<TaskerProfileEvent, TaskerProfileState> {
   }) async {
     QueryBuilder<ReviewModel> query = QueryBuilder(ReviewModel())
       ..setAmountToSkip(startIndex)
+      ..includeObject([
+        'user',
+      ])
+      ..whereEqualTo('tasker', tasker)
       ..orderByDescending('createdAt')
       ..setLimit(limit);
 

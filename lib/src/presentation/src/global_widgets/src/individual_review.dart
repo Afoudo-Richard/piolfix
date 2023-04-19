@@ -1,10 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:poilfix/poilfix.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart' as ratingBar;
 
 class IndividualReview extends StatelessWidget {
+  final ReviewModel review;
   const IndividualReview({
     Key? key,
+    required this.review,
   }) : super(key: key);
 
   @override
@@ -21,16 +24,20 @@ class IndividualReview extends StatelessWidget {
           CustomCircle(
             radius: 40.sp,
             color: primaryColor,
-            child: Image.asset(
-              'assets/images/user1.jpeg',
-              width: 100.w,
-              height: 100.h,
+            child: CachedNetworkImage(
               fit: BoxFit.cover,
+              placeholder: (context, url) => const Center(
+                child: CircularProgressIndicator(
+                  backgroundColor: primaryColor,
+                  color: secondaryColor,
+                ),
+              ),
+              imageUrl: review.user?.profileImageUrl != null
+                  ? review.user!.profileImageUrl!
+                  : "https://ui-avatars.com/api/?name=${review.user!.firstname}+${review.user!.lastname}",
             ),
           ),
-          SizedBox(
-            width: deviceWidth(context) * 0.03,
-          ),
+          3.w.pw,
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,7 +46,7 @@ class IndividualReview extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Richard Arc',
+                      '${review.user!.firstname} ${review.user!.lastname}',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 11.sp,
@@ -61,7 +68,7 @@ class IndividualReview extends StatelessWidget {
                 1.h.ph,
                 ratingBar.RatingBar.builder(
                   ignoreGestures: true,
-                  initialRating: 4,
+                  initialRating: review.rating!.toDouble(),
                   minRating: 1,
                   direction: Axis.horizontal,
                   allowHalfRating: true,
@@ -76,7 +83,7 @@ class IndividualReview extends StatelessWidget {
                 ),
                 1.h.ph,
                 Text(
-                  'So prompt you where loved by everyone inline. So professional you knew exactly what to say. Rave review from everyone around you. You killed it. Thank you so much.',
+                  review.review ?? 'N/A',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 9.sp,

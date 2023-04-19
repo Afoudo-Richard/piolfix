@@ -32,7 +32,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ..showSnackBar(
                 SnackBar(
                   backgroundColor: Color.fromARGB(255, 31, 177, 230),
-                  content: Text("User registered Successfully"),
+                  content: Text("registered Successfully"),
                 ),
               );
             Navigator.pushReplacement(context, LoginPage.route());
