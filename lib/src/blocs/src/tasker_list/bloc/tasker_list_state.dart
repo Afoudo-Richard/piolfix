@@ -8,12 +8,14 @@ class TaskerListState extends Equatable {
   final TaskerListStatus taskerListStatus;
   final bool hasReachedMax;
   final String? errorMessage;
+  final bool checker;
 
   TaskerListState({
     this.taskers = const <User>[],
     this.taskerListStatus = TaskerListStatus.initial,
     this.hasReachedMax = false,
     this.errorMessage,
+    this.checker = false,
   });
 
   @override
@@ -22,6 +24,7 @@ class TaskerListState extends Equatable {
         taskerListStatus,
         hasReachedMax,
         errorMessage,
+        checker,
       ];
 
   TaskerListState copyWith({
@@ -29,12 +32,14 @@ class TaskerListState extends Equatable {
     TaskerListStatus? taskerListStatus,
     bool? hasReachedMax,
     String? errorMessage,
+    bool? checker,
   }) {
     return TaskerListState(
       taskers: taskers ?? this.taskers,
       taskerListStatus: taskerListStatus ?? this.taskerListStatus,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
       errorMessage: errorMessage ?? this.errorMessage,
+      checker: checker ?? this.checker,
     );
   }
 }

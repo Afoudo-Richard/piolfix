@@ -45,6 +45,7 @@ class SelectLanguagePage extends StatelessWidget {
                     Navigator.push(context, WalkThroughPage.route());
                   },
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Proceed',
@@ -57,7 +58,7 @@ class SelectLanguagePage extends StatelessWidget {
                       2.w.pw,
                       Icon(
                         Icons.arrow_forward,
-                        size: 12,
+                        size: 16.sp,
                         color: Colors.white,
                       ),
                     ],

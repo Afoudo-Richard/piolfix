@@ -36,6 +36,8 @@ class AllLanguages extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         // context.locale = const Locale('en', 'US');
+                        BlocProvider.of<SettingsBloc>(context).add(
+                            LanguageChanged(value: const Locale('en', 'US')));
                         Navigator.pop(context);
                       },
                       child: Text(
@@ -49,6 +51,8 @@ class AllLanguages extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         // context.locale = const Locale('fr', 'FR');
+                        BlocProvider.of<SettingsBloc>(context).add(
+                            LanguageChanged(value: const Locale('fr', 'FR')));
                         Navigator.pop(context);
                       },
                       child: Text(

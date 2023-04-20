@@ -1,31 +1,40 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'user_bloc.dart';
 
+enum UserAvailableStatus { initial, success, loading, failure }
+
 class UserState extends Equatable {
   final User? user;
   final bool checker;
   final Locale locale;
+  final UserAvailableStatus userAvailableStatus;
 
   UserState({
     this.user,
     this.checker = false,
     this.locale = const Locale('en', 'US'),
+    this.userAvailableStatus = UserAvailableStatus.initial,
   });
 
   @override
   List<Object?> get props => [
         user,
+        userAvailableStatus,
+        checker,
       ];
 
   UserState copyWith({
     User? user,
     bool? checker,
     Locale? locale,
+    bool? isAvailable,
+    UserAvailableStatus? userAvailableStatus,
   }) {
     return UserState(
       user: user ?? this.user,
       checker: checker ?? this.checker,
       locale: locale ?? this.locale,
+      userAvailableStatus: userAvailableStatus ?? this.userAvailableStatus,
     );
   }
 

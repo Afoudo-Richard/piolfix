@@ -6,3 +6,4 @@ export './src/debouncer.dart';
 export './src/translate_helper.dart';
 export './src/device_helper.dart';
 export './src/FCM.dart';
+export './src/live_query_streams.dart';

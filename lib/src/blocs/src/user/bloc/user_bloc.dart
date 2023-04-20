@@ -14,6 +14,7 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
   UserBloc() : super(UserState()) {
     on<UserChanged>(_onUserChanged);
     on<UserLanguangeChanged>(_onUserLanguangeChanged);
+    on<IsUserAvailableChanged>(_onIsUserAvailableChanged);
   }
 
   void _onUserChanged(
@@ -37,6 +38,42 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
         locale: event.locale,
       ),
     );
+  }
+
+  void _onIsUserAvailableChanged(
+    IsUserAvailableChanged event,
+    Emitter<UserState> emit,
+  ) async {
+    if (state.user != null) {
+      var user = state.user!..isAvailable = event.value;
+      emit(
+        state.copyWith(
+          userAvailableStatus: UserAvailableStatus.loading,
+          checker: !state.checker,
+        ),
+      );
+      var response = await user.save();
+
+      if (response.success) {
+        emit(
+          state.copyWith(
+            userAvailableStatus: UserAvailableStatus.success,
+            checker: !state.checker,
+            user: user,
+          ),
+        );
+
+        // state.copyWith(
+        //   userAvailableStatus: UserAvailableStatus.initial,
+        //   checker: !state.checker,
+        // );
+      } else {
+        state.copyWith(
+          userAvailableStatus: UserAvailableStatus.failure,
+          checker: !state.checker,
+        );
+      }
+    }
   }
 
   @override

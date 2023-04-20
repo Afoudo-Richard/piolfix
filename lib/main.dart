@@ -29,6 +29,8 @@ void main() async {
 
     await registerParseServer();
 
+    startLiveQuery();
+
     final storage = await HydratedStorage.build(
       storageDirectory: await getApplicationDocumentsDirectory(),
     );
@@ -44,13 +46,14 @@ registerParseServer() async {
   const keyApplicationId = 'Uqc9HYgHwTrE6nyBJl9zMPZi5pZE5lyQalWaDcr1';
   const keyClientKey = 'dRCisEpybrKkwzoEnJmzayHlbLoGtbKnKVJL3kA8';
   const keyParseServerUrl = 'https://parseapi.back4app.com';
+  const liveQueryUrl = 'https://piolfix.b4a.io';
 
   await Parse().initialize(
     keyApplicationId,
     keyParseServerUrl,
     clientKey: keyClientKey,
     debug: true, // When enabled, prints logs to console
-    // liveQueryUrl: keyLiveQueryUrl, // Required if using LiveQuery
+    liveQueryUrl: liveQueryUrl, // Required if using LiveQuery
     autoSendSessionId: true, // Required for authentication and ACL
     // securityContext: securityContext, // Again, required for some setups
   );
@@ -72,6 +75,38 @@ registerParseServer() async {
     ReviewModel.keyTableName,
     () => ReviewModel(),
   );
+}
+
+void startLiveQuery() async {
+  final LiveQuery liveQuery = LiveQuery();
+
+  QueryBuilder<User> query = QueryBuilder<User>(User());
+  // ..whereEqualTo('available', true);
+
+  Subscription subscription = await liveQuery.client.subscribe(query);
+
+  subscription.on(LiveQueryEvent.create, (value) {
+    print('*** CREATE ***: ${DateTime.now().toString()}\n $value ');
+    print((value as ParseObject).objectId);
+    print((value as ParseObject).updatedAt);
+    print((value as ParseObject).createdAt);
+    print((value as ParseObject).get('objectId'));
+    print((value as ParseObject).get('updatedAt'));
+    print((value as ParseObject).get('createdAt'));
+  });
+
+  subscription.on(LiveQueryEvent.update, (value) {
+    print('*** UPDATE ***: ${DateTime.now().toString()}\n $value ');
+
+    print((value as ParseObject).objectId);
+    print((value as ParseObject).updatedAt);
+    print((value as ParseObject).createdAt);
+    print((value as ParseObject).get('objectId'));
+    print((value as ParseObject).get('updatedAt'));
+    print((value as ParseObject).get('createdAt'));
+
+    LiveQueryStreams.userUpdateStream.sink.add(value as User);
+  });
 }
 
 void initializeAwesomeNotification() {

@@ -24,7 +24,7 @@ class FavouriteBloc extends HydratedBloc<FavouriteEvent, FavouriteState> {
           )
         : emit(
             state.copyWith(
-              users: List.of(state.users)..add(event.user),
+              taskers: List.of(state.taskers)..add(event.user),
               favouriteStatus: FavouriteStatus.userAdded,
             ),
           );
@@ -34,7 +34,7 @@ class FavouriteBloc extends HydratedBloc<FavouriteEvent, FavouriteState> {
       FavouriteUserRemoved event, Emitter<FavouriteState> emit) {
     emit(
       state.copyWith(
-        users: List.of(state.users)..remove(event.user),
+        taskers: List.of(state.taskers)..remove(event.user),
         favouriteStatus: FavouriteStatus.userRemoved,
       ),
     );
@@ -44,7 +44,7 @@ class FavouriteBloc extends HydratedBloc<FavouriteEvent, FavouriteState> {
       ClearedFavourite event, Emitter<FavouriteState> emit) {
     emit(
       state.copyWith(
-        users: List.of(state.users)..clear(),
+        taskers: List.of(state.taskers)..clear(),
         favouriteStatus: FavouriteStatus.cleared,
       ),
     );

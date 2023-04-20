@@ -23,3 +23,10 @@ class UserLanguangeChanged extends UserEvent {
   @override
   List<Object?> get props => [locale];
 }
+
+class IsUserAvailableChanged extends UserEvent {
+  final bool value;
+  IsUserAvailableChanged({required this.value});
+  @override
+  List<Object?> get props => [value];
+}

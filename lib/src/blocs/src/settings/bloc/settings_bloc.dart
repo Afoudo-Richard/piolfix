@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -9,6 +10,7 @@ part 'settings_state.dart';
 class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
   SettingsBloc() : super(const SettingsState()) {
     on<IsDarkModeChanged>(_isDarkModeChanged);
+    on<LanguageChanged>(_onLanguageChanged);
   }
 
   void _isDarkModeChanged(
@@ -16,6 +18,13 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) async {
     emit(state.copyWith(isDarkMode: event.value));
+  }
+
+  void _onLanguageChanged(
+    LanguageChanged event,
+    Emitter<SettingsState> emit,
+  ) async {
+    emit(state.copyWith(locale: event.value));
   }
 
   @override

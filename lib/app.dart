@@ -23,6 +23,7 @@ class App extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => SettingsBloc()),
+          BlocProvider(create: (context) => FavouriteBloc()),
           BlocProvider(create: (context) => AuthenticationBloc()),
           BlocProvider(create: (context) => UserBloc()),
           BlocProvider(create: (context) => AppBottomNavigationBarBloc()),
@@ -73,76 +74,85 @@ class _AppViewState extends State<AppView> {
     return Sizer(
       builder: (context, orientation, deviceType) {
         return ConnectivityAppWrapper(
-          app: MaterialApp(
-            title: 'PiolFix',
-            // locale: context.locale,
-            supportedLocales: const [
-              Locale('en'), // English, no country code
-              Locale('fr'), // Spanish, no country code
-            ],
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            debugShowCheckedModeBanner: false,
-            navigatorKey: _navigatorKey,
-            theme: appTheme(context),
-            builder: (context, child) {
-              return GlobalScaffold(
-                child: InternetConnectivityWidgetWrapper(
-                  child: BlocListener<AuthenticationBloc, AuthenticationState>(
-                    listener: (context, state) {
-                      Future.delayed(
-                        const Duration(microseconds: 500),
-                        () {
-                          if (state.authenticated ||
-                              state.isSignedInAnonymous) {
-                            _navigator.pushAndRemoveUntil<void>(
-                              MainScreen.route(),
-                              (route) => false,
-                            );
-                            BlocProvider.of<AppBottomNavigationBarBloc>(context)
-                                .add(
-                              AppBottomNavigationBarChanged(
-                                activePage: const HomePage(),
-                              ),
-                            );
-                          } else {
-                            if (state.hasWalkedThrough) {
-                              _navigator.pushAndRemoveUntil<void>(
-                                LoginPage.route(),
-                                (route) => false,
-                              );
-                            } else {
-                              _navigator.pushAndRemoveUntil<void>(
-                                SelectLanguagePage.route(),
-                                (route) => false,
-                              );
-                              BlocProvider.of<AppBottomNavigationBarBloc>(
-                                      context)
-                                  .add(
-                                AppBottomNavigationBarChanged(
-                                  activePage: const HomePage(),
-                                ),
-                              );
-                            }
-                          }
+          app: BlocBuilder<SettingsBloc, SettingsState>(
+            builder: (context, settingsState) {
+              return MaterialApp(
+                title: 'PiolFix',
+                locale: settingsState.locale,
+                // supportedLocales: const [
+                //   Locale('en'), // English, no country code
+                //   Locale('fr'), // Spanish, no country code
+                // ],
+                // localizationsDelegates: const [
+                //   AppLocalizations.delegate,
+                //   GlobalMaterialLocalizations.delegate,
+                //   GlobalWidgetsLocalizations.delegate,
+                //   GlobalCupertinoLocalizations.delegate,
+                // ],
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+
+                debugShowCheckedModeBanner: false,
+                navigatorKey: _navigatorKey,
+                theme: appTheme(context),
+                builder: (context, child) {
+                  return GlobalScaffold(
+                    child: InternetConnectivityWidgetWrapper(
+                      child:
+                          BlocListener<AuthenticationBloc, AuthenticationState>(
+                        listener: (context, state) {
+                          Future.delayed(
+                            const Duration(microseconds: 500),
+                            () {
+                              if (state.authenticated ||
+                                  state.isSignedInAnonymous) {
+                                _navigator.pushAndRemoveUntil<void>(
+                                  MainScreen.route(),
+                                  (route) => false,
+                                );
+                                BlocProvider.of<AppBottomNavigationBarBloc>(
+                                        context)
+                                    .add(
+                                  AppBottomNavigationBarChanged(
+                                    activePage: const HomePage(),
+                                  ),
+                                );
+                              } else {
+                                if (state.hasWalkedThrough) {
+                                  _navigator.pushAndRemoveUntil<void>(
+                                    LoginPage.route(),
+                                    (route) => false,
+                                  );
+                                } else {
+                                  _navigator.pushAndRemoveUntil<void>(
+                                    SelectLanguagePage.route(),
+                                    (route) => false,
+                                  );
+                                  BlocProvider.of<AppBottomNavigationBarBloc>(
+                                          context)
+                                      .add(
+                                    AppBottomNavigationBarChanged(
+                                      activePage: const HomePage(),
+                                    ),
+                                  );
+                                }
+                              }
+                            },
+                          );
                         },
-                      );
-                    },
-                    child: child,
-                  ),
-                ),
+                        child: child,
+                      ),
+                    ),
+                  );
+                },
+                onGenerateRoute: (_) {
+                  final state = context.read<AuthenticationBloc>().state;
+                  context
+                      .read<AuthenticationBloc>()
+                      .add(AuthenticationChecker(check: !(state.checker)));
+                  return SplashPage.route();
+                },
               );
-            },
-            onGenerateRoute: (_) {
-              final state = context.read<AuthenticationBloc>().state;
-              context
-                  .read<AuthenticationBloc>()
-                  .add(AuthenticationChecker(check: !(state.checker)));
-              return SplashPage.route();
             },
           ),
         );

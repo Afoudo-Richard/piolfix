@@ -77,7 +77,6 @@ class _AllReviewsState extends State<AllReviews> {
                       child: ListView.separated(
                         controller: _scrollController,
                         itemBuilder: (context, index) {
-                          final review = state.reviews[index];
                           return index >= state.reviews.length
                               ? LoadingIndicator()
                               : IndividualReview(

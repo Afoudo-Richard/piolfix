@@ -11,10 +11,69 @@ class MyTaskersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      appBar: const CustomAppBar(
+      appBar: CustomAppBar(
         title: 'My Taskers',
+        actions: [
+          BlocBuilder<FavouriteBloc, FavouriteState>(
+            builder: (context, state) {
+              return state.taskers.isNotEmpty
+                  ? TextButton(
+                      onPressed: () {
+                        BlocProvider.of<FavouriteBloc>(context)
+                            .add(ClearedFavourite());
+                      },
+                      child: Text(
+                        trans(context)!.clear,
+                        style: const TextStyle(
+                          color: Colors.red,
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink();
+            },
+          ),
+        ],
       ),
-      body: Container(),
+      // body: ListView.separated(
+      //   physics: const NeverScrollableScrollPhysics(),
+      //   shrinkWrap: true,
+      //   itemBuilder: (context, index) {
+      //     return IndividualReview();
+      //   },
+      //   separatorBuilder: (context, index) {
+      //     return Divider(
+      //       height: 10,
+      //     );
+      //   },
+      //   itemCount: 7,
+      // ),
+
+      body: BlocBuilder<FavouriteBloc, FavouriteState>(
+        builder: (context, state) {
+          if (state.taskers.isEmpty) {
+            return Center(
+              child: FetchEmpty(
+                message: trans(context)!.no_favourite_added_yet,
+              ),
+            );
+          } else {
+            return ListView.separated(
+              padding:
+                  EdgeInsets.symmetric(vertical: 2.h, horizontal: paddingSize),
+              itemBuilder: (context, index) {
+                final tasker = state.taskers[index];
+                return TaskerItem(
+                  user: tasker,
+                );
+              },
+              separatorBuilder: (context, index) {
+                return 2.h.ph;
+              },
+              itemCount: state.taskers.length,
+            );
+          }
+        },
+      ),
     );
   }
 }

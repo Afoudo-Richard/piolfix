@@ -16,6 +16,19 @@ class TaskerListBloc extends Bloc<TaskerListEvent, TaskerListState> {
         _duration,
       ),
     );
+
+    LiveQueryStreams.userUpdateStream.stream.listen((User user) {
+      final taskers = state.taskers;
+
+      taskers[taskers.indexWhere((item) => item.objectId == user.objectId)] =
+          user;
+      if (state.taskerListStatus == TaskerListStatus.success) {
+        emit(state.copyWith(
+          taskers: List.of(taskers),
+          checker: !state.checker,
+        ));
+      }
+    });
   }
 
   Future<void> _onTaskerListFetched(

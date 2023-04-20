@@ -135,10 +135,11 @@ class TaskerItem extends StatelessWidget {
                           ),
                           1.h.ph,
                           Text(
-                            'Available',
+                            user.isAvailable ? 'Available' : 'Offline',
                             style: TextStyle(
                               fontSize: 10.sp,
-                              color: Colors.green,
+                              color:
+                                  user.isAvailable ? Colors.green : Colors.red,
                             ),
                           ),
                         ],
@@ -169,12 +170,25 @@ class TaskerItem extends StatelessWidget {
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      child: Icon(
-                        LineIcons.heartAlt,
-                        size: 15.sp,
-                        color: Colors.grey,
-                      ),
+                    BlocBuilder<FavouriteBloc, FavouriteState>(
+                      builder: (context, state) {
+                        return GestureDetector(
+                          child: Icon(
+                            LineIcons.heartAlt,
+                            size: 20.sp,
+                            color: state.userInFavourite(user)
+                                ? const Color.fromARGB(255, 255, 191, 0)
+                                : Colors.grey,
+                          ),
+                          onTap: () {
+                            state.userInFavourite(user)
+                                ? BlocProvider.of<FavouriteBloc>(context)
+                                    .add(FavouriteUserRemoved(user: user))
+                                : BlocProvider.of<FavouriteBloc>(context)
+                                    .add(FavouriteUserAdded(user: user));
+                          },
+                        );
+                      },
                     ),
                   ],
                 ),

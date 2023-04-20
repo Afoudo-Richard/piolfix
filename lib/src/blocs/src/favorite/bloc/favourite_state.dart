@@ -5,24 +5,24 @@ enum FavouriteStatus { initial, userExist, userRemoved, userAdded, cleared }
 
 class FavouriteState extends Equatable {
   final FavouriteStatus favouriteStatus;
-  final List<User> users;
+  final List<User> taskers;
 
   FavouriteState({
     this.favouriteStatus = FavouriteStatus.initial,
-    this.users = const [],
+    this.taskers = const [],
   });
 
   @override
-  List<Object> get props => [users, favouriteStatus];
+  List<Object> get props => [taskers, favouriteStatus];
 
   bool userInFavourite(User user) {
-    return users.contains(user);
+    return taskers.contains(user);
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'favouriteStatus': favouriteStatus.name,
-      'users': users.map((x) => x.toMap()).toList(),
+      'taskers': taskers.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -30,8 +30,8 @@ class FavouriteState extends Equatable {
     return FavouriteState(
       favouriteStatus:
           FavouriteStatus.values.byName(map['favouriteStatus'] as String),
-      users: List<User>.from(
-        (map['users'] as List<Map<String, dynamic>>).map<User>(
+      taskers: List<User>.from(
+        (map['taskers'] as List<Map<String, dynamic>>).map<User>(
           (x) => User.fromMap(x),
         ),
       ),
@@ -45,11 +45,11 @@ class FavouriteState extends Equatable {
 
   FavouriteState copyWith({
     FavouriteStatus? favouriteStatus,
-    List<User>? users,
+    List<User>? taskers,
   }) {
     return FavouriteState(
       favouriteStatus: favouriteStatus ?? this.favouriteStatus,
-      users: users ?? this.users,
+      taskers: taskers ?? this.taskers,
     );
   }
 }

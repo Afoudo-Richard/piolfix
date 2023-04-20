@@ -60,6 +60,9 @@ class User extends ParseUser with EquatableMixin implements ParseCloneable {
   set profileImageUrl(String? value) =>
       set<String?>('profile_image_url', value);
 
+  bool get isAvailable => get<bool?>('is_available') ?? false;
+  set isAvailable(bool value) => set<bool?>('is_available', value);
+
   @override
   List<Object?> get props => [
         firstname,
@@ -74,6 +77,7 @@ class User extends ParseUser with EquatableMixin implements ParseCloneable {
         skills,
         pricePerHr,
         status,
+        isAvailable,
       ];
 
   Map<String, dynamic> toMap() {
@@ -92,6 +96,7 @@ class User extends ParseUser with EquatableMixin implements ParseCloneable {
       'skills': skills,
       'pricePerHr': pricePerHr,
       'status': status,
+      'isAvailable': isAvailable
     };
   }
 
@@ -115,7 +120,8 @@ class User extends ParseUser with EquatableMixin implements ParseCloneable {
       ..skills = map['skills'] != null ? map['skills'] as String : null
       ..pricePerHr =
           map['pricePerHr'] != null ? map['pricePerHr'] as String : null
-      ..status = map['status'] != null ? map['status'] as String : null;
+      ..status = map['status'] != null ? map['status'] as String : null
+      ..isAvailable = map['isAvailable'] as bool;
 
     return user;
   }

@@ -9,3 +9,8 @@ class IsDarkModeChanged extends SettingsEvent {
   final bool value;
   IsDarkModeChanged({required this.value});
 }
+
+class LanguageChanged extends SettingsEvent {
+  final Locale value;
+  LanguageChanged({required this.value});
+}

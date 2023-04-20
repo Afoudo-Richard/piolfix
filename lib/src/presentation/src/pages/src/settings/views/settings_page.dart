@@ -47,6 +47,34 @@ class SettingsPage extends StatelessWidget {
                     ),
                   ],
                 ),
+                2.h.ph,
+                ItemTile(
+                  icon: LineIcons.bell,
+                  title: "Language",
+                  trailing: CustomCircle(
+                    radius: 15.sp,
+                    color: primaryColor,
+                    child: Center(
+                      child: Text(
+                        '2',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 10.sp,
+                        ),
+                      ),
+                    ),
+                  ),
+                  onTap: () {
+                    showModalBottomSheet(
+                      barrierColor: primaryColor.withOpacity(0.6),
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (ctx) {
+                        return const AllLanguages();
+                      },
+                    );
+                  },
+                ),
               ],
             ),
           );

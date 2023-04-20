@@ -1,7 +1,7 @@
 enum UserStatus { active, declined, reviewing }
 
 class AppConfigs {
-  static const int fetchLimit = 10;
+  static const int fetchLimit = 6;
   static const String bannerAdTestUnitId =
       'ca-app-pub-3940256099942544/6300978111';
   static const String interstitialAdTestUnitId =
