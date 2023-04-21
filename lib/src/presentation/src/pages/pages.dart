@@ -20,3 +20,6 @@ export './src/orange_mtn_momo_payment/orange_mtn_momo_payment.dart';
 export './src/settings/settings.dart';
 export './src/about_app/about_app.dart';
 export './src/select_language/select_language.dart';
+export './src/privacy_policy/privacy_policy.dart';
+export './src/terms_conditions/terms_conditions.dart';
+export './src/contact_us/contact_us.dart';

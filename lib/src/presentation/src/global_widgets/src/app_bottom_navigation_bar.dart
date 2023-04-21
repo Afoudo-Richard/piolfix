@@ -44,7 +44,7 @@ class AppBottomNavigationBar extends StatelessWidget {
                       BottomNavItem(
                         active: state.activePage is HomePage,
                         icon: LineIcons.home,
-                        text: "Home",
+                        text: trans(context)!.home,
                         onTap: () {
                           BlocProvider.of<AppBottomNavigationBarBloc>(context)
                               .add(AppBottomNavigationBarChanged(

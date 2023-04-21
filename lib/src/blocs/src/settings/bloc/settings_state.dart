@@ -29,14 +29,19 @@ class SettingsState extends Equatable {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'isDarkMode': isDarkMode,
-      'local': locale.toString()
+      'locale': locale.toString()
     };
   }
 
   factory SettingsState.fromMap(Map<String, dynamic> map) {
     return SettingsState(
       isDarkMode: map['isDarkMode'] as bool,
-      locale: map['locale'] ?? const Locale('en', 'US'),
+      locale: map['locale'] != null
+          ? Locale(
+              map['locale'].toString().split('_')[0],
+              map['locale'].toString().split('_')[1],
+            )
+          : const Locale('en', 'US'),
     );
   }
 

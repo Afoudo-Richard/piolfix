@@ -19,7 +19,41 @@ class SelectLanguagePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Select language here"),
+            3.h.ph,
+            BlocBuilder<SettingsBloc, SettingsState>(
+              builder: (context, state) {
+                return GestureDetector(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Select language",
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                      Text(
+                        state.locale.toString(),
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: primaryColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                  onTap: () {
+                    showModalBottomSheet(
+                      barrierColor: primaryColor.withOpacity(0.6),
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (ctx) {
+                        return const AllLanguages();
+                      },
+                    );
+                  },
+                );
+              },
+            ),
           ],
         ),
       ),

@@ -133,6 +133,14 @@ class ProfilePage extends StatelessWidget {
                                   2.h.ph,
                                   ItemTile(
                                     icon: LineIcons.bell,
+                                    title: "PiolFixers",
+                                    onTap: () => Navigator.push(
+                                      context,
+                                      CategoryListPage.route(),
+                                    ),
+                                  ),
+                                  ItemTile(
+                                    icon: LineIcons.bell,
                                     title: "List Category",
                                     onTap: () => Navigator.push(
                                       context,
@@ -175,10 +183,18 @@ class ProfilePage extends StatelessWidget {
                                   ItemTile(
                                     icon: LineIcons.scroll,
                                     title: "Terms & condition",
+                                    onTap: () {
+                                      Navigator.push(
+                                          context, TermsConditionsPage.route());
+                                    },
                                   ),
                                   ItemTile(
                                     icon: LineIcons.userShield,
                                     title: "Privacy policy",
+                                    onTap: () {
+                                      Navigator.push(
+                                          context, PrivacyPolicyPage.route());
+                                    },
                                   ),
                                   ItemTile(
                                     icon: LineIcons.users,
@@ -190,7 +206,11 @@ class ProfilePage extends StatelessWidget {
                                   ),
                                   ItemTile(
                                     icon: LineIcons.headset,
-                                    title: "Contact Us",
+                                    title: "Contact Us / Support",
+                                    onTap: () {
+                                      Navigator.push(
+                                          context, ContactUsPage.route());
+                                    },
                                   ),
                                 ],
                               )

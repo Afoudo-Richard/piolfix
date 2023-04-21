@@ -81,6 +81,7 @@ class FCM {
             channelKey: 'basic_channel',
             title: message.notification?.title ?? "PiolFix",
             body: message.notification?.body ?? "N/A",
+            bigPicture: message.notification?.body ?? "N/A",
             actionType: ActionType.Default,
           ),
         );
@@ -111,6 +112,7 @@ class FCM {
             channelKey: 'basic_channel',
             title: message.notification?.title ?? "PiolFix",
             body: message.notification?.body ?? "N/A",
+            bigPicture: message.notification?.body ?? "N/A",
             actionType: ActionType.Default,
           ),
         );

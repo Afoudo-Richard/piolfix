@@ -86,25 +86,16 @@ void startLiveQuery() async {
   Subscription subscription = await liveQuery.client.subscribe(query);
 
   subscription.on(LiveQueryEvent.create, (value) {
-    print('*** CREATE ***: ${DateTime.now().toString()}\n $value ');
-    print((value as ParseObject).objectId);
-    print((value as ParseObject).updatedAt);
-    print((value as ParseObject).createdAt);
-    print((value as ParseObject).get('objectId'));
-    print((value as ParseObject).get('updatedAt'));
-    print((value as ParseObject).get('createdAt'));
+    // print('*** CREATE ***: ${DateTime.now().toString()}\n $value ');
+    // print((value as ParseObject).objectId);
+    // print((value as ParseObject).updatedAt);
+    // print((value as ParseObject).createdAt);
+    // print((value as ParseObject).get('objectId'));
+    // print((value as ParseObject).get('updatedAt'));
+    // print((value as ParseObject).get('createdAt'));
   });
 
   subscription.on(LiveQueryEvent.update, (value) {
-    print('*** UPDATE ***: ${DateTime.now().toString()}\n $value ');
-
-    print((value as ParseObject).objectId);
-    print((value as ParseObject).updatedAt);
-    print((value as ParseObject).createdAt);
-    print((value as ParseObject).get('objectId'));
-    print((value as ParseObject).get('updatedAt'));
-    print((value as ParseObject).get('createdAt'));
-
     LiveQueryStreams.userUpdateStream.sink.add(value as User);
   });
 }
