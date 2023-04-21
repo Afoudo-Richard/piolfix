@@ -6,7 +6,7 @@ import 'package:poilfix/poilfix.dart';
 class LoadingIndicator extends StatelessWidget {
   LoadingIndicator({
     Key? key,
-    this.radius = 15,
+    this.radius = 20,
     this.color = primaryColor,
     this.strokeWidth = 2,
   }) : super(key: key);

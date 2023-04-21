@@ -48,29 +48,36 @@ class SettingsPage extends StatelessWidget {
                   ],
                 ),
                 2.h.ph,
-                ItemTile(
-                  icon: LineIcons.bell,
-                  title: "Language",
-                  trailing: CustomCircle(
-                    radius: 15.sp,
-                    color: primaryColor,
-                    child: Center(
-                      child: Text(
-                        '2',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 10.sp,
-                        ),
+                BlocBuilder<SettingsBloc, SettingsState>(
+                  builder: (context, state) {
+                    return GestureDetector(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Select language",
+                            style: TextStyle(
+                              fontSize: 15.sp,
+                            ),
+                          ),
+                          Text(
+                            state.locale.toString(),
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: primaryColor,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ),
-                  onTap: () {
-                    showModalBottomSheet(
-                      barrierColor: primaryColor.withOpacity(0.6),
-                      isScrollControlled: true,
-                      context: context,
-                      builder: (ctx) {
-                        return const AllLanguages();
+                      onTap: () {
+                        showModalBottomSheet(
+                          barrierColor: primaryColor.withOpacity(0.6),
+                          isScrollControlled: true,
+                          context: context,
+                          builder: (ctx) {
+                            return const AllLanguages();
+                          },
+                        );
                       },
                     );
                   },

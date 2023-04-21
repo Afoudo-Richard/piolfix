@@ -15,6 +15,17 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
     on<UserChanged>(_onUserChanged);
     on<UserLanguangeChanged>(_onUserLanguangeChanged);
     on<IsUserAvailableChanged>(_onIsUserAvailableChanged);
+
+    LiveQueryStreams.userUpdateStream.stream.listen((User user) {
+      if (state.user != null && user.objectId == state.user!.objectId) {
+        emit(
+          state.copyWith(
+            user: user,
+            checker: !state.checker,
+          ),
+        );
+      }
+    });
   }
 
   void _onUserChanged(
@@ -45,7 +56,10 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
     Emitter<UserState> emit,
   ) async {
     if (state.user != null) {
-      var user = state.user!..isAvailable = event.value;
+      User currentUser = await ParseUser.currentUser();
+      var user = state.user!
+        ..isAvailable = event.value
+        ..sessionToken = currentUser.sessionToken;
       emit(
         state.copyWith(
           userAvailableStatus: UserAvailableStatus.loading,

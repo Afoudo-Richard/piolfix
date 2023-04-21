@@ -148,6 +148,7 @@ class HomeSearchInput extends StatelessWidget {
           'I need help with',
           style: TextStyle(
             fontSize: 18.sp,
+            color: Colors.grey,
           ),
         ),
         2.h.ph,

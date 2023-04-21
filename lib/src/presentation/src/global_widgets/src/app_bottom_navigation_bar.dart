@@ -55,8 +55,8 @@ class AppBottomNavigationBar extends StatelessWidget {
                       ),
                       BottomNavItem(
                         active: state.activePage is TaskPage,
-                        icon: LineIcons.calendarCheck,
-                        text: "Task",
+                        icon: LineIcons.search,
+                        text: "Search",
                         onTap: () {
                           BlocProvider.of<AppBottomNavigationBarBloc>(context)
                               .add(AppBottomNavigationBarChanged(

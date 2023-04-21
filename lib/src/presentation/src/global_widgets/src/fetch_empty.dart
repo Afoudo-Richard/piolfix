@@ -22,12 +22,17 @@ class FetchEmpty extends StatelessWidget {
           width: 40.w,
         ),
         2.h.ph,
-        Text(
-          message ?? trans(context)!.no_data_available,
-          style: TextStyle(
-            fontSize: 15.sp,
-          ),
-          textAlign: TextAlign.center,
+        BlocBuilder<SettingsBloc, SettingsState>(
+          builder: (context, state) {
+            return Text(
+              message ?? trans(context)!.no_data_available,
+              style: TextStyle(
+                fontSize: 15.sp,
+                color: state.isDarkMode ? Colors.white : Colors.black,
+              ),
+              textAlign: TextAlign.center,
+            );
+          },
         ),
       ],
     );

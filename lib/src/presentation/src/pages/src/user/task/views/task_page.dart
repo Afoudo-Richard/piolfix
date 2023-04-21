@@ -32,7 +32,7 @@ class TaskPage extends StatelessWidget {
         .toList();
     return CustomScaffold(
       appBar: const CustomAppBar(
-        title: 'Task',
+        title: 'Search',
       ),
       body: SingleChildScrollView(
         padding: pagePadding,
