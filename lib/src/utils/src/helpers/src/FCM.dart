@@ -21,6 +21,7 @@ Future<void> onBackgroundMessage(RemoteMessage message) async {
         title: message.notification?.title ?? "PiolFix",
         body: message.notification?.body ?? "N/A",
         actionType: ActionType.Default,
+        notificationLayout: NotificationLayout.BigText,
       ),
     );
   }
@@ -83,6 +84,7 @@ class FCM {
             body: message.notification?.body ?? "N/A",
             bigPicture: message.notification?.body ?? "N/A",
             actionType: ActionType.Default,
+            notificationLayout: NotificationLayout.BigText,
           ),
         );
         if (message.data.containsKey('data')) {
@@ -104,7 +106,7 @@ class FCM {
     FirebaseMessaging.onMessageOpenedApp.listen(
       (message) async {
         debugPrint(
-            "#################################### user clicked the notification  ##################################");
+            "############################# user clicked the notification  ###############################");
 
         AwesomeNotifications().createNotification(
           content: NotificationContent(
@@ -114,6 +116,7 @@ class FCM {
             body: message.notification?.body ?? "N/A",
             bigPicture: message.notification?.body ?? "N/A",
             actionType: ActionType.Default,
+            notificationLayout: NotificationLayout.BigText,
           ),
         );
 
