@@ -14,8 +14,8 @@ class TaskReviewPage extends StatelessWidget {
     return BlocBuilder<SelectTaskBloc, SelectTaskState>(
       builder: (context, state) {
         return CustomScaffold(
-          appBar: const CustomAppBar(
-            title: "Task review",
+          appBar: CustomAppBar(
+            title: trans(context)!.task_review,
           ),
           body: SingleChildScrollView(
             padding: pagePadding,
@@ -104,7 +104,7 @@ class TaskReviewPage extends StatelessWidget {
                   ],
                 ),
                 3.h.ph,
-                const SectionHeader(title: "Task Details"),
+                SectionHeader(title: "${trans(context)!.task_details}"),
                 1.h.ph,
                 BlocBuilder<SelectTaskBloc, SelectTaskState>(
                   builder: (context, state) {
@@ -119,7 +119,7 @@ class TaskReviewPage extends StatelessWidget {
                 ),
                 3.h.ph,
                 SectionHeader(
-                  title: "Total Rate:",
+                  title: "${trans(context)!.total_rate}:",
                   trailing: Text(
                     '${state.tasker!.pricePerHr}/hr',
                     style: TextStyle(
@@ -141,7 +141,7 @@ class TaskReviewPage extends StatelessWidget {
                     Navigator.push(context, SelectPaymentMethodPage.route());
                   },
                   child: Text(
-                    'Confirm and Pay',
+                    trans(context)!.confirm_and_pay,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 14.sp,

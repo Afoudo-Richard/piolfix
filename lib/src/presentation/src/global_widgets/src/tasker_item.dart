@@ -96,7 +96,7 @@ class TaskerItem extends StatelessWidget {
                               ),
                               2.w.pw,
                               Text(
-                                '5.0 (11 Reviews)',
+                                '5.0 (11 ${trans(context)!.reviews})',
                                 style: TextStyle(
                                   fontSize: 10.sp,
                                   color: textColor,
@@ -142,7 +142,9 @@ class TaskerItem extends StatelessWidget {
                           ),
                           1.h.ph,
                           Text(
-                            user.isAvailable ? 'Available' : 'Offline',
+                            user.isAvailable
+                                ? trans(context)!.available
+                                : trans(context)!.offline,
                             style: TextStyle(
                               fontSize: 10.sp,
                               color:
@@ -170,7 +172,7 @@ class TaskerItem extends StatelessWidget {
                   children: [
                     GestureDetector(
                       child: Text(
-                        'See Profile',
+                        trans(context)!.see_profile,
                         style: TextStyle(
                           fontSize: 10.sp,
                           color: primaryColor,

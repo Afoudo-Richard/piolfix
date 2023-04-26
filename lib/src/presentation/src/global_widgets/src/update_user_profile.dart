@@ -43,7 +43,8 @@ class UpdateUserProfile extends StatelessWidget {
                                           Expanded(
                                             child: Text(
                                               message ??
-                                                  "Almost there. Complete your profile, get approval and start earning",
+                                                  trans(context)!
+                                                      .almost_there_complete_profile,
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 9.sp,
@@ -60,7 +61,7 @@ class UpdateUserProfile extends StatelessWidget {
                                               );
                                             },
                                             child: Text(
-                                              "Update",
+                                              trans(context)!.update,
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 9.sp,

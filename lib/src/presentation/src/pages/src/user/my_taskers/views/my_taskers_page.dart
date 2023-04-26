@@ -12,7 +12,7 @@ class MyTaskersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScaffold(
       appBar: CustomAppBar(
-        title: 'My Taskers',
+        title: trans(context)!.my_taskers,
         actions: [
           BlocBuilder<FavouriteBloc, FavouriteState>(
             builder: (context, state) {

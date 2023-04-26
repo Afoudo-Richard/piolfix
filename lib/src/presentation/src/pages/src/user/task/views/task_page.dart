@@ -31,8 +31,8 @@ class TaskPage extends StatelessWidget {
         )
         .toList();
     return CustomScaffold(
-      appBar: const CustomAppBar(
-        title: 'Search',
+      appBar: CustomAppBar(
+        title: trans(context)!.search,
       ),
       body: SingleChildScrollView(
         padding: pagePadding,
@@ -45,11 +45,11 @@ class TaskPage extends StatelessWidget {
                 LineIcons.search,
                 color: primaryColor,
               ),
-              inputHintText: 'What are you looking for? 🤔',
+              inputHintText: trans(context)!.what_are_you_looking_for,
             ),
             2.h.ph,
             Text(
-              'Popular',
+              trans(context)!.popular,
               style: TextStyle(
                 fontSize: 18.sp,
               ),

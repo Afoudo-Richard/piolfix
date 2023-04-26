@@ -15,8 +15,8 @@ class ProfilePage extends StatelessWidget {
         return BlocBuilder<SettingsBloc, SettingsState>(
           builder: (context, settingState) {
             return CustomScaffold(
-              appBar: const CustomAppBar(
-                title: 'Profile',
+              appBar: CustomAppBar(
+                title: trans(context)!.profile,
               ),
               body: SingleChildScrollView(
                 padding: pagePadding,
@@ -53,8 +53,8 @@ class ProfilePage extends StatelessWidget {
                                         ),
                                         Text(
                                           state.user!.isAvailable
-                                              ? 'Available'
-                                              : 'Offline',
+                                              ? trans(context)!.available
+                                              : trans(context)!.offline,
                                           style: TextStyle(
                                             fontSize: 10.sp,
                                             color: state.user!.isAvailable
@@ -65,7 +65,7 @@ class ProfilePage extends StatelessWidget {
                                       ],
                                     )
                                   : Text(
-                                      'Anoymous',
+                                      trans(context)!.anonymous,
                                       style: TextStyle(
                                         fontSize: 16.sp,
                                       ),
@@ -104,7 +104,8 @@ class ProfilePage extends StatelessWidget {
                                                 ItemTile(
                                                     icon: LineIcons
                                                         .accessibleIcon,
-                                                    title: "Dashboard",
+                                                    title: trans(context)!
+                                                        .dashboard,
                                                     onTap: () {
                                                       Navigator.push(
                                                         context,
@@ -143,11 +144,11 @@ class ProfilePage extends StatelessWidget {
                                     },
                                   ),
                                   SectionGrouping(
-                                    title: 'Info',
+                                    title: trans(context)!.info,
                                     children: [
                                       ItemTile(
                                         icon: LineIcons.cog,
-                                        title: "Settings",
+                                        title: trans(context)!.settings,
                                         onTap: () {
                                           Navigator.push(
                                               context, SettingsPage.route());
@@ -155,7 +156,7 @@ class ProfilePage extends StatelessWidget {
                                       ),
                                       ItemTile(
                                         icon: LineIcons.bell,
-                                        title: "Notification",
+                                        title: trans(context)!.notifications,
                                         trailing: CustomCircle(
                                           radius: 15.sp,
                                           color: primaryColor,
@@ -173,11 +174,12 @@ class ProfilePage extends StatelessWidget {
                                     ],
                                   ),
                                   SectionGrouping(
-                                    title: 'Legals',
+                                    title: trans(context)!.legals,
                                     children: [
                                       ItemTile(
                                         icon: LineIcons.scroll,
-                                        title: "Terms & condition",
+                                        title: trans(context)!
+                                            .terms_and_conditions,
                                         onTap: () {
                                           Navigator.push(context,
                                               TermsConditionsPage.route());
@@ -185,7 +187,7 @@ class ProfilePage extends StatelessWidget {
                                       ),
                                       ItemTile(
                                         icon: LineIcons.userShield,
-                                        title: "Privacy policy",
+                                        title: trans(context)!.privacy_policy,
                                         onTap: () {
                                           Navigator.push(context,
                                               PrivacyPolicyPage.route());
@@ -194,11 +196,11 @@ class ProfilePage extends StatelessWidget {
                                     ],
                                   ),
                                   SectionGrouping(
-                                    title: 'Others',
+                                    title: trans(context)!.other,
                                     children: [
                                       ItemTile(
                                         icon: LineIcons.users,
-                                        title: "About Us",
+                                        title: trans(context)!.about_app,
                                         onTap: () {
                                           Navigator.push(
                                               context, AboutAppPage.route());
@@ -206,7 +208,8 @@ class ProfilePage extends StatelessWidget {
                                       ),
                                       ItemTile(
                                         icon: LineIcons.headset,
-                                        title: "Contact Us / Support",
+                                        title:
+                                            "${trans(context)!.contact_us} / ${trans(context)!.support}",
                                         onTap: () {
                                           Navigator.push(
                                               context, ContactUsPage.route());
@@ -221,7 +224,9 @@ class ProfilePage extends StatelessWidget {
                     ),
                     ItemTile(
                       icon: LineIcons.alternateSignOut,
-                      title: authState.authenticated ? "LogOut" : 'Sign In',
+                      title: authState.authenticated
+                          ? trans(context)!.logout
+                          : trans(context)!.login,
                       onTap: () {
                         BlocProvider.of<AuthenticationBloc>(context).add(
                           const AuthenticationHasWalkedThroughChanged(

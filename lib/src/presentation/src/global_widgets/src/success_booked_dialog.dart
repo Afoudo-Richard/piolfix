@@ -46,7 +46,7 @@ class SuccessBookedDialog extends StatelessWidget {
                     ),
                     2.h.ph,
                     Text(
-                      "You've booked ${state.tasker!.firstname} ${state.tasker!.lastname}",
+                      "${trans(context)!.you_have_booked} ${state.tasker!.firstname} ${state.tasker!.lastname}",
                       style: TextStyle(
                         fontSize: 18.sp,
                         color: Colors.grey,

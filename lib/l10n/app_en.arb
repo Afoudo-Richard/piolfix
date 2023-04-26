@@ -126,6 +126,8 @@
 
     
 
+
+
     "welcome": "Welcome",
     "welcome_messsage": "Come let's go into a new world of task outsourcing for you.",
     "too_much_task" : "Too much tasks?",
@@ -138,6 +140,51 @@
     "proceed": "Proceed",
     "welcome_back": "Welcome Back",
     "sign_in_to_your_piolfix_account": "Sign in to your PiolFix account",
-    "new_to_piolfix": "New to PiolFix?"
+    "new_to_piolfix": "New to PiolFix?",
+    "i_need_help_with": "I need help with",
+    "try_mount_tv_or_leachy_faucet": "Try mount Tv or leaky faucet",
+    "trending_services": "Trending Services",
+    "popular_taskers": "Popular Tasker's",
+    "my_taskers": "My Taskers",
+    "popular": "Popular",
+    "offline": "Offline",
+    "available": "Available",
+    "anonymous": "Anonymous",
+    "dashboard": "Dashboard",
+    "info": "Info",
+    "notifications": "Notifiactions",
+    "legals": "Legals",
+    "terms_and_conditions": "Terms & Conditions",
+    "privacy_policy" : "Privacy Policy",
+    "contact_us": "Contact Us",
+    "select_tasker": "Select Tasker",
+    "task": "Task",
+    "see_profile": "See Profile",
+    "reviews": "Reviews",
+    "no_tasker_found": "No tasker found",
+    "almost_there_complete_profile": "Almost there. Complete your profile, get approval and start earning",
+    "update": "Update",
+    "you_have_booked": "You've booked",
+    "always_have_peace_of_mind": "Always have peace of mind. All taskers undergo ID and criminal background checks",
+    "dark_mode": "Dark Mode",
+    "tasker_profile": "Tasker Profile",
+    "tools": "Tools",
+    "speaks": "Speaks",
+    "select": "Select",
+    "skills_and_experience": "Skills and Experience",
+    "user_reviews": "User Reviews",
+    "add" : "Add",
+    "no_reviews_yet": "No reviews yet",
+    "see_all_reviews": "See All Reviews",
+    "task_details": "Task Details",
+    "for_example_what_supplies": "For example, what supplies are needed, where to park or timing restrictions",
+    "task_review": "Task Review",
+    "total_rate": "Total Rate",
+    "confirm_and_pay": "Confirm and Pay",
+    "select_payment_method": "Select Payment Method",
+    "continue_": "Continue",
+    "amount": "Amount",
+    "pay": "Pay"
+    
  
 }

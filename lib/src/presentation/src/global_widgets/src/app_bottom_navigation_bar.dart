@@ -56,7 +56,7 @@ class AppBottomNavigationBar extends StatelessWidget {
                       BottomNavItem(
                         active: state.activePage is TaskPage,
                         icon: LineIcons.search,
-                        text: "Search",
+                        text: trans(context)!.search,
                         onTap: () {
                           BlocProvider.of<AppBottomNavigationBarBloc>(context)
                               .add(AppBottomNavigationBarChanged(
@@ -68,7 +68,7 @@ class AppBottomNavigationBar extends StatelessWidget {
                       BottomNavItem(
                         active: state.activePage is MyTaskersPage,
                         icon: LineIcons.heart,
-                        text: "My Taskers",
+                        text: trans(context)!.my_taskers,
                         onTap: () {
                           BlocProvider.of<AppBottomNavigationBarBloc>(context)
                               .add(AppBottomNavigationBarChanged(
@@ -80,7 +80,7 @@ class AppBottomNavigationBar extends StatelessWidget {
                       BottomNavItem(
                         active: state.activePage is ProfilePage,
                         icon: LineIcons.user,
-                        text: "Profile",
+                        text: trans(context)!.profile,
                         onTap: () {
                           BlocProvider.of<AppBottomNavigationBarBloc>(context)
                               .add(AppBottomNavigationBarChanged(

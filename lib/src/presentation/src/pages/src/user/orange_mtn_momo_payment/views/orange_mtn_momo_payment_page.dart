@@ -22,7 +22,7 @@ class OrangeMtnMomoPaymentPage extends StatelessWidget {
           children: [
             2.h.ph,
             Text(
-              'Amount: FCFA 2000',
+              '${trans(context)!.amount}: FCFA 2000',
               style: TextStyle(
                 color: secondaryColor,
                 fontSize: 16.sp,
@@ -33,7 +33,7 @@ class OrangeMtnMomoPaymentPage extends StatelessWidget {
             BlocBuilder<MobileMoneyBloc, MobileMoneyState>(
               builder: (context, state) {
                 return CustomInput(
-                  label: 'Enter phone number',
+                  label: trans(context)!.enter_phone_number,
                   inputHintText: 'E.g. 672367020 or 693386383',
                   backgroundColor: Colors.white.withOpacity(0.7),
                   labelTextStyle: const TextStyle(
@@ -94,7 +94,7 @@ class OrangeMtnMomoPaymentPage extends StatelessWidget {
                                     color: secondaryColor,
                                   )
                                 : Text(
-                                    'Pay',
+                                    trans(context)!.pay,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14.sp,

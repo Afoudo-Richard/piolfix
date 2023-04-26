@@ -12,7 +12,7 @@ class SelectTaskerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomAppBar(
-          title: 'Select Tasker',
+          title: trans(context)!.select_tasker,
           actions: [
             IconButton(
               onPressed: () {
@@ -41,7 +41,7 @@ class SelectTaskerPage extends StatelessWidget {
               child: BlocBuilder<SelectTaskBloc, SelectTaskState>(
                 builder: (context, state) {
                   return Text(
-                    'Task : ${state.service!.name}',
+                    '${trans(context)!.task} : ${state.service!.name}',
                     style: TextStyle(
                       fontSize: 15.sp,
                       color: primaryColor,
@@ -129,7 +129,7 @@ class UserSecurityInfo extends StatelessWidget {
           2.w.pw,
           Expanded(
             child: Text(
-              'Always have peace of mind. All taskers undergo ID and criminal background checks',
+              trans(context)!.always_have_peace_of_mind,
               style: TextStyle(
                 fontSize: 12.sp,
                 color: Colors.grey,

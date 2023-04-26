@@ -27,8 +27,8 @@ class TaskerProfilePage extends StatelessWidget {
       child: BlocBuilder<SettingsBloc, SettingsState>(
         builder: (context, settingsState) {
           return CustomScaffold(
-            appBar: const CustomAppBar(
-              title: 'Tasker Profile',
+            appBar: CustomAppBar(
+              title: trans(context)!.tasker_profile,
             ),
             body: SingleChildScrollView(
               padding: pagePadding,
@@ -123,12 +123,13 @@ class TaskerProfilePage extends StatelessWidget {
                   2.h.ph,
                   TaskerInfoTextItem(
                     icon: LineIcons.tools,
-                    text: "Tools: ${user.tools}",
+                    text: "${trans(context)!.tools}: ${user.tools}",
                   ),
                   2.h.ph,
-                  const TaskerInfoTextItem(
+                  TaskerInfoTextItem(
                     icon: LineIcons.comment,
-                    text: "Speaks: English, French , Spanish",
+                    text:
+                        "${trans(context)!.speaks}: English, French , Spanish",
                   ),
                   4.h.ph,
                   SkillsAndExperience(
@@ -190,7 +191,7 @@ class TaskerProfilePage extends StatelessWidget {
                                                   TaskDetailPage.route());
                                             },
                                             child: Text(
-                                              'Select',
+                                              trans(context)!.select,
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 14.sp,
@@ -228,7 +229,7 @@ class SkillsAndExperience extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SectionHeader(title: "Skills and Experience"),
+        SectionHeader(title: trans(context)!.skills_and_experience),
         2.h.ph,
         BlocBuilder<SettingsBloc, SettingsState>(
           builder: (context, settingsState) {
@@ -261,7 +262,7 @@ class UserReviews extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SectionHeader(
-              title: "User Reviews",
+              title: trans(context)!.user_reviews,
               trailing: InkWell(
                 onTap: () {
                   showModalBottomSheet(
@@ -282,7 +283,7 @@ class UserReviews extends StatelessWidget {
                         return authState.authenticated &&
                                 state.user!.objectId != tasker.objectId
                             ? Text(
-                                "Add",
+                                trans(context)!.add,
                                 style: TextStyle(
                                   fontSize: 13.sp,
                                   fontWeight: FontWeight.w400,
@@ -313,7 +314,7 @@ class UserReviews extends StatelessWidget {
                           BlocBuilder<TaskerProfileBloc, TaskerProfileState>(
                             builder: (context, state) {
                               return Text(
-                                '5.0 (${state.reviewStatus == ReviewStatus.loading || state.reviewStatus == ReviewStatus.initial || state.reviewStatus == ReviewStatus.refresh ? '--' : state.totalReviews} Reviews)',
+                                '5.0 (${state.reviewStatus == ReviewStatus.loading || state.reviewStatus == ReviewStatus.initial || state.reviewStatus == ReviewStatus.refresh ? '--' : state.totalReviews} ${trans(context)!.reviews})',
                                 style: TextStyle(
                                   fontSize: 10.sp,
                                   color: settingsState.isDarkMode
@@ -369,7 +370,7 @@ class UserReviews extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "No reviews yet",
+                                    trans(context)!.no_reviews_yet,
                                     style: TextStyle(
                                       fontSize: 11.sp,
                                       color: settingsState.isDarkMode
@@ -407,7 +408,7 @@ class UserReviews extends StatelessWidget {
                                         border: const BorderSide(
                                             color: primaryColor),
                                         child: Text(
-                                          'See All Reviews',
+                                          trans(context)!.see_all_reviews,
                                           style: TextStyle(
                                             color: primaryColor,
                                             fontSize: 12.sp,

@@ -11,8 +11,8 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      appBar: const CustomAppBar(
-        title: 'Settings',
+      appBar: CustomAppBar(
+        title: trans(context)!.settings,
       ),
       body: BlocBuilder<SettingsBloc, SettingsState>(
         builder: (context, settingState) {
@@ -26,7 +26,7 @@ class SettingsPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Dark Mode",
+                      trans(context)!.dark_mode,
                       style: TextStyle(
                         fontSize: 15.sp,
                         color: settingState.isDarkMode
@@ -55,9 +55,12 @@ class SettingsPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Select language",
+                            trans(context)!.select_language,
                             style: TextStyle(
                               fontSize: 15.sp,
+                              color: settingState.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black,
                             ),
                           ),
                           Text(

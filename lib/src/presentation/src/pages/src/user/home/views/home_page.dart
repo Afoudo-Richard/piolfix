@@ -145,7 +145,7 @@ class HomeSearchInput extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'I need help with',
+          trans(context)!.i_need_help_with,
           style: TextStyle(
             fontSize: 18.sp,
             color: Colors.grey,
@@ -159,7 +159,7 @@ class HomeSearchInput extends StatelessWidget {
               LineIcons.search,
               color: primaryColor,
             ),
-            inputHintText: 'Try "mount Tv or leacky faucet',
+            inputHintText: trans(context)!.try_mount_tv_or_leachy_faucet,
           ),
           onTap: () {
             BlocProvider.of<AppBottomNavigationBarBloc>(context)
@@ -185,9 +185,9 @@ class TrendingProjects extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SectionHeader(
-          title: 'Trending Projects',
+          title: trans(context)!.trending_services,
           trailing: Text(
-            "See all",
+            trans(context)!.see_all,
             style: TextStyle(
               fontSize: 13.sp,
               fontWeight: FontWeight.w400,
@@ -245,9 +245,9 @@ class PopularTaskers extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SectionHeader(
-          title: "Popular Tasker's",
+          title: trans(context)!.popular_taskers,
           trailing: Text(
-            "See all",
+            trans(context)!.see_all,
             style: TextStyle(
               fontSize: 13.sp,
               fontWeight: FontWeight.w400,

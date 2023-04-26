@@ -13,8 +13,8 @@ class TaskDetailPage extends StatelessWidget {
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {
         return CustomScaffold(
-          appBar: const CustomAppBar(
-            title: 'Task Details',
+          appBar: CustomAppBar(
+            title: trans(context)!.task_details,
           ),
           body: SingleChildScrollView(
             padding: pagePadding,
@@ -26,9 +26,8 @@ class TaskDetailPage extends StatelessWidget {
                   builder: (context, state) {
                     return CustomInput(
                       inputMaxLines: 9,
-                      label: 'Task Detail',
-                      inputHintText:
-                          'For example, what supplies are needed, where to park or timing restrictions',
+                      label: trans(context)!.task_details,
+                      inputHintText: trans(context)!.for_example_what_supplies,
                       backgroundColor: Colors.white.withOpacity(0.7),
                       labelTextStyle: const TextStyle(
                         color: primaryColor,
@@ -71,7 +70,7 @@ class TaskDetailPage extends StatelessWidget {
                               color: secondaryColor,
                             )
                           : Text(
-                              'Next',
+                              trans(context)!.next,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14.sp,

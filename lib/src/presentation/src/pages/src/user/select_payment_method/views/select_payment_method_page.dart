@@ -12,8 +12,8 @@ class SelectPaymentMethodPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      appBar: const CustomAppBar(
-        title: "Select Payment Method",
+      appBar: CustomAppBar(
+        title: trans(context)!.select_payment_method,
       ),
       body: SingleChildScrollView(
         padding: pagePadding,
@@ -78,7 +78,7 @@ class SelectPaymentMethodPage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.0),
         child: IntrinsicHeight(
           child: SizedBox(
             width: 100.w,
@@ -87,7 +87,7 @@ class SelectPaymentMethodPage extends StatelessWidget {
                 Navigator.push(context, OrangeMtnMomoPaymentPage.route());
               },
               child: Text(
-                'Continue',
+                trans(context)!.continue_,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 14.sp,

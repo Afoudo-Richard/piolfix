@@ -44,9 +44,9 @@ class _TaskersListingState extends State<TaskersListing> {
   @override
   Widget build(BuildContext context) {
     return widget.taskers.isEmpty
-        ? const Center(
+        ? Center(
             child: FetchEmpty(
-              message: "No Tasker's found",
+              message: trans(context)!.no_tasker_found,
             ),
           )
         : ListView.separated(
