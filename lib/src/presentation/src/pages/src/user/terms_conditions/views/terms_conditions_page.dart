@@ -19,7 +19,12 @@ class TermsConditionsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Terms and conditions here'),
+            2.h.ph,
+            BlocBuilder<ConfigBloc, ConfigState>(
+              builder: (context, state) {
+                return Text(state.termsAndCondition);
+              },
+            ),
           ],
         ),
       ),

@@ -12,40 +12,38 @@ class WalkThroughPage extends StatelessWidget {
     return MaterialPageRoute<void>(builder: (_) => WalkThroughPage());
   }
 
-  final List<OnbordingData> list = [
-    onbordingDateWrapper(
-      image: SvgPicture.asset(
-        'assets/images/welcome.svg',
-        height: 30.h,
-        width: 30.w,
-      ),
-      title: "Welcome",
-      description:
-          "Come let's go into a new world of task outsourcing for you.",
-    ),
-    onbordingDateWrapper(
-      image: SvgPicture.asset(
-        'assets/images/workload_many.svg',
-        height: 30.h,
-        width: 30.w,
-      ),
-      title: "Too Much Task",
-      description:
-          "We know you might be too busy with a lot of task at hand. Let's help you outsource them.",
-    ),
-    onbordingDateWrapper(
-      image: SvgPicture.asset(
-        'assets/images/people_skills.svg',
-        height: 30.h,
-        width: 30.w,
-      ),
-      title: "OutSource",
-      description: "Find quality and skilled individuals to handle your task ",
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final List<OnbordingData> list = [
+      onbordingDateWrapper(
+        image: SvgPicture.asset(
+          'assets/images/welcome.svg',
+          height: 30.h,
+          width: 30.w,
+        ),
+        title: trans(context)!.welcome,
+        description:
+            "Come let's go into a new world of task outsourcing for you.",
+      ),
+      onbordingDateWrapper(
+        image: SvgPicture.asset(
+          'assets/images/workload_many.svg',
+          height: 30.h,
+          width: 30.w,
+        ),
+        title: trans(context)!.too_much_task,
+        description: trans(context)!.too_much_task_message,
+      ),
+      onbordingDateWrapper(
+        image: SvgPicture.asset(
+          'assets/images/people_skills.svg',
+          height: 30.h,
+          width: 30.w,
+        ),
+        title: trans(context)!.outsource,
+        description: trans(context)!.outsource_message,
+      ),
+    ];
     /* remove the back button in the AppBar is to set automaticallyImplyLeading to false
   here we need to pass the list and the route for the next page to be opened after this. */
     return IntroScreen(
@@ -93,8 +91,8 @@ class WalkThroughPage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "Get Started",
+              Text(
+                trans(context)!.get_started,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 14,
@@ -121,7 +119,7 @@ class WalkThroughPage extends StatelessWidget {
           // _showWelcomeMessage();
         },
         child: Text(
-          "Skip",
+          trans(context)!.skip,
           style: TextStyle(
             color: Color(0XFF7B7879),
             fontSize: 14,

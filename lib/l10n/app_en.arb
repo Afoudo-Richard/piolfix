@@ -105,7 +105,6 @@
     "select_year_of_manufacture": "Select the year of manufacture",
     "enter_vehicle_location": "Enter the vehicle location",
     "vehicle_summary": "Vehicle summary",
-    "proceed": "Proceed",
     "retry": "Retry",
     "no_favourite_added_yet": "No favorite has been added yet",
     "an_error_occured_while_trying": "An error occurred while trying to fetch data.",
@@ -116,8 +115,6 @@
     "vehicle_mileage": "Vehicle Mileage",
     "vehicle_description": "Vehicle Description",
     "vehicle_price": "Vehicle price",
-
-
     "clear_photos": "Clear photos",
     "admin": "Admin",
     "verify_ads": "Verify Adverts",
@@ -125,6 +122,22 @@
     "declined": "Declined",
     "closed": "Closed",
     "adverts" : "Adverts",
-    "my_adverts" : "My Adverts"
+    "my_adverts" : "My Adverts",
+
+    
+
+    "welcome": "Welcome",
+    "welcome_messsage": "Come let's go into a new world of task outsourcing for you.",
+    "too_much_task" : "Too much tasks?",
+    "too_much_task_message": "We know you might be too busy with a lot of task at hand. Let's help you outsource them.",
+    "outsource": "OutSource",
+    "outsource_message": "Find quality and skilled individuals to handle your task",
+    "get_started": "Get Started",
+    "skip": "Skip",
+    "select_language": "Select Language",
+    "proceed": "Proceed",
+    "welcome_back": "Welcome Back",
+    "sign_in_to_your_piolfix_account": "Sign in to your PiolFix account",
+    "new_to_piolfix": "New to PiolFix?"
  
 }

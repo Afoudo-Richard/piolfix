@@ -74,9 +74,15 @@ class ProfilePage extends StatelessWidget {
                           },
                         ),
                         authState.authenticated
-                            ? Icon(
-                                LineIcons.edit,
-                                color: primaryColor,
+                            ? GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context, EditPersonalInfoPage.route());
+                                },
+                                child: Icon(
+                                  LineIcons.edit,
+                                  color: primaryColor,
+                                ),
                               )
                             : const SizedBox.shrink(),
                       ],
@@ -89,46 +95,64 @@ class ProfilePage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   2.h.ph,
-                                  SectionGrouping(
-                                    title: 'PiolFixer',
-                                    children: [
-                                      ItemTile(
-                                          icon: LineIcons.accessibleIcon,
-                                          title: "Dashboard",
-                                          onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              ServiceProviderScreen.route(),
-                                            );
-                                            BlocProvider.of<
-                                                        AppBottomNavigationBarBloc>(
-                                                    context)
-                                                .add(
-                                                    AppBottomNavigationBarChanged(
-                                              activePage: const DashboardPage(),
-                                            ));
-                                          }),
-                                      ItemTile(
-                                        icon: LineIcons.bell,
-                                        title: "List Category",
-                                        onTap: () => Navigator.push(
-                                          context,
-                                          CategoryListPage.route(),
-                                        ),
-                                      ),
-                                      ItemTile(
-                                        icon: LineIcons.book,
-                                        title: "My Tasker Profile",
-                                        onTap: () => Navigator.push(
-                                          context,
-                                          TaskerProfileInfoPage.route(),
-                                        ),
-                                      ),
-                                    ],
+                                  BlocBuilder<UserBloc, UserState>(
+                                    builder: (context, state) {
+                                      return state.user!.isServiceProvider
+                                          ? SectionGrouping(
+                                              title: 'PiolFixer',
+                                              children: [
+                                                ItemTile(
+                                                    icon: LineIcons
+                                                        .accessibleIcon,
+                                                    title: "Dashboard",
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                        context,
+                                                        ServiceProviderScreen
+                                                            .route(),
+                                                      );
+                                                      BlocProvider.of<
+                                                                  AppBottomNavigationBarBloc>(
+                                                              context)
+                                                          .add(
+                                                              AppBottomNavigationBarChanged(
+                                                        activePage:
+                                                            const DashboardPage(),
+                                                      ));
+                                                    }),
+                                                ItemTile(
+                                                  icon: LineIcons.bell,
+                                                  title: "List Category",
+                                                  onTap: () => Navigator.push(
+                                                    context,
+                                                    CategoryListPage.route(),
+                                                  ),
+                                                ),
+                                                ItemTile(
+                                                  icon: LineIcons.book,
+                                                  title: "My Tasker Profile",
+                                                  onTap: () => Navigator.push(
+                                                    context,
+                                                    TaskerProfileInfoPage
+                                                        .route(),
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          : const SizedBox.shrink();
+                                    },
                                   ),
                                   SectionGrouping(
                                     title: 'Info',
                                     children: [
+                                      ItemTile(
+                                        icon: LineIcons.cog,
+                                        title: "Settings",
+                                        onTap: () {
+                                          Navigator.push(
+                                              context, SettingsPage.route());
+                                        },
+                                      ),
                                       ItemTile(
                                         icon: LineIcons.bell,
                                         title: "Notification",
@@ -145,14 +169,6 @@ class ProfilePage extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      ItemTile(
-                                        icon: LineIcons.cog,
-                                        title: "Settings",
-                                        onTap: () {
-                                          Navigator.push(
-                                              context, SettingsPage.route());
-                                        },
                                       ),
                                     ],
                                   ),
@@ -207,10 +223,10 @@ class ProfilePage extends StatelessWidget {
                       icon: LineIcons.alternateSignOut,
                       title: authState.authenticated ? "LogOut" : 'Sign In',
                       onTap: () {
-                        // BlocProvider.of<AuthenticationBloc>(context).add(
-                        //   const AuthenticationHasWalkedThroughChanged(
-                        //       hasWalkedThrough: false),
-                        // );
+                        BlocProvider.of<AuthenticationBloc>(context).add(
+                          const AuthenticationHasWalkedThroughChanged(
+                              hasWalkedThrough: false),
+                        );
                         BlocProvider.of<AuthenticationBloc>(context).add(
                           AuthenticationLogoutRequested(),
                         );

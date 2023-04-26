@@ -106,12 +106,16 @@ class TaskReviewPage extends StatelessWidget {
                 3.h.ph,
                 const SectionHeader(title: "Task Details"),
                 1.h.ph,
-                Text(
-                  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores dolore, ullam magni itaque adipisci quaerat quas possimus iusto accusamus? Quaerat doloremque repudiandae asperiores porro, esse deserunt est rerum iste, nihil perspiciatis ',
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    letterSpacing: 1.5,
-                  ),
+                BlocBuilder<SelectTaskBloc, SelectTaskState>(
+                  builder: (context, state) {
+                    return Text(
+                      state.taskDetails.value,
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        letterSpacing: 1.5,
+                      ),
+                    );
+                  },
                 ),
                 3.h.ph,
                 SectionHeader(

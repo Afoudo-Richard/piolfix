@@ -20,7 +20,12 @@ class PrivacyPolicyPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('privacy policy here'),
+            2.h.ph,
+            BlocBuilder<ConfigBloc, ConfigState>(
+              builder: (context, state) {
+                return Text(state.privacyPolicy);
+              },
+            ),
           ],
         ),
       ),

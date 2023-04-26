@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:poilfix/src/data/data.dart';
 
 part 'authentication_event.dart';
@@ -70,6 +71,11 @@ class AuthenticationBloc
       authenticated: false,
       isSignedInAnonymous: false,
     ));
+    final user = await ParseUser.currentUser();
+    var response = await user.logout();
+    if (response.success) {
+      print('User logout');
+    }
   }
 
   void _onAuthenticationChecker(

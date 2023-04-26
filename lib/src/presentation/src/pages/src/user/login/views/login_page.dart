@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                             children: [
                               1.h.ph,
                               Text(
-                                'Welcome Back To',
+                                trans(context)!.welcome_back,
                                 style: TextStyle(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.bold,
@@ -101,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               2.h.ph,
                               Text(
-                                'Sign in to your PiolFix account',
+                                trans(context)!.sign_in_to_your_piolfix_account,
                                 style: TextStyle(
                                   fontSize: 12.sp,
                                   color: Colors.white,
@@ -209,7 +209,7 @@ class _LoginPageState extends State<LoginPage> {
                                   backgroundColor: Colors.white,
                                   border: const BorderSide(color: primaryColor),
                                   child: Text(
-                                    'Browse incognito',
+                                    trans(context)!.continue_anonymously,
                                     style: TextStyle(
                                       color: primaryColor,
                                       fontSize: 12.sp,
@@ -225,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               5.h.ph,
                               ListRowText(
-                                leadingText: 'New to PiolFix?',
+                                leadingText: trans(context)!.new_to_piolfix,
                                 trailingText: " " + trans(context)!.sign_up,
                                 onTapTrailingText: () {
                                   Navigator.pushReplacement(

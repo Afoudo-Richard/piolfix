@@ -1,0 +1,2 @@
+- Change the fetchLimit in app_config.dart file to something ok
+- remove unneccery assets files (images, fonts)

@@ -22,6 +22,13 @@ class App extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
+          BlocProvider(
+            create: (context) => ConfigBloc()
+              ..add(
+                ConfigFetched(),
+              ),
+            lazy: false,
+          ),
           BlocProvider(create: (context) => SettingsBloc()),
           BlocProvider(create: (context) => FavouriteBloc()),
           BlocProvider(create: (context) => AuthenticationBloc()),
@@ -36,6 +43,9 @@ class App extends StatelessWidget {
               create: (context) => TaskerListBloc()..add(TaskerListFetched())),
           BlocProvider(
               create: (context) => TaskerProfileInfoBloc(
+                  userBloc: BlocProvider.of<UserBloc>(context))),
+          BlocProvider(
+              create: (context) => UserProfileBloc(
                   userBloc: BlocProvider.of<UserBloc>(context))),
           BlocProvider(
             create: (context) => CategoryListBloc()..add(CategoryListFetched()),

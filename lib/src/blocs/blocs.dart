@@ -13,3 +13,5 @@ export './src/mobile_money/bloc/mobile_money_bloc.dart';
 export './src/review/bloc/review_bloc.dart';
 export './src/tasker_profile/bloc/tasker_profile_bloc.dart';
 export './src/favorite/bloc/favourite_bloc.dart';
+export './src/config/bloc/config_bloc.dart';
+export './src/user_profile/bloc/user_profile_bloc.dart';

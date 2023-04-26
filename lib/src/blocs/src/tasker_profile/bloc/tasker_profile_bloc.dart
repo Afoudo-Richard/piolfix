@@ -66,10 +66,12 @@ class TaskerProfileBloc extends Bloc<TaskerProfileEvent, TaskerProfileState> {
             reviewStatus: ReviewStatus.refresh,
           ));
         }
+        final reviewsCount = await _reviewCount();
         final reviews = await _fetchReviews();
 
         return emit(state.copyWith(
           reviewStatus: ReviewStatus.success,
+          totalReviews: reviewsCount,
           reviews: reviews,
           reviewHasReachedMax:
               reviews.length < AppConfigs.fetchLimit ? true : false,
@@ -94,16 +96,31 @@ class TaskerProfileBloc extends Bloc<TaskerProfileEvent, TaskerProfileState> {
     }
   }
 
-  // Future<User> _fetchTasker() async {
-  //   QueryBuilder<User> query = QueryBuilder(User());
-  //   query.whereEqualTo('objectId', tasker.objectId);
-  //   return query.find();
-  // }
+  Future<User?> _fetchTasker() async {
+    QueryBuilder<User> query = QueryBuilder(User());
+    query.whereRelatedTo('reviews', 'Reviews', tasker.objectId as String);
+    // query.whereEqualTo('objectId', tasker.objectId);
+    return query.first();
+  }
+
+  Future<int> _reviewCount() async {
+    QueryBuilder<ReviewModel> query = QueryBuilder(ReviewModel())
+      ..whereEqualTo('tasker', tasker);
+    var apiResponse = await query.count();
+    if (apiResponse.success && apiResponse.result != null) {
+      int countGames = apiResponse.count;
+      return apiResponse.count;
+    }
+    return 0;
+  }
 
   Future<List<ReviewModel>> _fetchReviews({
     int startIndex = 0,
     int limit = AppConfigs.fetchLimit,
   }) async {
+    // final taskerResponse = await _fetchTasker();
+    // print("================> Tasker <===========");
+    // print(tasker);
     QueryBuilder<ReviewModel> query = QueryBuilder(ReviewModel())
       ..setAmountToSkip(startIndex)
       ..includeObject([
@@ -112,6 +129,16 @@ class TaskerProfileBloc extends Bloc<TaskerProfileEvent, TaskerProfileState> {
       ..whereEqualTo('tasker', tasker)
       ..orderByDescending('createdAt')
       ..setLimit(limit);
+
+    // QueryBuilder<User> query = QueryBuilder<User>(User())
+    //   ..includeObject([
+    //     'user',
+    //   ])
+    //   ..orderByDescending('createdAt')
+    //   ..setLimit(limit)
+    //   ..whereRelatedTo('tasker', '_User', tasker.objectId as String);
+
+    // print(query.find());
 
     return query.find();
   }

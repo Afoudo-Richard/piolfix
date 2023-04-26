@@ -72,24 +72,39 @@ class _AllReviewsState extends State<AllReviews> {
                   case ReviewStatus.refresh:
                     return LoadingIndicator();
                   case ReviewStatus.success:
-                    return Padding(
-                      padding: pagePadding,
-                      child: ListView.separated(
-                        controller: _scrollController,
-                        itemBuilder: (context, index) {
-                          return index >= state.reviews.length
-                              ? LoadingIndicator()
-                              : IndividualReview(
-                                  review: state.reviews[index],
-                                );
-                        },
-                        separatorBuilder: (context, index) {
-                          return 3.h.ph;
-                        },
-                        itemCount: state.reviewHasReachedMax
-                            ? state.reviews.length
-                            : state.reviews.length + 1,
-                      ),
+                    return Column(
+                      children: [
+                        Expanded(
+                          child: ListView.separated(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: paddingSize,
+                              vertical: 2.h,
+                            ),
+                            controller: _scrollController,
+                            itemBuilder: (context, index) {
+                              return index >= state.reviews.length
+                                  ? LoadingIndicator()
+                                  : IndividualReview(
+                                      review: state.reviews[index],
+                                    );
+                            },
+                            separatorBuilder: (context, index) {
+                              return 3.h.ph;
+                            },
+                            itemCount: state.reviewHasReachedMax
+                                ? state.reviews.length
+                                : state.reviews.length + 1,
+                          ),
+                        ),
+                        state.reviewHasReachedMax
+                            ? Column(
+                                children: [
+                                  2.h.ph,
+                                  Text("The end"),
+                                ],
+                              )
+                            : const SizedBox.shrink(),
+                      ],
                     );
                   case ReviewStatus.failure:
                     return FetchError(

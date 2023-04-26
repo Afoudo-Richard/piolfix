@@ -23,6 +23,7 @@ export './src/user/select_language/select_language.dart';
 export './src/user/privacy_policy/privacy_policy.dart';
 export './src/user/terms_conditions/terms_conditions.dart';
 export './src/user/contact_us/contact_us.dart';
+export './src/user/edit_personal_info/edit_personal_info.dart';
 
 // ==========================> Service Providers <====================== //
 

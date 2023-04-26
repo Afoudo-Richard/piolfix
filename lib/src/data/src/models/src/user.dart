@@ -37,6 +37,9 @@ class User extends ParseUser with EquatableMixin implements ParseCloneable {
   bool get isAdmin => get<bool?>('is_admin') ?? false;
   set isAdmin(bool value) => set<bool?>('is_admin', value);
 
+  bool get isServiceProvider => get<bool?>('is_service_provider') ?? false;
+  set isServiceProvider(bool value) => set<bool?>('is_service_provider', value);
+
   List<dynamic>? get devices => get('devices');
   set devices(List<dynamic>? value) => set('devices', value);
 
@@ -71,6 +74,7 @@ class User extends ParseUser with EquatableMixin implements ParseCloneable {
         phone,
         gender,
         isAdmin,
+        isServiceProvider,
         devices,
         profileImageUrl,
         tools,
@@ -90,6 +94,7 @@ class User extends ParseUser with EquatableMixin implements ParseCloneable {
       'gender': gender,
       'sessionToken': sessionToken,
       'isAdmin': isAdmin,
+      'isServiceProvider': isServiceProvider,
       'devices': devices,
       'profileImageUrl': profileImageUrl,
       'tools': tools,
@@ -111,6 +116,7 @@ class User extends ParseUser with EquatableMixin implements ParseCloneable {
       ..sessionToken =
           map['sessionToken'] != null ? map['sessionToken'] as String : null
       ..isAdmin = map['isAdmin'] as bool
+      ..isServiceProvider = map['isServiceProvider'] as bool
       ..devices =
           map['devices'] != null ? map['devices'] as List<dynamic> : null
       ..profileImageUrl = map['profileImageUrl'] != null

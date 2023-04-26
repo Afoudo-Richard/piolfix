@@ -7,6 +7,7 @@ import 'package:shimmer/shimmer.dart';
 class TaskersListing extends StatefulWidget {
   const TaskersListing({
     super.key,
+    this.showSelect = false,
     this.isScrollable = false,
     this.minItems = 8,
     required this.taskers,
@@ -17,6 +18,7 @@ class TaskersListing extends StatefulWidget {
     this.showVehicleItemActivationStatusBar = false,
   });
 
+  final bool showSelect;
   final bool isScrollable;
   final int minItems;
   final List<User> taskers;
@@ -51,7 +53,9 @@ class _TaskersListingState extends State<TaskersListing> {
             padding: widget.padding,
             itemBuilder: (context, index) {
               final user = widget.taskers[index];
+
               final taskerItem = TaskerItem(
+                showSelect: widget.showSelect,
                 user: user,
               );
               return widget.isScrollable

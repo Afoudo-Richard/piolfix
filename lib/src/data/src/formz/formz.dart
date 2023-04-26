@@ -13,3 +13,4 @@ export './src/tasker_skill.dart';
 export './src/tasker_tools.dart';
 export './src/review.dart';
 export './src/rating.dart';
+export './src/task_details.dart';

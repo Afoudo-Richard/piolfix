@@ -5,17 +5,24 @@ import 'package:poilfix/poilfix.dart';
 
 class TaskerItem extends StatelessWidget {
   final User user;
+  final bool showSelect;
 
   const TaskerItem({
     super.key,
     required this.user,
+    this.showSelect = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, TaskerProfilePage.route(user));
+        Navigator.push(
+            context,
+            TaskerProfilePage.route(
+              showSelect: showSelect,
+              user,
+            ));
       },
       child: BlocBuilder<SettingsBloc, SettingsState>(
         builder: (context, settingState) {

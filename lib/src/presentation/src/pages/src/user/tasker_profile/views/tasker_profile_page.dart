@@ -4,12 +4,18 @@ import 'package:poilfix/poilfix.dart';
 
 class TaskerProfilePage extends StatelessWidget {
   final User user;
-  const TaskerProfilePage({super.key, required this.user});
+  final bool showSelect;
+  const TaskerProfilePage({
+    super.key,
+    required this.user,
+    this.showSelect = false,
+  });
 
-  static Route route(User user) {
+  static Route route(User user, {bool showSelect = false}) {
     return MaterialPageRoute<void>(
         builder: (_) => TaskerProfilePage(
               user: user,
+              showSelect: showSelect,
             ));
   }
 
@@ -75,25 +81,30 @@ class TaskerProfilePage extends StatelessWidget {
                               ],
                             ),
                             1.h.ph,
-                            Row(
-                              children: [
-                                Icon(
-                                  LineIcons.star,
-                                  color: Colors.orange,
-                                  size: 10.sp,
-                                ),
-                                2.w.pw,
-                                Text(
-                                  '5.0 (11 Reviews)',
-                                  style: TextStyle(
-                                    fontSize: 10.sp,
-                                    color: settingsState.isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                  ),
-                                ),
-                              ],
-                            ),
+                            // Row(
+                            //   children: [
+                            //     Icon(
+                            //       LineIcons.star,
+                            //       color: Colors.orange,
+                            //       size: 10.sp,
+                            //     ),
+                            //     2.w.pw,
+                            //     BlocBuilder<TaskerProfileBloc,
+                            //         TaskerProfileState>(
+                            //       builder: (context, state) {
+                            //         return Text(
+                            //           '5.0 (${state.reviewStatus == ReviewStatus.loading || state.reviewStatus == ReviewStatus.initial || state.reviewStatus == ReviewStatus.refresh ? '--' : state.totalReviews} Reviews)',
+                            //           style: TextStyle(
+                            //             fontSize: 10.sp,
+                            //             color: settingsState.isDarkMode
+                            //                 ? Colors.white
+                            //                 : Colors.black,
+                            //           ),
+                            //         );
+                            //       },
+                            //     ),
+                            //   ],
+                            // ),
                           ],
                         ),
                       )
@@ -136,7 +147,7 @@ class TaskerProfilePage extends StatelessWidget {
                 return authState.authenticated
                     ? BlocBuilder<SelectTaskBloc, SelectTaskState>(
                         builder: (context, state) {
-                          return state.service != null
+                          return state.service != null && showSelect
                               ? Container(
                                   decoration: BoxDecoration(
                                     boxShadow: [
@@ -299,14 +310,18 @@ class UserReviews extends StatelessWidget {
                             size: 10.sp,
                           ),
                           2.w.pw,
-                          Text(
-                            '5.0 (11 Reviews)',
-                            style: TextStyle(
-                              fontSize: 10.sp,
-                              color: settingsState.isDarkMode
-                                  ? Colors.white
-                                  : Colors.black,
-                            ),
+                          BlocBuilder<TaskerProfileBloc, TaskerProfileState>(
+                            builder: (context, state) {
+                              return Text(
+                                '5.0 (${state.reviewStatus == ReviewStatus.loading || state.reviewStatus == ReviewStatus.initial || state.reviewStatus == ReviewStatus.refresh ? '--' : state.totalReviews} Reviews)',
+                                style: TextStyle(
+                                  fontSize: 10.sp,
+                                  color: settingsState.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                              );
+                            },
                           ),
                         ],
                       )

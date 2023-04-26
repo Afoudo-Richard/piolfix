@@ -22,16 +22,26 @@ class TaskDetailPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 2.h.ph,
-                CustomInput(
-                  inputMaxLines: 9,
-                  label: 'Task Detail',
-                  inputHintText:
-                      'For example, what supplies are needed, where to park or timing restrictions',
-                  backgroundColor: Colors.white.withOpacity(0.7),
-                  labelTextStyle: const TextStyle(
-                    color: primaryColor,
-                  ),
-                  onChanged: (value) {},
+                BlocBuilder<SelectTaskBloc, SelectTaskState>(
+                  builder: (context, state) {
+                    return CustomInput(
+                      inputMaxLines: 9,
+                      label: 'Task Detail',
+                      inputHintText:
+                          'For example, what supplies are needed, where to park or timing restrictions',
+                      backgroundColor: Colors.white.withOpacity(0.7),
+                      labelTextStyle: const TextStyle(
+                        color: primaryColor,
+                      ),
+                      onChanged: (value) {
+                        BlocProvider.of<SelectTaskBloc>(context)
+                            .add(SelectTaskTaskDetailsChanged(value));
+                      },
+                      inputErrorText: state.taskDetails.invalid
+                          ? state.taskDetails.error
+                          : null,
+                    );
+                  },
                 ),
               ],
             ),
@@ -41,18 +51,35 @@ class TaskDetailPage extends StatelessWidget {
             child: IntrinsicHeight(
               child: SizedBox(
                 width: 100.w,
-                child: CustomButton(
-                  onPressed: () {
-                    Navigator.push(context, TaskReviewPage.route());
+                child: BlocBuilder<SelectTaskBloc, SelectTaskState>(
+                  builder: (context, state) {
+                    return CustomButton(
+                      // backgroundColor: state.formStatus.isSubmissionInProgress
+                      //       ? Colors.grey
+                      //       : null,
+                      onPressed: () {
+                        state.formStatus.isValidated
+                            ? state.formStatus.isSubmissionInProgress
+                                ? null
+                                : Navigator.push(
+                                    context, TaskReviewPage.route())
+                            : BlocProvider.of<SelectTaskBloc>(context)
+                                .add(SelectTaskTaskDetailsInputsChecked());
+                      },
+                      child: state.formStatus.isSubmissionInProgress
+                          ? LoadingIndicator(
+                              color: secondaryColor,
+                            )
+                          : Text(
+                              'Next',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14.sp,
+                                letterSpacing: 1.5,
+                              ),
+                            ),
+                    );
                   },
-                  child: Text(
-                    'Review Task',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14.sp,
-                      letterSpacing: 1.5,
-                    ),
-                  ),
                 ),
               ),
             ),

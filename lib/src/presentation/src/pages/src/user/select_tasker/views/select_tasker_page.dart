@@ -69,6 +69,7 @@ class SelectTaskerPage extends StatelessWidget {
                       );
                     case TaskerListStatus.success:
                       return TaskersListing(
+                        showSelect: true,
                         padding: EdgeInsets.symmetric(
                             horizontal: 5.sp, vertical: paddingSize),
                         isScrollable: true,

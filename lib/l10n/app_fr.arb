@@ -107,5 +107,9 @@
     "vehicle_location": "Emplacement du véhicule",
     "vehicle_mileage": "Kilométrage du véhicule",
     "vehicle_description": "Description du véhicule",
-    "vehicle_price": "Prix ​​du véhicule"
+    "vehicle_price": "Prix ​​du véhicule",
+
+
+    "welcome": "Bienvenu",
+    "welcome_messsage": "Venez entrer dans un nouveau monde d'externalisation de tâches pour vous."
 }

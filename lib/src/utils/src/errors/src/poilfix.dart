@@ -108,3 +108,13 @@ class ErrorAddingReview extends PoilfixApiError {
           errors: errors,
         );
 }
+
+class ErrorFetchingAppConfig extends PoilfixApiError {
+  ErrorFetchingAppConfig({
+    String? message,
+    Map<String, dynamic>? errors,
+  }) : super(
+          message: message,
+          errors: errors,
+        );
+}

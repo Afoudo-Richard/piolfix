@@ -12,7 +12,7 @@ class SelectLanguagePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: "Select language",
+        title: trans(context)!.select_language,
       ),
       body: SingleChildScrollView(
         padding: pagePadding,
@@ -27,7 +27,7 @@ class SelectLanguagePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Select language",
+                        trans(context)!.select_language,
                         style: TextStyle(
                           fontSize: 14.sp,
                         ),
@@ -82,7 +82,7 @@ class SelectLanguagePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Proceed',
+                        trans(context)!.proceed,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 14.sp,
