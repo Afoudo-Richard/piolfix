@@ -52,31 +52,37 @@ class SelectTaskerPage extends StatelessWidget {
             ),
             2.h.ph,
             Expanded(
-              child: BlocBuilder<TaskerListBloc, TaskerListState>(
+              child: BlocBuilder<SelectTaskBloc, SelectTaskState>(
                 builder: (context, state) {
-                  switch (state.taskerListStatus) {
-                    case TaskerListStatus.initial:
-                    case TaskerListStatus.refresh:
-                      return const TaskersLoading();
+                  switch (state.searchFilterStatus) {
+                    case SearchFilterStatus.initial:
+                    case SearchFilterStatus.refresh:
+                    case SearchFilterStatus.loading:
+                      return Padding(
+                        padding: pagePadding,
+                        child: const TaskersLoading(),
+                      );
 
-                    case TaskerListStatus.failure:
+                    case SearchFilterStatus.failure:
                       return FetchError(
                         onPressedTryAgain: () {
-                          BlocProvider.of<TaskerListBloc>(context).add(
-                            TaskerListFetched(refresh: true),
+                          BlocProvider.of<SelectTaskBloc>(context).add(
+                            const SearchFilterSubmitted(refresh: true),
                           );
                         },
                       );
-                    case TaskerListStatus.success:
+                    case SearchFilterStatus.success:
                       return TaskersListing(
                         showSelect: true,
                         padding: EdgeInsets.symmetric(
-                            horizontal: 5.sp, vertical: paddingSize),
+                          horizontal: 5.sp,
+                          vertical: paddingSize,
+                        ),
                         isScrollable: true,
                         taskers: state.taskers,
                         onScroll: () {
-                          BlocProvider.of<TaskerListBloc>(context)
-                              .add(TaskerListFetched());
+                          BlocProvider.of<SelectTaskBloc>(context)
+                              .add(const SearchFilterSubmitted());
                         },
                         hasReachedMax: state.hasReachedMax,
                       );
