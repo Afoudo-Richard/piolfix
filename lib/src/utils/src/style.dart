@@ -1,7 +1,7 @@
 import 'package:poilfix/poilfix.dart';
 import 'package:flutter/material.dart';
 
-const Color primaryColor = Color(0xFFCA3130);
+const Color primaryColor = Color(0xFF145D2F);
 const Color secondaryColor = Color(0xFF003048);
 const Color contentBackgroundColor = Color(0XFFE5E5E5);
 const Color darkColor = Color(0XFF171717);

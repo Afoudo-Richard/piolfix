@@ -1,37 +1,45 @@
 {
   "project_info": {
-    "project_number": "113094693277",
-    "project_id": "piolfix",
-    "storage_bucket": "piolfix.appspot.com"
+    "project_number": "592632828821",
+    "project_id": "piolfix-123",
+    "storage_bucket": "piolfix-123.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:113094693277:android:b37d9adaf78c3163369f74",
+        "mobilesdk_app_id": "1:592632828821:android:975e485d426ed4b7475c9c",
         "android_client_info": {
           "package_name": "com.example.piolfix"
         }
       },
       "oauth_client": [
         {
-          "client_id": "113094693277-sqp895qbn0gan9mvb4vuc6ofo0jsn5pd.apps.googleusercontent.com",
+          "client_id": "592632828821-cpe6hk205n15mt1dvlrva9sttno1vs1p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.piolfix",
+            "certificate_hash": "e3ea071b9f53d3fa8b970ee2c73e8baffcc6ed18"
+          }
+        },
+        {
+          "client_id": "592632828821-lfuh3clupickd5avjjd381po17dp5c39.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCo6gobP0NzpdalXOfqWAIM0yW8qBI0o5g"
+          "current_key": "AIzaSyDPbuVMvAEdw7XyKCqMwtFD3RiALjHHHr0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "113094693277-sqp895qbn0gan9mvb4vuc6ofo0jsn5pd.apps.googleusercontent.com",
+              "client_id": "592632828821-g6eeeud9f2jtf2095a5dfeuioqe9kosj.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "113094693277-tnkdu415pljj0f16cu1cpbvfki88avj4.apps.googleusercontent.com",
+              "client_id": "592632828821-es56flgdpgme1g4ucmm5upedep7t7jhd.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.example.piolfix"

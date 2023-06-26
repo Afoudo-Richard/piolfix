@@ -105,7 +105,7 @@ class CustomInput extends StatelessWidget {
                         : primaryColor.withOpacity(0.5)),
             borderRadius: borderRadius ??
                 const BorderRadius.all(
-                  Radius.circular(20),
+                  Radius.circular(10),
                 ),
           ),
           child: Row(

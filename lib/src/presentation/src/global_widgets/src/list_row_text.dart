@@ -24,7 +24,7 @@ class ListRowText extends StatelessWidget {
                 style: TextStyle(
                   fontSize:
                       SizerUtil.deviceType == DeviceType.mobile ? 12.sp : 6.sp,
-                  color: Colors.white,
+                  color: Colors.grey,
                 ),
               )
             : const SizedBox.shrink(),

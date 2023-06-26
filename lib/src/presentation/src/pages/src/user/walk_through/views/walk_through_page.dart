@@ -16,29 +16,26 @@ class WalkThroughPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<OnbordingData> list = [
       onbordingDateWrapper(
-        image: SvgPicture.asset(
-          'assets/images/welcome.svg',
-          height: 30.h,
-          width: 30.w,
+        image: Image.asset(
+          "assets/images/welcome_2.png",
+          width: 50.w,
         ),
         title: trans(context)!.welcome,
         description:
             "Come let's go into a new world of task outsourcing for you.",
       ),
       onbordingDateWrapper(
-        image: SvgPicture.asset(
-          'assets/images/workload_many.svg',
-          height: 30.h,
-          width: 30.w,
+        image: Image.asset(
+          "assets/images/welcome_3.png",
+          width: 50.w,
         ),
         title: trans(context)!.too_much_task,
         description: trans(context)!.too_much_task_message,
       ),
       onbordingDateWrapper(
-        image: SvgPicture.asset(
-          'assets/images/people_skills.svg',
-          height: 30.h,
-          width: 30.w,
+        image: Image.asset(
+          "assets/images/welcome_4.png",
+          width: 50.w,
         ),
         title: trans(context)!.outsource,
         description: trans(context)!.outsource_message,
@@ -152,7 +149,7 @@ OnbordingData onbordingDateWrapper({
     image: image,
     titleText: SizedBox(
       width: 70.sp,
-      child: Image.asset("assets/images/logo_trans.png"),
+      child: Image.asset("assets/images/logo1_trans.png"),
     ),
     descText: Column(
       children: [

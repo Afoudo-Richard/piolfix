@@ -37,6 +37,7 @@ dependencies:
   flutter_svg: ^1.1.4
   flutter_map: ^3.1.0
   google_fonts: ^4.0.3
+  google_sign_in: ^6.1.4
   
 
 dev_dependencies:
@@ -59,13 +60,13 @@ flutter:
 
 flutter_icons:
   android: "ic_launcher"
-  adaptive_icon_background: "assets/images/logo.png"
+  adaptive_icon_background: "assets/images/piolfix_app_icon_trans.png"
   ios: true
-  image_path: "assets/images/logo.png"
+  image_path: "assets/images/piolfix_app_icon_trans.png"
 # command : flutter pub run flutter_launcher_icons
 
 flutter_native_splash:
   color: "#ffffff"
-  image: "assets/images/logo.png"
+  image: "assets/images/piolfix_logo_text.png"
 
 # command : flutter pub run flutter_native_splash:create

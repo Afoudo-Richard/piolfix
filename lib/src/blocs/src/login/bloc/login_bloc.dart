@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:poilfix/poilfix.dart';
 // import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
@@ -15,6 +16,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginEmailChanged>(_onEmailChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
     on<SubmitLoginInputsChecked>(_onSubmitLoginInputsChecked);
+    on<LoginWithGoogle>(_onLoginWithGoogle);
+
     on<LoginSubmitted>(_onSubmitted);
   }
 
@@ -109,6 +112,57 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
+  void _onLoginWithGoogle(
+    LoginWithGoogle event,
+    Emitter<LoginState> emit,
+  ) async {
+    emit(state.copyWith(status: FormzStatus.submissionInProgress));
+    try {
+      await _loginWithGoogle();
+
+      User user = await ParseUser.currentUser();
+
+      print(user);
+
+      final fcmToken = await FirebaseMessaging.instance.getToken();
+
+      if (user.devices!
+              .where((element) => element == fcmToken)
+              .toList()
+              .isEmpty &&
+          fcmToken != null &&
+          user.devices != null) {
+        /// Device is empty create a new remote device
+
+        final deviceName = await DeviceHelper.platformName();
+        String firebaseCMToken = fcmToken;
+
+        /// update user devices with new device
+        // user.("devices", [firebaseCMToken]);
+        user.devices = List.of(user.devices!)..add(firebaseCMToken);
+        final userUpdateResponse = await user.save();
+        print(userUpdateResponse);
+      }
+
+      authenticationBloc.add(
+        const AuthenticationChanged(
+          authenticated: true,
+        ),
+      );
+      userBloc.add(UserChanged(user: user));
+
+      emit(state.copyWith(status: FormzStatus.submissionSuccess));
+    } on ErrorLoggingIn catch (e) {
+      emit(state.copyWith(
+          errorMessage: e.getErrorsAsString ?? e.message,
+          status: FormzStatus.submissionFailure));
+    } catch (e) {
+      emit(state.copyWith(
+        status: FormzStatus.submissionFailure,
+      ));
+    }
+  }
+
   Future _login({
     required String email,
     required String password,
@@ -128,5 +182,29 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             : response.error?.message,
       );
     }
+  }
+
+  Future _loginWithGoogle() async {
+    final GoogleSignIn googleSignIn = GoogleSignIn(scopes: [
+      'email',
+      // 'https://www.googleapis.com/auth/contacts.readonly',
+    ]);
+
+    GoogleSignInAccount? account = await googleSignIn.signIn();
+
+    GoogleSignInAuthentication authentication = await account!.authentication;
+
+    // final credential = GoogleSign
+
+    final user = await ParseUser.loginWith(
+      'google',
+      google(
+        authentication.accessToken!,
+        googleSignIn.currentUser!.id,
+        authentication.idToken!,
+      ),
+    );
+
+    print(user);
   }
 }

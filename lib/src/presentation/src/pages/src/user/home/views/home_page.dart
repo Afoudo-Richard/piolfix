@@ -17,47 +17,75 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      body: RefreshIndicator(
-        color: primaryColor,
-        onRefresh: () => Future.sync(() {
-          BlocProvider.of<CategoryListBloc>(context)
-              .add(CategoryListFetched(refresh: true));
-
-          BlocProvider.of<TaskerListBloc>(context)
-              .add(TaskerListFetched(refresh: true));
-        }),
-        child: SingleChildScrollView(
-          padding: pagePadding,
-          child: Column(
-            children: [
-              4.h.ph,
-              const UserLocation(),
-              const Divider(),
-              const UpdateUserProfile(),
-              const HomeSearchInput(),
-              2.h.ph,
-              const TrendingProjects(),
-              // 5.h.ph,
-              // const InfoCard(),
-              3.h.ph,
-              const PopularTaskers(),
-              // 2.h.ph,
-              // ItemTile(
-              //   icon: LineIcons.alternateSignOut,
-              //   title: "LogOut",
-              //   onTap: () {
-              //     BlocProvider.of<AuthenticationBloc>(context).add(
-              //       AuthenticationLogoutRequested(),
-              //     );
-              //   },
-              // ),
-              5.h.ph,
-            ],
-          ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            BlocBuilder<AuthenticationBloc, AuthenticationState>(
+              builder: (context, authState) {
+                return ItemTile(
+                  icon: LineIcons.alternateSignOut,
+                  title: authState.authenticated
+                      ? trans(context)!.logout
+                      : trans(context)!.login,
+                  onTap: () {
+                    BlocProvider.of<AuthenticationBloc>(context).add(
+                      const AuthenticationHasWalkedThroughChanged(
+                          hasWalkedThrough: false),
+                    );
+                    BlocProvider.of<AuthenticationBloc>(context).add(
+                      AuthenticationLogoutRequested(),
+                    );
+                  },
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
   }
+  //   return CustomScaffold(
+  //     body: RefreshIndicator(
+  //       color: primaryColor,
+  //       onRefresh: () => Future.sync(() {
+  //         BlocProvider.of<CategoryListBloc>(context)
+  //             .add(CategoryListFetched(refresh: true));
+
+  //         BlocProvider.of<TaskerListBloc>(context)
+  //             .add(TaskerListFetched(refresh: true));
+  //       }),
+  //       child: SingleChildScrollView(
+  //         padding: pagePadding,
+  //         child: Column(
+  //           children: [
+  //             4.h.ph,
+  //             const UserLocation(),
+  //             const Divider(),
+  //             const UpdateUserProfile(),
+  //             const HomeSearchInput(),
+  //             2.h.ph,
+  //             const TrendingProjects(),
+  //             // 5.h.ph,
+  //             // const InfoCard(),
+  //             3.h.ph,
+  //             const PopularTaskers(),
+  //             // 2.h.ph,
+  //             // ItemTile(
+  //             //   icon: LineIcons.alternateSignOut,
+  //             //   title: "LogOut",
+  //             //   onTap: () {
+  //             //     BlocProvider.of<AuthenticationBloc>(context).add(
+  //             //       AuthenticationLogoutRequested(),
+  //             //     );
+  //             //   },
+  //             // ),
+  //             5.h.ph,
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }
 
 class InfoCard extends StatelessWidget {
@@ -215,8 +243,8 @@ class TrendingProjects extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   crossAxisCount: 3,
-                  mainAxisSpacing: 15.sp,
-                  crossAxisSpacing: 10.sp,
+                  mainAxisSpacing: 20.sp,
+                  crossAxisSpacing: 35.sp,
                   itemCount:
                       state.categories.length < 6 ? state.categories.length : 6,
                   itemBuilder: (BuildContext context, int index) {

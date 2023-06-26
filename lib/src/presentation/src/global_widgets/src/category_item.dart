@@ -21,22 +21,24 @@ class CategoryItem extends StatelessWidget {
         );
       },
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           IntrinsicWidth(
             child: CustomContainer(
               padding: EdgeInsets.zero,
               boxShadow: [],
-              height: 15.h,
               width: 100.w,
-              child: CachedNetworkImage(
-                fit: BoxFit.cover,
-                placeholder: (context, url) => Center(
-                  child: LoadingIndicator(),
+              // height: 100.sp,
+              child: SizedBox(
+                child: CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => Center(
+                    child: LoadingIndicator(),
+                  ),
+                  imageUrl: category.imageThumbnailUrl != null
+                      ? category.imageThumbnailUrl!
+                      : "https://ui-avatars.com/api/?name=P+F",
                 ),
-                imageUrl: category.imageThumbnailUrl != null
-                    ? category.imageThumbnailUrl!
-                    : "https://ui-avatars.com/api/?name=P+F",
               ),
             ),
           ),

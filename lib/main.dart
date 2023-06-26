@@ -20,6 +20,7 @@ void main() async {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
     await Firebase.initializeApp(
+      name: "PiolFix",
       options: DefaultFirebaseOptions.currentPlatform,
     );
     requestForNotificationPermission();
@@ -85,15 +86,7 @@ void startLiveQuery() async {
 
   Subscription subscription = await liveQuery.client.subscribe(query);
 
-  subscription.on(LiveQueryEvent.create, (value) {
-    // print('*** CREATE ***: ${DateTime.now().toString()}\n $value ');
-    // print((value as ParseObject).objectId);
-    // print((value as ParseObject).updatedAt);
-    // print((value as ParseObject).createdAt);
-    // print((value as ParseObject).get('objectId'));
-    // print((value as ParseObject).get('updatedAt'));
-    // print((value as ParseObject).get('createdAt'));
-  });
+  subscription.on(LiveQueryEvent.create, (value) {});
 
   subscription.on(LiveQueryEvent.update, (value) {
     LiveQueryStreams.userUpdateStream.sink.add(value as User);
@@ -115,8 +108,9 @@ void initializeAwesomeNotification() {
     // Channel groups are only visual and are not required
     channelGroups: [
       NotificationChannelGroup(
-          channelGroupKey: 'basic_channel_group',
-          channelGroupName: 'Basic group')
+        channelGroupKey: 'basic_channel_group',
+        channelGroupName: 'Basic group',
+      ),
     ],
     debug: true,
   );

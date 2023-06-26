@@ -50,20 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCo6gobP0NzpdalXOfqWAIM0yW8qBI0o5g',
-    appId: '1:113094693277:android:b37d9adaf78c3163369f74',
-    messagingSenderId: '113094693277',
-    projectId: 'piolfix',
-    storageBucket: 'piolfix.appspot.com',
+    apiKey: 'AIzaSyDPbuVMvAEdw7XyKCqMwtFD3RiALjHHHr0',
+    appId: '1:592632828821:android:975e485d426ed4b7475c9c',
+    messagingSenderId: '592632828821',
+    projectId: 'piolfix-123',
+    storageBucket: 'piolfix-123.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCz6kK73r1o5_K5zsM2urkkzidw-fnm-xc',
-    appId: '1:113094693277:ios:f203e0e31dafb219369f74',
-    messagingSenderId: '113094693277',
-    projectId: 'piolfix',
-    storageBucket: 'piolfix.appspot.com',
-    iosClientId: '113094693277-tnkdu415pljj0f16cu1cpbvfki88avj4.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBCY1U7X_sPMVkccakMAY8ZWsZtlsAkfAg',
+    appId: '1:592632828821:ios:290882cdf3147bea475c9c',
+    messagingSenderId: '592632828821',
+    projectId: 'piolfix-123',
+    storageBucket: 'piolfix-123.appspot.com',
+    androidClientId: '592632828821-cpe6hk205n15mt1dvlrva9sttno1vs1p.apps.googleusercontent.com',
+    iosClientId: '592632828821-es56flgdpgme1g4ucmm5upedep7t7jhd.apps.googleusercontent.com',
     iosBundleId: 'com.example.piolfix',
   );
 }

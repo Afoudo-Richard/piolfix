@@ -1,0 +1,8 @@
+- app updates available
+    update_available
+- email OTP 
+    email_otp
+- insta image viewer
+    insta_image_viewer
+- chart painter for charts
+    charts_painter
